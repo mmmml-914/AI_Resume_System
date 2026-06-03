@@ -1,43 +1,41 @@
 /* ===================================================
-   Nova Light — 大厂智能模型风 · 浅色版
-   通透 · 蓝紫渐变 · AI 产品级质感
+   Interview-Guide Design Port
+   Indigo · Outfit + DM Sans · 微渐变 · 圆润卡片
    =================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
 
 :root {
-  --bg: #f5f7fa;
-  --bg-alt: #eef1f6;
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #eef2ff 100%);
   --surface: #ffffff;
-  --surface-hover: #f8f9fc;
-  --border: #e2e6ee;
-  --border-light: #eef1f6;
-  --border-active: rgba(99, 102, 241, 0.25);
-  --text-primary: #1a1d29;
-  --text-secondary: #5b6170;
-  --text-muted: #959dad;
+  --surface-hover: #f8fafc;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
   --accent: #6366f1;
-  --accent-light: rgba(99, 102, 241, 0.08);
-  --accent-subtle: rgba(99, 102, 241, 0.12);
   --accent-hover: #4f46e5;
-  --accent-gradient: linear-gradient(135deg, #6366f1, #06b6d4);
+  --accent-light: #eef2ff;
+  --accent-subtle: rgba(99, 102, 241, 0.1);
+  --accent-gradient: linear-gradient(135deg, #4f46e5, #6366f1);
   --danger: #ef4444;
   --success: #22c55e;
   --warning: #f59e0b;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.12);
-  --radius: 8px;
-  --radius-sm: 6px;
-  --radius-lg: 12px;
+  --shadow-lg: 0 8px 32px rgba(99, 102, 241, 0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 20px;
 }
 
 /* ===== Base ===== */
 .stApp {
-  background: var(--bg) !important;
+  background: var(--bg-gradient) !important;
+  font-family: 'DM Sans', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   color: var(--text-primary);
-  font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -52,12 +50,12 @@ header { display: none !important; }
 
 /* ===== Header ===== */
 .app-header {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
-  padding: 0 2rem;
-  height: 56px;
+  padding: 0 2.5rem;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,34 +65,51 @@ header { display: none !important; }
 }
 
 .app-header .logo {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.app-header .logo span {
-  -webkit-text-fill-color: var(--text-muted);
-  font-weight: 400;
+.app-header .logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--accent-gradient);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.app-header .logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.app-header .logo-text span {
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .app-header .badge {
   font-size: 0.6rem;
   color: var(--text-muted);
-  font-weight: 500;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
+  font-weight: 600;
+  background: var(--accent-light);
+  padding: 5px 12px;
   border-radius: 20px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 /* ===== Main Content ===== */
 .main-content {
-  padding: 1.5rem 2rem 4rem;
+  padding: 1.75rem 2.5rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -105,7 +120,8 @@ header { display: none !important; }
 }
 
 .page-title {
-  font-size: 1.35rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
@@ -113,7 +129,7 @@ header { display: none !important; }
 }
 
 .page-subtitle {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 400;
 }
@@ -124,19 +140,19 @@ div[data-testid="metric-container"] {
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
   padding: 1rem 1.25rem !important;
-  box-shadow: var(--shadow-sm) !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow) !important;
+  transition: all 0.2s ease;
 }
 
 div[data-testid="metric-container"]:hover {
-  border-color: var(--border-active) !important;
-  box-shadow: var(--shadow-glow) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: #c7d2fe !important;
 }
 
 div[data-testid="metric-container"] label {
   font-size: 0.7rem !important;
   color: var(--text-muted) !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -159,28 +175,44 @@ section[data-testid="stSidebar"] > div:first-child {
 }
 
 .sidebar-brand {
-  padding: 1.25rem 0.75rem 1rem;
+  padding: 1.5rem 0.75rem 1.25rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.sidebar-brand .brand-name {
+.sidebar-brand-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-gradient);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.sidebar-brand-text .brand-name {
+  font-family: 'Outfit', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
-.sidebar-brand .brand-desc {
+.sidebar-brand-text .brand-desc {
   font-size: 0.6rem;
   color: var(--text-muted);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-top: 0.15rem;
 }
 
 /* ===== Navigation ===== */
@@ -188,11 +220,11 @@ section[data-testid="stSidebar"] div[data-testid="stRadio"] {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 0.35rem 0;
+  padding: 0.25rem 0;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label {
-  padding: 0.45rem 0.75rem !important;
+  padding: 0.6rem 0.85rem !important;
   border-radius: var(--radius-sm) !important;
   font-size: 0.82rem !important;
   font-weight: 500 !important;
@@ -200,10 +232,11 @@ section[data-testid="stSidebar"] div[data-testid="stRadio"] > label {
   border: none !important;
   background: transparent !important;
   transition: all 0.15s ease;
+  position: relative;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label:hover {
-  background: var(--bg) !important;
+  background: #f1f5f9 !important;
   color: var(--text-primary) !important;
 }
 
@@ -211,8 +244,6 @@ section[data-testid="stSidebar"] div[data-testid="stRadio"] > label[data-checked
   background: var(--accent-light) !important;
   color: var(--accent) !important;
   font-weight: 600 !important;
-  border-left: 2px solid var(--accent) !important;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
 }
 
 section[data-testid="stSidebar"] hr {
@@ -245,7 +276,7 @@ section[data-testid="stSidebar"] .stMarkdown p {
   font-size: 0.6rem;
   color: var(--text-muted);
   text-align: center;
-  padding: 0.75rem;
+  padding: 0.85rem;
   border-top: 1px solid var(--border);
   margin-top: 0.5rem;
   font-weight: 500;
@@ -255,18 +286,19 @@ section[data-testid="stSidebar"] .stMarkdown p {
 /* ===== Buttons ===== */
 .stButton button {
   border-radius: var(--radius-sm) !important;
-  padding: 0.4rem 1.25rem !important;
-  font-size: 0.8rem !important;
+  padding: 0.45rem 1.35rem !important;
+  font-size: 0.82rem !important;
   font-weight: 500 !important;
   border: 1px solid var(--border) !important;
   background: var(--surface) !important;
   color: var(--text-secondary) !important;
   transition: all 0.15s ease !important;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .stButton button:hover {
-  background: var(--bg) !important;
-  border-color: #d0d5dd !important;
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
   color: var(--text-primary) !important;
 }
 
@@ -274,23 +306,24 @@ section[data-testid="stSidebar"] .stMarkdown p {
   background: var(--accent-gradient) !important;
   color: white !important;
   border: none !important;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2) !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3) !important;
+  font-weight: 600 !important;
 }
 
 .stButton button[kind="primary"]:hover {
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.35) !important;
-  opacity: 0.95;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4) !important;
+  transform: translateY(-1px);
 }
 
 /* ===== Form Elements ===== */
 .stTextInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] > div {
   border-radius: var(--radius-sm) !important;
   border: 1px solid var(--border) !important;
-  padding: 0.5rem 0.75rem !important;
-  font-size: 0.85rem !important;
+  padding: 0.55rem 0.85rem !important;
+  font-size: 0.87rem !important;
   background: var(--surface) !important;
   color: var(--text-primary) !important;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -299,35 +332,32 @@ section[data-testid="stSidebar"] .stMarkdown p {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
 }
 
-.stSelectbox div[data-baseweb="select"] > div:hover {
-  border-color: #d0d5dd !important;
-}
-
 /* ===== Progress ===== */
 .stProgress .st-bo {
-  background: var(--border) !important;
-  height: 4px !important;
+  background: #e2e8f0 !important;
+  height: 6px !important;
   border-radius: 4px !important;
 }
 
 .stProgress .st-bp {
   background: var(--accent-gradient) !important;
-  height: 4px !important;
+  height: 6px !important;
   border-radius: 4px !important;
 }
 
 /* ===== Chat ===== */
 div[data-testid="stChatMessage"] {
   border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  margin: 0.4rem 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.5rem 0;
   border: 1px solid var(--border-light);
   background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 div[data-testid="stChatMessage"]:first-child {
   background: var(--accent-light);
-  border-color: var(--border-active);
+  border-color: #c7d2fe;
 }
 
 div[data-testid="stChatMessageContent"] {
@@ -341,6 +371,7 @@ div[data-testid="stChatInput"] {
   border-radius: var(--radius) !important;
   padding: 0.15rem 0.15rem 0.15rem 1.2rem !important;
   background: var(--surface) !important;
+  box-shadow: var(--shadow) !important;
 }
 
 div[data-testid="stChatInput"]:focus-within {
@@ -357,13 +388,16 @@ div[data-testid="stChatInput"] button {
 .stTabs [data-baseweb="tab-list"] {
   border-bottom: 1px solid var(--border);
   gap: 0;
+  padding: 0 0.5rem;
 }
 
 .stTabs [data-baseweb="tab"] {
-  padding: 0.55rem 1.25rem !important;
-  font-size: 0.78rem !important;
+  padding: 0.6rem 1.4rem !important;
+  font-size: 0.8rem !important;
   color: var(--text-muted) !important;
   font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.15s ease;
 }
 
 .stTabs [data-baseweb="tab"]:hover {
@@ -381,31 +415,31 @@ div[data-testid="stChatInput"] button {
 .stAlert {
   border-radius: var(--radius-sm) !important;
   border: 1px solid var(--border) !important;
-  padding: 0.6rem 1rem !important;
-  font-size: 0.82rem;
+  padding: 0.7rem 1.1rem !important;
+  font-size: 0.84rem;
   background: var(--surface) !important;
   color: var(--text-secondary) !important;
 }
 
 .stInfo {
-  border-color: var(--border-active) !important;
+  border-color: #c7d2fe !important;
   background: var(--accent-light) !important;
   color: var(--text-primary) !important;
 }
 
 .stSuccess {
-  border-color: rgba(34, 197, 94, 0.15) !important;
-  background: rgba(34, 197, 94, 0.06) !important;
+  border-color: #bbf7d0 !important;
+  background: #f0fdf4 !important;
 }
 
 .stWarning {
-  border-color: rgba(245, 158, 11, 0.15) !important;
-  background: rgba(245, 158, 11, 0.06) !important;
+  border-color: #fde68a !important;
+  background: #fffbeb !important;
 }
 
 .stError {
-  border-color: rgba(239, 68, 68, 0.15) !important;
-  background: rgba(239, 68, 68, 0.06) !important;
+  border-color: #fecaca !important;
+  background: #fef2f2 !important;
 }
 
 /* ===== Dataframe ===== */
@@ -413,22 +447,23 @@ div[data-testid="stDataFrame"] {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 div[data-testid="stDataFrame"] thead tr th {
-  background: var(--bg) !important;
+  background: #f8fafc !important;
   color: var(--text-muted) !important;
   font-weight: 600 !important;
   font-size: 0.7rem !important;
-  padding: 0.55rem 0.8rem !important;
+  padding: 0.6rem 0.9rem !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   border-bottom: 1px solid var(--border) !important;
 }
 
 div[data-testid="stDataFrame"] tbody tr td {
-  padding: 0.45rem 0.8rem !important;
-  font-size: 0.82rem !important;
+  padding: 0.5rem 0.9rem !important;
+  font-size: 0.83rem !important;
   border-bottom: 1px solid var(--border-light) !important;
   color: var(--text-secondary) !important;
 }
@@ -438,7 +473,7 @@ div[data-testid="stDataFrame"] tbody tr:last-child td {
 }
 
 div[data-testid="stDataFrame"] tbody tr:hover td {
-  background: var(--bg) !important;
+  background: #f8fafc !important;
 }
 
 /* ===== File Uploader ===== */
@@ -457,18 +492,18 @@ div[data-testid="stFileUploader"]:hover {
 
 /* ===== Radio ===== */
 div[data-testid="stRadio"] label {
-  padding: 0.3rem 0.8rem !important;
+  padding: 0.35rem 0.9rem !important;
   border-radius: var(--radius-sm) !important;
   background: transparent !important;
   color: var(--text-secondary) !important;
-  font-size: 0.78rem !important;
+  font-size: 0.8rem !important;
   border: 1px solid var(--border) !important;
   transition: all 0.15s ease;
 }
 
 div[data-testid="stRadio"] label:hover {
-  border-color: #d0d5dd !important;
-  background: var(--bg) !important;
+  border-color: #cbd5e1 !important;
+  background: #f8fafc !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"] {
@@ -484,6 +519,7 @@ div[data-testid="stRadio"] label[data-checked="true"] {
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 /* ===== Expander ===== */
@@ -491,18 +527,19 @@ div[data-testid="stExpander"] {
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
   background: var(--surface) !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 div[data-testid="stExpander"] summary {
-  padding: 0.5rem 1rem;
-  font-size: 0.82rem;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.84rem;
   font-weight: 500;
   color: var(--text-secondary);
   border-radius: var(--radius) !important;
 }
 
 div[data-testid="stExpander"] summary:hover {
-  background: var(--surface-hover);
+  background: #f8fafc;
 }
 
 /* ===== Typography ===== */
@@ -518,14 +555,15 @@ div[data-testid="stExpander"] summary:hover {
 }
 
 .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+  font-family: 'Outfit', sans-serif;
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .stMarkdown h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-.stMarkdown h2 { font-size: 1.2rem; margin-bottom: 0.4rem; }
-.stMarkdown h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.stMarkdown h2 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+.stMarkdown h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
 
 hr:not(section[data-testid="stSidebar"] hr) {
   margin: 1.5rem 0;
@@ -535,10 +573,10 @@ hr:not(section[data-testid="stSidebar"] hr) {
 }
 
 code {
-  background: var(--bg) !important;
+  background: #f1f5f9 !important;
   border: 1px solid var(--border) !important;
-  border-radius: 4px !important;
-  padding: 0.1em 0.3em !important;
+  border-radius: 6px !important;
+  padding: 0.1em 0.35em !important;
   font-size: 0.85em !important;
   color: var(--text-primary) !important;
 }
@@ -546,16 +584,11 @@ code {
 pre code {
   background: var(--surface) !important;
   border: 1px solid var(--border) !important;
-  border-radius: var(--radius) !important;
+  border-radius: var(--radius-sm) !important;
   padding: 1rem !important;
 }
 
-/* ===== Columns ===== */
-div.row-widget.stColumns {
-  gap: 0.75rem;
-}
-
-/* ===== Dropdown ===== */
+/* ===== Dropdown Menu ===== */
 ul[data-baseweb="menu"] {
   background: var(--surface) !important;
   border: 1px solid var(--border) !important;
@@ -565,7 +598,7 @@ ul[data-baseweb="menu"] {
 
 ul[data-baseweb="menu"] li {
   color: var(--text-secondary) !important;
-  font-size: 0.82rem !important;
+  font-size: 0.84rem !important;
 }
 
 ul[data-baseweb="menu"] li:hover {
@@ -573,15 +606,20 @@ ul[data-baseweb="menu"] li:hover {
   color: var(--accent) !important;
 }
 
+/* ===== Columns ===== */
+div.row-widget.stColumns {
+  gap: 0.85rem;
+}
+
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ===== Misc ===== */
 .stCheckbox label {
-  font-size: 0.82rem !important;
+  font-size: 0.84rem !important;
   color: var(--text-secondary) !important;
 }
 
@@ -592,7 +630,7 @@ ul[data-baseweb="menu"] li:hover {
 div[data-baseweb="select"] > div {
   border-radius: var(--radius-sm) !important;
   border-color: var(--border) !important;
-  min-height: 36px;
+  min-height: 38px;
 }
 
 .stInfo, .stSuccess, .stWarning, .stError {

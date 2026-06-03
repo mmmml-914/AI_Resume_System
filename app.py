@@ -58,7 +58,7 @@ with open(os.path.join(os.path.dirname(__file__), "styles", "style.css"), encodi
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # ========== 顶部导航栏 ==========
-st.markdown('<div class="app-header"><div class="logo">AI Resume <span>System</span></div><div class="badge">v2.0</div></div>', unsafe_allow_html=True)
+st.markdown('<div class="app-header"><div class="logo"><div class="logo-icon">AI</div><div class="logo-text">AI Resume <span>System</span></div></div><div class="badge">v2.0</div></div>', unsafe_allow_html=True)
 
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
@@ -110,7 +110,7 @@ collector = st.session_state.collector
 
 # ========== 侧边栏 ==========
 with st.sidebar:
-    st.markdown('<div class="sidebar-brand"><div class="brand-name">AI Interview</div><div class="brand-desc">模拟面试系统</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-brand"><div class="sidebar-brand-icon">AI</div><div class="sidebar-brand-text"><div class="brand-name">AI Interview</div><div class="brand-desc">模拟面试系统</div></div></div>', unsafe_allow_html=True)
 
     st.markdown("---")
 
