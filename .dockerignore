@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.git/
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.md
+run.bat
+tests/
+.pytest_cache/
