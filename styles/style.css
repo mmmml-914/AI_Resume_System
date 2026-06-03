@@ -1,45 +1,40 @@
 /* ===================================================
-   Nova — 大厂智能模型风格
-   深色 · 极简 · 玻璃质感 · AI 产品级
+   Nova Light — 大厂智能模型风 · 浅色版
+   通透 · 蓝紫渐变 · AI 产品级质感
    =================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
 
 :root {
-  --bg: #0a0c10;
-  --bg-alt: #111318;
-  --surface: #161a22;
-  --surface-hover: #1c202b;
-  --surface-glass: rgba(22, 26, 34, 0.7);
-  --border: rgba(255, 255, 255, 0.06);
-  --border-light: rgba(255, 255, 255, 0.04);
-  --border-active: rgba(59, 130, 246, 0.3);
-  --text-primary: #e8edf5;
-  --text-secondary: #8b95a6;
-  --text-muted: #545d6e;
-  --accent: #3b82f6;
-  --accent-light: rgba(59, 130, 246, 0.1);
-  --accent-subtle: rgba(59, 130, 246, 0.15);
-  --accent-hover: #60a5fa;
-  --accent-gradient: linear-gradient(135deg, #3b82f6, #2dd4bf);
+  --bg: #f5f7fa;
+  --bg-alt: #eef1f6;
+  --surface: #ffffff;
+  --surface-hover: #f8f9fc;
+  --border: #e2e6ee;
+  --border-light: #eef1f6;
+  --border-active: rgba(99, 102, 241, 0.25);
+  --text-primary: #1a1d29;
+  --text-secondary: #5b6170;
+  --text-muted: #959dad;
+  --accent: #6366f1;
+  --accent-light: rgba(99, 102, 241, 0.08);
+  --accent-subtle: rgba(99, 102, 241, 0.12);
+  --accent-hover: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #6366f1, #06b6d4);
   --danger: #ef4444;
   --success: #22c55e;
   --warning: #f59e0b;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.12);
   --radius: 8px;
   --radius-sm: 6px;
   --radius-lg: 12px;
-
-  /* accent color for elements that should use gradient */
-  --accent-1: #3b82f6;
-  --accent-2: #2dd4bf;
 }
 
 /* ===== Base ===== */
-html, body, .stApp {
+.stApp {
   background: var(--bg) !important;
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -57,7 +52,7 @@ header { display: none !important; }
 
 /* ===== Header ===== */
 .app-header {
-  background: rgba(10, 12, 16, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -73,8 +68,7 @@ header { display: none !important; }
 
 .app-header .logo {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
   letter-spacing: -0.02em;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
@@ -91,7 +85,7 @@ header { display: none !important; }
   font-size: 0.6rem;
   color: var(--text-muted);
   font-weight: 500;
-  background: var(--surface);
+  background: var(--bg);
   border: 1px solid var(--border);
   padding: 4px 10px;
   border-radius: 20px;
@@ -156,7 +150,7 @@ div[data-testid="metric-container"] div[data-testid="metric-value"] {
 
 /* ===== Sidebar ===== */
 section[data-testid="stSidebar"] {
-  background: var(--bg-alt) !important;
+  background: var(--surface) !important;
   border-right: 1px solid var(--border) !important;
 }
 
@@ -209,7 +203,7 @@ section[data-testid="stSidebar"] div[data-testid="stRadio"] > label {
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label:hover {
-  background: var(--surface) !important;
+  background: var(--bg) !important;
   color: var(--text-primary) !important;
 }
 
@@ -271,8 +265,8 @@ section[data-testid="stSidebar"] .stMarkdown p {
 }
 
 .stButton button:hover {
-  background: var(--surface-hover) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: var(--bg) !important;
+  border-color: #d0d5dd !important;
   color: var(--text-primary) !important;
 }
 
@@ -280,11 +274,11 @@ section[data-testid="stSidebar"] .stMarkdown p {
   background: var(--accent-gradient) !important;
   color: white !important;
   border: none !important;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2) !important;
 }
 
 .stButton button[kind="primary"]:hover {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4) !important;
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.35) !important;
   opacity: 0.95;
 }
 
@@ -302,16 +296,16 @@ section[data-testid="stSidebar"] .stMarkdown p {
 
 .stTextInput input:focus, .stTextArea textarea:focus {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
 }
 
 .stSelectbox div[data-baseweb="select"] > div:hover {
-  border-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: #d0d5dd !important;
 }
 
 /* ===== Progress ===== */
 .stProgress .st-bo {
-  background: var(--bg-alt) !important;
+  background: var(--border) !important;
   height: 4px !important;
   border-radius: 4px !important;
 }
@@ -327,7 +321,7 @@ div[data-testid="stChatMessage"] {
   border-radius: var(--radius);
   padding: 0.75rem 1rem;
   margin: 0.4rem 0;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-light);
   background: var(--surface);
 }
 
@@ -351,7 +345,7 @@ div[data-testid="stChatInput"] {
 
 div[data-testid="stChatInput"]:focus-within {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08) !important;
 }
 
 div[data-testid="stChatInput"] button {
@@ -400,18 +394,18 @@ div[data-testid="stChatInput"] button {
 }
 
 .stSuccess {
-  border-color: rgba(34, 197, 94, 0.2) !important;
-  background: rgba(34, 197, 94, 0.08) !important;
+  border-color: rgba(34, 197, 94, 0.15) !important;
+  background: rgba(34, 197, 94, 0.06) !important;
 }
 
 .stWarning {
-  border-color: rgba(245, 158, 11, 0.2) !important;
-  background: rgba(245, 158, 11, 0.08) !important;
+  border-color: rgba(245, 158, 11, 0.15) !important;
+  background: rgba(245, 158, 11, 0.06) !important;
 }
 
 .stError {
-  border-color: rgba(239, 68, 68, 0.2) !important;
-  background: rgba(239, 68, 68, 0.08) !important;
+  border-color: rgba(239, 68, 68, 0.15) !important;
+  background: rgba(239, 68, 68, 0.06) !important;
 }
 
 /* ===== Dataframe ===== */
@@ -422,7 +416,7 @@ div[data-testid="stDataFrame"] {
 }
 
 div[data-testid="stDataFrame"] thead tr th {
-  background: var(--bg-alt) !important;
+  background: var(--bg) !important;
   color: var(--text-muted) !important;
   font-weight: 600 !important;
   font-size: 0.7rem !important;
@@ -444,7 +438,7 @@ div[data-testid="stDataFrame"] tbody tr:last-child td {
 }
 
 div[data-testid="stDataFrame"] tbody tr:hover td {
-  background: var(--surface-hover) !important;
+  background: var(--bg) !important;
 }
 
 /* ===== File Uploader ===== */
@@ -473,8 +467,8 @@ div[data-testid="stRadio"] label {
 }
 
 div[data-testid="stRadio"] label:hover {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-  background: var(--surface) !important;
+  border-color: #d0d5dd !important;
+  background: var(--bg) !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"] {
@@ -541,7 +535,7 @@ hr:not(section[data-testid="stSidebar"] hr) {
 }
 
 code {
-  background: var(--bg-alt) !important;
+  background: var(--bg) !important;
   border: 1px solid var(--border) !important;
   border-radius: 4px !important;
   padding: 0.1em 0.3em !important;
@@ -561,7 +555,7 @@ div.row-widget.stColumns {
   gap: 0.75rem;
 }
 
-/* ===== Dropdown Menu ===== */
+/* ===== Dropdown ===== */
 ul[data-baseweb="menu"] {
   background: var(--surface) !important;
   border: 1px solid var(--border) !important;
@@ -585,25 +579,22 @@ ul[data-baseweb="menu"] li:hover {
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* ===== Checkbox ===== */
+/* ===== Misc ===== */
 .stCheckbox label {
   font-size: 0.82rem !important;
   color: var(--text-secondary) !important;
 }
 
-/* ===== Spinner ===== */
 .stSpinner {
   color: var(--accent) !important;
 }
 
-/* ===== Select ===== */
 div[data-baseweb="select"] > div {
   border-radius: var(--radius-sm) !important;
   border-color: var(--border) !important;
   min-height: 36px;
 }
 
-/* ===== Markdown Info/Note Decor ===== */
 .stInfo, .stSuccess, .stWarning, .stError {
   border-left: 3px solid transparent !important;
 }
@@ -611,11 +602,3 @@ div[data-baseweb="select"] > div {
 .stSuccess { border-left-color: var(--success) !important; }
 .stWarning { border-left-color: var(--warning) !important; }
 .stError { border-left-color: var(--danger) !important; }
-
-/* ===== Plotly chart modebar tweak for dark ===== */
-.modebar-btn {
-  color: var(--text-muted) !important;
-}
-.modebar-btn:hover {
-  color: var(--text-primary) !important;
-}
