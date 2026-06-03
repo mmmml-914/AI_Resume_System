@@ -21,10 +21,11 @@ class LLMClient:
     )
 
     def __init__(self, api_key: str = None, base_url: str = None, model: str = None):
-          self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY") or st.secrets.get("DEEPSEEK_API_KEY", "")
-          self.base_url = base_url or os.getenv("DEEPSEEK_BASE_URL") or st.secrets.get("DEEPSEEK_BASE_URL", "") or "https://api.deepseek.com"
-          self.model = model or os.getenv("DEEPSEEK_MODEL") or st.secrets.get("DEEPSEEK_MODEL", "") or "deepseek-chat"
-          self.client = OpenAI(api_key=self.api_key, base_url=self.base_url, timeout=120, max_retries=1)
+        # 优先级: 参数 > 环境变量 > Streamlit secrets
+        self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY") or st.secrets.get("DEEPSEEK_API_KEY", "")
+        self.base_url = base_url or os.getenv("DEEPSEEK_BASE_URL") or st.secrets.get("DEEPSEEK_BASE_URL", "") or "https://api.deepseek.com"
+        self.model = model or os.getenv("DEEPSEEK_MODEL") or st.secrets.get("DEEPSEEK_MODEL", "") or "deepseek-chat"
+        self.client = OpenAI(api_key=self.api_key, base_url=self.base_url, timeout=120, max_retries=1)
 
     def chat(self, messages: list, temperature: float = 0.3, max_tokens: int = 2048,
              tools: list = None, tool_choice: str = None) -> dict:
