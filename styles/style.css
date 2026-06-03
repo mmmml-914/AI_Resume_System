@@ -1,0 +1,491 @@
+/* ===================================================
+   Frost — 清爽浅色主题
+   温暖底调 · 毛玻璃 · 蓝灰点缀
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-app: #F4F5FB;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --bg-card-solid: #FFFFFF;
+  --bg-sidebar: rgba(255, 255, 255, 0.92);
+  --border-light: #E8ECF4;
+  --border-hover: #C8D0E0;
+  --text-primary: #1A1D29;
+  --text-secondary: #5A6478;
+  --text-muted: #919AAD;
+  --accent-blue: #3B6BFA;
+  --accent-cyan: #0EA5E9;
+  --accent-indigo: #5B5BD6;
+  --accent-green: #10B981;
+  --accent-amber: #F59E0B;
+  --accent-rose: #F43F5E;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.03);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+}
+
+/* ===== 全局 ===== */
+.stApp {
+  background: var(--bg-app);
+  font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: var(--text-primary);
+}
+
+.main > div {
+  padding: 1.2rem 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 隐藏默认品牌 */
+#MainMenu, footer, header { visibility: hidden; }
+
+/* ===== 标题 ===== */
+h1, h2, h3 {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+h3 {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ===== 毛玻璃卡片 ===== */
+.css-card, div[data-testid="stExpander"], .stTabs [data-baseweb="tab-panel"],
+.stAlert, div[data-testid="metric-container"] {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.css-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ===== 侧边栏 ===== */
+section[data-testid="stSidebar"] {
+  background: var(--bg-sidebar);
+  backdrop-filter: blur(16px);
+  border-right: 1px solid var(--border-light);
+  padding: 0.5rem 0;
+}
+
+section[data-testid="stSidebar"] hr {
+  margin: 0.6rem 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  padding: 0.2rem 0.8rem;
+}
+
+.sidebar-subtitle {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 0 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ===== 侧边栏导航 ===== */
+section[data-testid="stSidebar"] label {
+  padding: 0.45rem 0.8rem !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.15s ease;
+  font-size: 0.83rem !important;
+  color: var(--text-secondary) !important;
+  margin: 1px 0 !important;
+  border: 1px solid transparent !important;
+}
+
+section[data-testid="stSidebar"] label:hover {
+  background: rgba(59, 107, 250, 0.06) !important;
+  color: var(--text-primary) !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stRadio"] > label[data-checked="true"] {
+  background: rgba(59, 107, 250, 0.08) !important;
+  color: var(--accent-blue) !important;
+  font-weight: 600 !important;
+  border-color: rgba(59, 107, 250, 0.12) !important;
+}
+
+/* ===== 按钮 ===== */
+.stButton button {
+  border-radius: var(--radius-md) !important;
+  padding: 0.45rem 1.5rem !important;
+  font-weight: 500 !important;
+  font-size: 0.83rem !important;
+  border: 1px solid var(--border-light) !important;
+  background: var(--bg-card-solid) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: var(--shadow-card);
+}
+
+.stButton button:hover {
+  border-color: var(--border-hover) !important;
+  box-shadow: var(--shadow-hover) !important;
+  transform: translateY(-1px);
+}
+
+.stButton button[kind="primary"] {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo)) !important;
+  color: white !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(59, 107, 250, 0.2) !important;
+}
+
+.stButton button[kind="primary"]:hover {
+  box-shadow: 0 6px 20px rgba(59, 107, 250, 0.3) !important;
+  transform: translateY(-2px);
+}
+
+.stButton button[kind="secondary"] {
+  background: #F1F3F7 !important;
+  color: var(--text-secondary) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ===== 表单输入 ===== */
+.stTextInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] > div {
+  border-radius: var(--radius-md) !important;
+  border: 1.5px solid var(--border-light) !important;
+  padding: 0.55rem 0.9rem !important;
+  font-size: 0.87rem !important;
+  background: var(--bg-card-solid) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.2s ease;
+  font-family: 'Noto Sans SC', sans-serif;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.stTextInput input:focus, .stTextArea textarea:focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 0 3px rgba(59, 107, 250, 0.08) !important;
+}
+
+.stTextArea textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ===== 指标卡片 ===== */
+div[data-testid="metric-container"] {
+  text-align: center;
+  border-radius: var(--radius-md) !important;
+  padding: 0.7rem 0.5rem !important;
+  background: var(--bg-card-solid) !important;
+}
+
+div[data-testid="metric-container"] label {
+  font-size: 0.68rem !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600 !important;
+}
+
+div[data-testid="metric-container"] div[data-testid="metric-value"] {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--accent-blue) !important;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== 进度条 ===== */
+.stProgress .st-bo {
+  background-color: #E2E6EF !important;
+  border-radius: 10px !important;
+  height: 6px !important;
+}
+
+.stProgress .st-bp {
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)) !important;
+  border-radius: 10px !important;
+  height: 6px !important;
+}
+
+/* ===== 对话气泡 ===== */
+div[data-testid="chatAvatarIcon-user"] {
+  background: var(--accent-indigo) !important;
+}
+
+div[data-testid="chatAvatarIcon-assistant"] {
+  background: var(--accent-blue) !important;
+}
+
+div[data-testid="stChatMessage"] {
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+}
+
+div[data-testid="stChatMessage"][aria-label="user"] {
+  background: rgba(91, 91, 214, 0.05);
+  border-color: rgba(91, 91, 214, 0.1);
+}
+
+div[data-testid="stChatMessage"][aria-label="assistant"] {
+  background: rgba(59, 107, 250, 0.04);
+  border-color: rgba(59, 107, 250, 0.08);
+}
+
+div[data-testid="stChatMessageContent"] {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+div[data-testid="stChatInput"] {
+  border: 1.5px solid var(--border-light) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: 0.25rem 0.25rem 0.25rem 1.2rem !important;
+  background: var(--bg-card-solid) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+}
+
+div[data-testid="stChatInput"]:focus-within {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 0 3px rgba(59, 107, 250, 0.06) !important;
+}
+
+div[data-testid="stChatInput"] button {
+  background: var(--accent-blue) !important;
+  border-radius: 50% !important;
+  color: white !important;
+}
+
+/* ===== 标签页 ===== */
+.stTabs [data-baseweb="tab-list"] {
+  gap: 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.stTabs [data-baseweb="tab"] {
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+  padding: 0.45rem 1.2rem !important;
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+  transition: all 0.15s ease;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+  color: var(--text-secondary) !important;
+  background: rgba(0,0,0,0.01) !important;
+}
+
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+  color: var(--accent-blue) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--accent-blue);
+}
+
+/* ===== 展开面板 ===== */
+div[data-testid="stExpander"] {
+  overflow: hidden;
+}
+
+div[data-testid="stExpander"] summary {
+  padding: 0.6rem 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ===== 提示消息 ===== */
+.stAlert {
+  border-radius: var(--radius-md) !important;
+  padding: 0.7rem 1rem !important;
+}
+
+.stInfo {
+  background: rgba(59, 107, 250, 0.06) !important;
+  border: 1px solid rgba(59, 107, 250, 0.12) !important;
+}
+
+.stSuccess {
+  background: rgba(16, 185, 129, 0.06) !important;
+  border: 1px solid rgba(16, 185, 129, 0.12) !important;
+}
+
+.stWarning {
+  background: rgba(245, 158, 11, 0.06) !important;
+  border: 1px solid rgba(245, 158, 11, 0.12) !important;
+}
+
+.stError {
+  background: rgba(244, 67, 54, 0.06) !important;
+  border: 1px solid rgba(244, 67, 54, 0.12) !important;
+}
+
+/* ===== 数据框 ===== */
+div[data-testid="stDataFrame"] {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+div[data-testid="stDataFrame"] thead tr th {
+  background: #F8F9FC !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+}
+
+/* ===== 上传区域 ===== */
+div[data-testid="stFileUploader"] {
+  border: 2px dashed var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.5);
+  transition: all 0.2s ease;
+}
+
+div[data-testid="stFileUploader"]:hover {
+  border-color: var(--accent-blue);
+  background: rgba(59, 107, 250, 0.03);
+}
+
+div[data-testid="stFileUploader"] small {
+  font-size: 0.72rem !important;
+  color: var(--text-muted) !important;
+}
+
+/* ===== radio 选择 ===== */
+div[data-testid="stRadio"] label {
+  padding: 0.25rem 1rem !important;
+  border-radius: var(--radius-sm) !important;
+  background: rgba(0,0,0,0.02) !important;
+  margin-right: 4px !important;
+  border: 1px solid transparent !important;
+  color: var(--text-secondary) !important;
+  font-size: 0.8rem !important;
+}
+
+div[data-testid="stRadio"] label[data-checked="true"] {
+  background: rgba(59, 107, 250, 0.07) !important;
+  border-color: rgba(59, 107, 250, 0.15) !important;
+  color: var(--accent-blue) !important;
+  font-weight: 600 !important;
+}
+
+/* ===== 选择框 ===== */
+div[data-baseweb="select"] > div {
+  border-radius: var(--radius-md) !important;
+}
+
+ul[data-baseweb="menu"] {
+  background: var(--bg-card-solid) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-hover);
+}
+
+ul[data-baseweb="menu"] li {
+  color: var(--text-secondary) !important;
+}
+
+ul[data-baseweb="menu"] li:hover {
+  background: rgba(59, 107, 250, 0.06) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ===== 通用文字 ===== */
+.stMarkdown p, .stMarkdown li {
+  color: var(--text-primary);
+}
+
+.stMarkdown p small, .stCaption {
+  color: var(--text-muted);
+}
+
+/* ===== 分割线 ===== */
+hr {
+  margin: 1.2rem 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+
+/* ===== 加载 ===== */
+.stSpinner {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ===== Plotly ===== */
+.js-plotly-plot {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* ===== 列间距 ===== */
+div.row-widget.stColumns {
+  gap: 0.8rem;
+}
+
+/* ===== 侧边栏数据集展开 ===== */
+section[data-testid="stSidebar"] [data-testid="stExpander"] {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stExpander"] summary {
+  padding: 0.4rem 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+section[data-testid="stSidebar"] .stMarkdown p {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+/* ===== 侧边栏恢复标记 ===== */
+div[data-testid="stSidebar"] div[style*="font-size:0.75rem"] {
+  color: var(--accent-blue) !important;
+}
+
+/* ===== Plotly 深色修正 ===== */
+div[data-testid="stDataFrame"] table {
+  color: var(--text-primary);
+}
