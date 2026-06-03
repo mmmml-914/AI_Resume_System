@@ -73,19 +73,9 @@ if "knowledge_base" not in st.session_state:
 if "records_mgr" not in st.session_state:
     st.session_state.records_mgr = RecordsManager()
 
-# ========== RAG 向量库自动构建 ==========
+# ========== RAG 状态（懒加载，不阻塞启动） ==========
 if "rag_built" not in st.session_state:
-    try:
-        from modules.rag_knowledge import get_chroma_collection, build_vector_store
-        collection = get_chroma_collection()
-        if collection.count() == 0:
-            with st.spinner("正在构建 RAG 向量库（首次启动，仅需一次）..."):
-                result = build_vector_store()
-                st.session_state.rag_built = result.get("status", "built")
-        else:
-            st.session_state.rag_built = "skipped"
-    except Exception as e:
-        st.session_state.rag_built = f"failed: {e}"
+    st.session_state.rag_built = "unchecked"
 if "report" not in st.session_state:
     st.session_state.report = None
 if "resume_text" not in st.session_state:
