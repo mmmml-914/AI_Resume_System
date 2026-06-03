@@ -60,30 +60,6 @@ def _load_all():
 with open(os.path.join(os.path.dirname(__file__), "styles", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# ========== 密码保护 ==========
-try:
-    PASSWORD = os.getenv("APP_PASSWORD", "") or st.secrets.get("APP_PASSWORD", "")
-except Exception:
-    PASSWORD = os.getenv("APP_PASSWORD", "")
-if PASSWORD:
-    if "authenticated" not in st.session_state:
-        st.session_state.authenticated = False
-    if not st.session_state.authenticated:
-        st.markdown("""
-        <div style="display:flex;align-items:center;justify-content:center;min-height:80vh;flex-direction:column;gap:1rem">
-            <div style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,#4F46E5,#06D6A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AI Mock Interview</div>
-            <div style="color:#8896AB">请输入密码访问系统</div>
-        </div>
-        """, unsafe_allow_html=True)
-        pwd = st.text_input("密码", type="password", label_visibility="collapsed", placeholder="请输入密码")
-        if pwd:
-            if pwd == PASSWORD:
-                st.session_state.authenticated = True
-                st.rerun()
-            else:
-                st.error("密码错误")
-        st.stop()
-
 # ========== 顶部导航栏 ==========
 st.markdown('<div class="app-header"><div class="logo"><div class="logo-icon">AI</div><div class="logo-text">AI Resume <span>System</span></div></div><div class="badge">v2.0</div></div>', unsafe_allow_html=True)
 
