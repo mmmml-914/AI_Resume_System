@@ -966,7 +966,7 @@ elif page == "数据看板":
             # RAG 状态
             st.markdown("---")
             try:
-                from modules.rag_knowledge import get_chroma_collection
+                from modules.rag_knowledge import get_chroma_collection, build_vector_store
                 rag_collection = get_chroma_collection()
                 rag_count = rag_collection.count()
                 rag_status = "已启用" if rag_count > 0 else "未构建"
@@ -978,6 +978,32 @@ elif page == "数据看板":
             col_r1.metric("RAG 知识库状态", rag_status, delta="检索增强评分" if rag_count > 0 else None)
             col_r2.metric("向量化简历数", rag_count)
             col_r3.metric("嵌入模型", "BAAI/bge-small-zh-v1.5" if rag_count > 0 else "-")
+
+            # 显示自动构建状态
+            rag_built = st.session_state.get("rag_built", "")
+            if "failed" in str(rag_built):
+                st.warning(f"自动构建失败: {rag_built}")
+            elif rag_built == "built":
+                st.success("✅ RAG 向量库已自动构建")
+
+            # 手动重建按钮
+            if rag_count == 0:
+                if st.button("🔨 构建 RAG 向量库", type="primary"):
+                    with st.spinner("正在下载 embedding 模型并构建向量库（首次约 2-3 分钟）..."):
+                        result = build_vector_store()
+                        if result.get("status") == "built":
+                            st.session_state.rag_built = "built"
+                            st.success(f"✅ 构建完成，共 {result.get('count', 0)} 条")
+                            st.rerun()
+                        else:
+                            st.error(f"构建失败: {result.get('error', '未知')}")
+            else:
+                if st.button("🔄 重建 RAG 向量库"):
+                    with st.spinner("重新构建中..."):
+                        result = build_vector_store()
+                        if result.get("status") == "built":
+                            st.success(f"✅ 重建完成，共 {result.get('count', 0)} 条")
+                            st.rerun()
             with st.expander("什么是 RAG？"):
                 st.markdown("""
                 **RAG (Retrieval-Augmented Generation)** — 检索增强生成技术。
