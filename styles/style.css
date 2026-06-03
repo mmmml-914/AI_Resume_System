@@ -1,32 +1,31 @@
 /* ===================================================
-   Lite — 简洁白主题
-   干净 · 清爽 · 少即是多
+   Thorne — 编辑级版面设计
+   暖白基调 · 森林绿点缀 · 克制排版
    =================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap');
 
 :root {
-  --bg: #F5F6F8;
-  --card: #FFFFFF;
-  --sidebar: #FAFBFC;
-  --border: #E6E8EC;
-  --border-light: #F0F1F4;
-  --text: #1D1F27;
-  --text-secondary: #5E6678;
-  --text-muted: #949CAF;
-  --primary: #2B6BF3;
-  --primary-light: rgba(43,107,243,0.06);
-  --primary-border: rgba(43,107,243,0.15);
-  --shadow: 0 1px 4px rgba(0,0,0,0.04);
-  --shadow-hover: 0 4px 16px rgba(0,0,0,0.06);
-  --radius: 10px;
-  --radius-sm: 6px;
+  --bg: #F5F4F2;
+  --surface: #FFFFFF;
+  --surface-hover: #FAF9F7;
+  --border: #E6E3DE;
+  --border-light: #EFEDE9;
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6560;
+  --text-muted: #9C9690;
+  --accent: #1B4332;
+  --accent-light: #E8F0EC;
+  --accent-hover: #2D6A4F;
+  --shadow: none;
+  --radius: 0;
+  --radius-sm: 0;
 }
 
 .stApp {
   background: var(--bg);
-  font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
-  color: var(--text);
+  font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: var(--text-primary);
 }
 
 #MainMenu, footer { display: none !important; }
@@ -38,12 +37,12 @@ header { display: none !important; }
   margin: 0;
 }
 
-/* ===== 顶部栏 ===== */
+/* ===== 顶栏 ===== */
 .app-header {
-  background: white;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 0 2rem;
-  height: 52px;
+  padding: 0 2.5rem;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,9 +53,9 @@ header { display: none !important; }
 
 .app-header .logo {
   font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .app-header .logo span {
@@ -67,56 +66,63 @@ header { display: none !important; }
 .app-header .badge {
   font-size: 0.65rem;
   color: var(--text-muted);
-  background: var(--bg);
-  padding: 0.15rem 0.6rem;
-  border-radius: 20px;
-  border: 1px solid var(--border);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* ===== 内容区 ===== */
 .main-content {
-  padding: 1.5rem 2rem 3rem;
-  max-width: 1200px;
+  padding: 2rem 2.5rem 4rem;
+  max-width: 1120px;
   margin: 0 auto;
 }
 
 /* ===== 页面标题 ===== */
 .page-title {
-  font-size: 1.3rem;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 0.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
 }
 
 .page-subtitle {
   font-size: 0.82rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
 }
 
 /* ===== 指标卡片 ===== */
 div[data-testid="metric-container"] {
-  background: white !important;
+  background: var(--surface) !important;
   border: 1px solid var(--border) !important;
-  border-radius: var(--radius) !important;
-  padding: 0.8rem 1rem !important;
-  box-shadow: var(--shadow) !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+div[data-testid="metric-container"]:hover {
+  background: var(--surface-hover) !important;
 }
 
 div[data-testid="metric-container"] label {
   font-size: 0.7rem !important;
   color: var(--text-muted) !important;
   font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 div[data-testid="metric-container"] div[data-testid="metric-value"] {
-  font-size: 1.4rem !important;
-  font-weight: 700 !important;
-  color: var(--text) !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
 }
 
 /* ===== 侧边栏 ===== */
 section[data-testid="stSidebar"] {
-  background: var(--sidebar) !important;
+  background: var(--surface) !important;
   border-right: 1px solid var(--border) !important;
 }
 
@@ -125,57 +131,58 @@ section[data-testid="stSidebar"] > div:first-child {
 }
 
 .sidebar-brand {
-  padding: 1rem 0.5rem 0.8rem;
+  padding: 1.25rem 0.75rem 1rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .sidebar-brand .brand-name {
-  font-size: 1rem;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--accent);
 }
 
 .sidebar-brand .brand-desc {
   font-size: 0.6rem;
   color: var(--text-muted);
-  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-top: 0.1rem;
+  letter-spacing: 0.12em;
+  margin-top: 0.15rem;
 }
 
 /* ===== 导航 ===== */
 section[data-testid="stSidebar"] div[data-testid="stRadio"] {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  padding: 0.3rem 0;
+  gap: 0;
+  padding: 0.5rem 0;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label {
-  padding: 0.5rem 0.7rem !important;
-  border-radius: var(--radius-sm) !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0 !important;
   font-size: 0.82rem !important;
   font-weight: 500 !important;
   color: var(--text-secondary) !important;
-  border: 1px solid transparent !important;
+  border-left: 2px solid transparent !important;
   transition: all 0.12s ease;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label:hover {
-  background: var(--primary-light) !important;
-  color: var(--primary) !important;
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label[data-checked="true"] {
-  background: var(--primary-light) !important;
-  color: var(--primary) !important;
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
   font-weight: 600 !important;
-  border-color: var(--primary-border) !important;
+  border-left-color: var(--accent) !important;
 }
 
 section[data-testid="stSidebar"] hr {
-  margin: 0.4rem 0.4rem;
+  margin: 0.25rem 0.5rem;
   border: 0;
   height: 1px;
   background: var(--border);
@@ -187,221 +194,254 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] {
 }
 
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
-  padding: 0.3rem 0.5rem;
-  font-size: 0.72rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
-  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 section[data-testid="stSidebar"] .stMarkdown p {
   color: var(--text-secondary);
   font-size: 0.72rem;
+  line-height: 1.6;
 }
 
 .sidebar-footer {
   font-size: 0.6rem;
   color: var(--text-muted);
   text-align: center;
-  padding: 0.8rem;
+  padding: 0.75rem;
   border-top: 1px solid var(--border);
   margin-top: 0.5rem;
+  letter-spacing: 0.06em;
 }
 
 /* ===== 按钮 ===== */
 .stButton button {
-  border-radius: var(--radius-sm) !important;
-  padding: 0.45rem 1.3rem !important;
-  font-size: 0.82rem !important;
+  border-radius: 0 !important;
+  padding: 0.45rem 1.4rem !important;
+  font-size: 0.8rem !important;
   font-weight: 500 !important;
   border: 1px solid var(--border) !important;
-  background: white !important;
-  color: var(--text) !important;
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
   transition: all 0.12s ease !important;
 }
 
 .stButton button:hover {
-  border-color: var(--primary) !important;
-  color: var(--primary) !important;
+  background: var(--surface-hover) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 
 .stButton button[kind="primary"] {
-  background: var(--primary) !important;
+  background: var(--accent) !important;
   color: white !important;
-  border-color: var(--primary) !important;
+  border-color: var(--accent) !important;
 }
 
 .stButton button[kind="primary"]:hover {
-  opacity: 0.9;
+  background: var(--accent-hover) !important;
 }
 
 /* ===== 表单 ===== */
 .stTextInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] > div {
-  border-radius: var(--radius-sm) !important;
-  border: 1.5px solid var(--border) !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--border) !important;
   padding: 0.5rem 0.8rem !important;
   font-size: 0.85rem !important;
-  background: white !important;
-  color: var(--text) !important;
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
   font-family: 'Noto Sans SC', sans-serif;
 }
 
 .stTextInput input:focus, .stTextArea textarea:focus {
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 3px rgba(43,107,243,0.08) !important;
+  border-color: var(--accent) !important;
+  box-shadow: none !important;
 }
 
 /* ===== 进度条 ===== */
-.stProgress .st-bo { background: var(--border) !important; height: 4px !important; border-radius: 4px !important; }
-.stProgress .st-bp { background: var(--primary) !important; height: 4px !important; border-radius: 4px !important; }
+.stProgress .st-bo {
+  background: var(--border) !important;
+  height: 2px !important;
+  border-radius: 0 !important;
+}
+
+.stProgress .st-bp {
+  background: var(--accent) !important;
+  height: 2px !important;
+  border-radius: 0 !important;
+}
 
 /* ===== 对话 ===== */
 div[data-testid="stChatMessage"] {
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 1rem;
+  border-radius: 0;
+  padding: 0.75rem 1rem;
   margin: 0.4rem 0;
   border: 1px solid var(--border-light);
-  background: white;
+  background: var(--surface);
 }
 
 div[data-testid="stChatMessageContent"] {
   font-size: 0.87rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 div[data-testid="stChatInput"] {
-  border: 1.5px solid var(--border) !important;
-  border-radius: 999px !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0 !important;
   padding: 0.15rem 0.15rem 0.15rem 1.2rem !important;
-  background: white !important;
+  background: var(--surface) !important;
 }
 
 div[data-testid="stChatInput"]:focus-within {
-  border-color: var(--primary) !important;
+  border-color: var(--accent) !important;
 }
 
 div[data-testid="stChatInput"] button {
-  background: var(--primary) !important;
-  border-radius: 50% !important;
+  background: var(--accent) !important;
+  border-radius: 0 !important;
 }
 
 /* ===== 标签页 ===== */
 .stTabs [data-baseweb="tab-list"] {
   border-bottom: 1px solid var(--border);
+  padding: 0;
 }
 
 .stTabs [data-baseweb="tab"] {
-  padding: 0.4rem 1rem !important;
-  font-size: 0.8rem !important;
+  padding: 0.5rem 1.2rem !important;
+  font-size: 0.78rem !important;
   color: var(--text-muted) !important;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .stTabs [data-baseweb="tab"]:hover {
   color: var(--text-secondary) !important;
+  background: transparent !important;
 }
 
 .stTabs [data-baseweb="tab"][aria-selected="true"] {
-  color: var(--primary) !important;
+  color: var(--accent) !important;
   font-weight: 600 !important;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 1px solid var(--accent);
+}
+
+.stTabs [data-baseweb="tab-panel"] {
+  padding-top: 1.25rem !important;
 }
 
 /* ===== 提示 ===== */
 .stAlert {
-  border-radius: var(--radius-sm) !important;
+  border-radius: 0 !important;
   border: 1px solid var(--border) !important;
   padding: 0.6rem 1rem !important;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
+  background: var(--surface) !important;
 }
 
 .stInfo {
-  background: rgba(43,107,243,0.04) !important;
-  border-color: rgba(43,107,243,0.12) !important;
+  border-color: var(--accent) !important;
+  background: var(--accent-light) !important;
+  color: var(--text-primary) !important;
 }
 
 .stSuccess {
-  background: rgba(16,185,129,0.04) !important;
-  border-color: rgba(16,185,129,0.12) !important;
-}
-
-.stWarning {
-  background: rgba(245,158,11,0.04) !important;
-  border-color: rgba(245,158,11,0.12) !important;
-}
-
-.stError {
-  background: rgba(239,68,68,0.04) !important;
-  border-color: rgba(239,68,68,0.12) !important;
+  border-color: var(--accent) !important;
+  background: var(--accent-light) !important;
 }
 
 /* ===== 表格 ===== */
 div[data-testid="stDataFrame"] {
-  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
+  border-radius: 0;
   overflow: hidden;
 }
 
 div[data-testid="stDataFrame"] thead tr th {
   background: var(--bg) !important;
   color: var(--text-secondary) !important;
-  font-weight: 600 !important;
-  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  font-size: 0.72rem !important;
   padding: 0.5rem 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+div[data-testid="stDataFrame"] tbody tr td {
+  padding: 0.45rem 0.8rem !important;
+  font-size: 0.82rem !important;
+  border-bottom: 1px solid var(--border-light) !important;
 }
 
 /* ===== 上传 ===== */
 div[data-testid="stFileUploader"] {
-  border: 2px dashed var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1.2rem;
-  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 0;
+  padding: 1.5rem;
+  background: var(--surface);
   transition: all 0.15s ease;
 }
 
 div[data-testid="stFileUploader"]:hover {
-  border-color: var(--primary);
+  border-color: var(--accent);
+  background: var(--accent-light);
 }
 
 /* ===== Radio ===== */
 div[data-testid="stRadio"] label {
   padding: 0.25rem 0.8rem !important;
-  border-radius: var(--radius-sm) !important;
-  background: var(--bg) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
   color: var(--text-secondary) !important;
   font-size: 0.78rem !important;
+  border: 1px solid var(--border) !important;
+  transition: all 0.12s ease;
+}
+
+div[data-testid="stRadio"] label:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"] {
-  background: var(--primary-light) !important;
-  color: var(--primary) !important;
+  background: var(--accent-light) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
   font-weight: 600 !important;
 }
 
 /* ===== Plotly ===== */
 .js-plotly-plot {
-  border-radius: var(--radius-sm);
-  overflow: hidden;
   border: 1px solid var(--border);
 }
 
 /* ===== 展开面板 ===== */
 div[data-testid="stExpander"] {
   border: 1px solid var(--border) !important;
-  border-radius: var(--radius-sm) !important;
-  background: white !important;
+  border-radius: 0 !important;
+  background: var(--surface) !important;
 }
 
 div[data-testid="stExpander"] summary {
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-secondary);
 }
 
+div[data-testid="stExpander"] summary:hover {
+  background: var(--surface-hover);
+}
+
 /* ===== 通用 ===== */
 .stMarkdown p, .stMarkdown li {
-  color: var(--text);
-  line-height: 1.6;
-  font-size: 0.88rem;
+  line-height: 1.7;
+  font-size: 0.87rem;
 }
 
 .stMarkdown p small, .stCaption {
@@ -409,8 +449,18 @@ div[data-testid="stExpander"] summary {
   font-size: 0.72rem !important;
 }
 
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
 hr:not(section[data-testid="stSidebar"] hr) {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   border: 0;
   height: 1px;
   background: var(--border);
@@ -419,10 +469,16 @@ hr:not(section[data-testid="stSidebar"] hr) {
 code {
   background: var(--bg) !important;
   border: 1px solid var(--border-light) !important;
-  border-radius: 3px !important;
+  border-radius: 0 !important;
   padding: 0.1em 0.3em !important;
   font-size: 0.85em !important;
-  color: #E44 !important;
+}
+
+pre code {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  padding: 1rem !important;
 }
 
 div.row-widget.stColumns {
@@ -430,10 +486,10 @@ div.row-widget.stColumns {
 }
 
 ul[data-baseweb="menu"] {
-  background: white !important;
+  background: var(--surface) !important;
   border: 1px solid var(--border) !important;
-  border-radius: var(--radius-sm) !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 ul[data-baseweb="menu"] li {
@@ -442,6 +498,12 @@ ul[data-baseweb="menu"] li {
 }
 
 ul[data-baseweb="menu"] li:hover {
-  background: var(--primary-light) !important;
-  color: var(--primary) !important;
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
 }
+
+/* ===== 滚动条 ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
