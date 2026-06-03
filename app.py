@@ -8,6 +8,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import os, sys, json
 
+# ChromaDB protobuf 兼容性
+os.environ.setdefault("PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION", "python")
+
 sys.path.insert(0, os.path.dirname(__file__))
 from modules.agent_workflow import WorkflowAgent
 from modules.knowledge_base import ResumeKnowledgeBase
