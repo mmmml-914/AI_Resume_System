@@ -61,7 +61,10 @@ with open(os.path.join(os.path.dirname(__file__), "styles", "style.css"), encodi
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # ========== 密码保护 ==========
-PASSWORD = os.getenv("APP_PASSWORD") or st.secrets.get("APP_PASSWORD", "")
+try:
+    PASSWORD = os.getenv("APP_PASSWORD", "") or st.secrets.get("APP_PASSWORD", "")
+except Exception:
+    PASSWORD = os.getenv("APP_PASSWORD", "")
 if PASSWORD:
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
