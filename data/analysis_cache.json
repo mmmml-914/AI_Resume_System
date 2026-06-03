@@ -1,0 +1,3797 @@
+{
+  "category_stats": {
+    "total": 962,
+    "total_categories": 25,
+    "categories": {
+      "Java Developer": 84,
+      "Testing": 70,
+      "DevOps Engineer": 55,
+      "Python Developer": 48,
+      "Web Designing": 45,
+      "HR": 44,
+      "Hadoop": 42,
+      "Sales": 40,
+      "Data Science": 40,
+      "Mechanical Engineer": 40,
+      "ETL Developer": 40,
+      "Blockchain": 40,
+      "Operations Manager": 40,
+      "Arts": 36,
+      "Database": 33,
+      "Health and fitness": 30,
+      "PMO": 30,
+      "Electrical Engineering": 30,
+      "Business Analyst": 28,
+      "DotNet Developer": 28,
+      "Automation Testing": 26,
+      "Network Security Engineer": 25,
+      "Civil Engineer": 24,
+      "SAP Developer": 24,
+      "Advocate": 20
+    }
+  },
+  "text_stats": {
+    "overall_avg": 3160,
+    "overall_max": 14816,
+    "overall_min": 142,
+    "per_category": {
+      "Data Science": {
+        "avg": 3213,
+        "max": 8192,
+        "min": 452,
+        "count": 40
+      },
+      "HR": {
+        "avg": 672,
+        "max": 2797,
+        "min": 142,
+        "count": 44
+      },
+      "Advocate": {
+        "avg": 953,
+        "max": 2871,
+        "min": 186,
+        "count": 20
+      },
+      "Arts": {
+        "avg": 2293,
+        "max": 8514,
+        "min": 421,
+        "count": 36
+      },
+      "Web Designing": {
+        "avg": 2980,
+        "max": 3600,
+        "min": 702,
+        "count": 45
+      },
+      "Mechanical Engineer": {
+        "avg": 3142,
+        "max": 10086,
+        "min": 613,
+        "count": 40
+      },
+      "Sales": {
+        "avg": 1670,
+        "max": 3811,
+        "min": 774,
+        "count": 40
+      },
+      "Health and fitness": {
+        "avg": 1886,
+        "max": 2825,
+        "min": 561,
+        "count": 30
+      },
+      "Civil Engineer": {
+        "avg": 3069,
+        "max": 7053,
+        "min": 489,
+        "count": 24
+      },
+      "Java Developer": {
+        "avg": 1629,
+        "max": 3777,
+        "min": 300,
+        "count": 84
+      },
+      "Business Analyst": {
+        "avg": 4944,
+        "max": 11587,
+        "min": 1581,
+        "count": 28
+      },
+      "SAP Developer": {
+        "avg": 3769,
+        "max": 8700,
+        "min": 1227,
+        "count": 24
+      },
+      "Automation Testing": {
+        "avg": 4163,
+        "max": 6816,
+        "min": 852,
+        "count": 26
+      },
+      "Electrical Engineering": {
+        "avg": 2545,
+        "max": 4727,
+        "min": 490,
+        "count": 30
+      },
+      "Operations Manager": {
+        "avg": 12025,
+        "max": 14816,
+        "min": 6887,
+        "count": 40
+      },
+      "Python Developer": {
+        "avg": 1791,
+        "max": 3134,
+        "min": 439,
+        "count": 48
+      },
+      "DevOps Engineer": {
+        "avg": 3996,
+        "max": 8291,
+        "min": 1590,
+        "count": 55
+      },
+      "Network Security Engineer": {
+        "avg": 4168,
+        "max": 6973,
+        "min": 2574,
+        "count": 25
+      },
+      "PMO": {
+        "avg": 5414,
+        "max": 8051,
+        "min": 2740,
+        "count": 30
+      },
+      "Database": {
+        "avg": 3873,
+        "max": 5909,
+        "min": 2054,
+        "count": 33
+      },
+      "Hadoop": {
+        "avg": 3551,
+        "max": 5992,
+        "min": 1609,
+        "count": 42
+      },
+      "ETL Developer": {
+        "avg": 3557,
+        "max": 5420,
+        "min": 1152,
+        "count": 40
+      },
+      "DotNet Developer": {
+        "avg": 2786,
+        "max": 8527,
+        "min": 452,
+        "count": 28
+      },
+      "Blockchain": {
+        "avg": 2290,
+        "max": 3501,
+        "min": 1334,
+        "count": 40
+      },
+      "Testing": {
+        "avg": 1869,
+        "max": 3319,
+        "min": 618,
+        "count": 70
+      }
+    }
+  },
+  "skill_stats": {
+    "overall": {
+      "SQL": 478,
+      "Testing": 373,
+      "Java": 335,
+      "Web": 331,
+      "JavaScript": 301,
+      "Tools": 266,
+      "Cloud": 233,
+      "BigData": 181,
+      "Python": 176,
+      "DevOps": 172,
+      "ML/AI": 108
+    },
+    "per_category": {
+      "Data Science": {
+        "Python": 40,
+        "ML/AI": 36,
+        "SQL": 28,
+        "Web": 20,
+        "Testing": 20,
+        "Tools": 20,
+        "Java": 16,
+        "Cloud": 16,
+        "BigData": 16,
+        "DevOps": 12
+      },
+      "HR": {
+        "SQL": 8,
+        "Java": 4
+      },
+      "Advocate": {
+        "ML/AI": 4,
+        "Cloud": 2
+      },
+      "Arts": {
+        "Testing": 6
+      },
+      "Web Designing": {
+        "Java": 36,
+        "JavaScript": 36,
+        "Cloud": 36,
+        "Web": 36,
+        "Testing": 18,
+        "Tools": 18,
+        "SQL": 18
+      },
+      "Mechanical Engineer": {
+        "SQL": 8,
+        "Testing": 8,
+        "Tools": 8,
+        "JavaScript": 8
+      },
+      "Sales": {
+        "Web": 8,
+        "SQL": 8
+      },
+      "Health and fitness": {
+        "Web": 5,
+        "BigData": 5
+      },
+      "Civil Engineer": {
+        "Testing": 8
+      },
+      "Java Developer": {
+        "Java": 84,
+        "JavaScript": 72,
+        "SQL": 66,
+        "Web": 36,
+        "DevOps": 30,
+        "Tools": 30,
+        "Testing": 24,
+        "Cloud": 18
+      },
+      "Business Analyst": {
+        "Testing": 16,
+        "Java": 12,
+        "Web": 12,
+        "SQL": 10,
+        "JavaScript": 6,
+        "DevOps": 6,
+        "Cloud": 6,
+        "Tools": 6
+      },
+      "SAP Developer": {
+        "Testing": 16,
+        "SQL": 12,
+        "Java": 8,
+        "Python": 4,
+        "BigData": 4,
+        "Web": 4
+      },
+      "Automation Testing": {
+        "Testing": 26,
+        "JavaScript": 18,
+        "DevOps": 18,
+        "Java": 14,
+        "SQL": 14,
+        "Tools": 12,
+        "Web": 12,
+        "Python": 8,
+        "ML/AI": 2
+      },
+      "Electrical Engineering": {
+        "ML/AI": 12,
+        "Testing": 12,
+        "Web": 6,
+        "Tools": 6
+      },
+      "Operations Manager": {
+        "SQL": 30,
+        "Testing": 20,
+        "BigData": 10,
+        "Web": 10,
+        "JavaScript": 10
+      },
+      "Python Developer": {
+        "Python": 48,
+        "SQL": 40,
+        "Web": 32,
+        "JavaScript": 24,
+        "Testing": 24,
+        "Tools": 24,
+        "Java": 16,
+        "Cloud": 16,
+        "BigData": 8,
+        "ML/AI": 8
+      },
+      "DevOps Engineer": {
+        "SQL": 38,
+        "Tools": 38,
+        "Cloud": 37,
+        "Web": 37,
+        "Testing": 37,
+        "Java": 37,
+        "Python": 36,
+        "DevOps": 35,
+        "JavaScript": 20,
+        "BigData": 1
+      },
+      "Network Security Engineer": {
+        "Web": 10,
+        "Cloud": 10,
+        "Python": 5,
+        "SQL": 5,
+        "DevOps": 5,
+        "BigData": 5,
+        "Tools": 5
+      },
+      "PMO": {
+        "BigData": 30,
+        "Web": 10,
+        "Testing": 10,
+        "SQL": 10,
+        "Tools": 10
+      },
+      "Database": {
+        "SQL": 33,
+        "Tools": 27,
+        "DevOps": 24,
+        "BigData": 12,
+        "Testing": 12,
+        "Java": 6,
+        "Cloud": 6,
+        "JavaScript": 3,
+        "Web": 3,
+        "Python": 3
+      },
+      "Hadoop": {
+        "SQL": 42,
+        "Cloud": 42,
+        "BigData": 42,
+        "Java": 30,
+        "Python": 24,
+        "DevOps": 24,
+        "Testing": 24,
+        "Tools": 24,
+        "JavaScript": 24,
+        "Web": 24
+      },
+      "ETL Developer": {
+        "SQL": 40,
+        "BigData": 40,
+        "Testing": 24,
+        "Tools": 16,
+        "JavaScript": 16,
+        "ML/AI": 8,
+        "Java": 8,
+        "Cloud": 8
+      },
+      "DotNet Developer": {
+        "JavaScript": 24,
+        "SQL": 24,
+        "Web": 24,
+        "Java": 20,
+        "Testing": 8,
+        "Tools": 4,
+        "Cloud": 4
+      },
+      "Blockchain": {
+        "JavaScript": 32,
+        "Cloud": 32,
+        "Web": 32,
+        "SQL": 24,
+        "Java": 24,
+        "DevOps": 8,
+        "BigData": 8,
+        "Tools": 8,
+        "Python": 8,
+        "ML/AI": 8
+      },
+      "Testing": {
+        "Testing": 60,
+        "Java": 20,
+        "SQL": 20,
+        "ML/AI": 20,
+        "DevOps": 10,
+        "Tools": 10,
+        "Web": 10
+      }
+    }
+  },
+  "word_freq": [
+    {
+      "word": "exprience",
+      "count": 3829
+    },
+    {
+      "word": "company",
+      "count": 3578
+    },
+    {
+      "word": "project",
+      "count": 3498
+    },
+    {
+      "word": "months",
+      "count": 3288
+    },
+    {
+      "word": "description",
+      "count": 3122
+    },
+    {
+      "word": "details",
+      "count": 3096
+    },
+    {
+      "word": "data",
+      "count": 2156
+    },
+    {
+      "word": "management",
+      "count": 1999
+    },
+    {
+      "word": "maharashtra",
+      "count": 1449
+    },
+    {
+      "word": "system",
+      "count": 1425
+    },
+    {
+      "word": "testing",
+      "count": 1349
+    },
+    {
+      "word": "year",
+      "count": 1344
+    },
+    {
+      "word": "database",
+      "count": 1280
+    },
+    {
+      "word": "all",
+      "count": 1226
+    },
+    {
+      "word": "development",
+      "count": 1203
+    },
+    {
+      "word": "business",
+      "count": 1196
+    },
+    {
+      "word": "ltd",
+      "count": 1177
+    },
+    {
+      "word": "test",
+      "count": 1174
+    },
+    {
+      "word": "less",
+      "count": 1145
+    },
+    {
+      "word": "using",
+      "count": 1124
+    },
+    {
+      "word": "sql",
+      "count": 1121
+    },
+    {
+      "word": "skill",
+      "count": 1117
+    },
+    {
+      "word": "january",
+      "count": 1090
+    },
+    {
+      "word": "client",
+      "count": 1085
+    },
+    {
+      "word": "java",
+      "count": 1076
+    },
+    {
+      "word": "developer",
+      "count": 1069
+    },
+    {
+      "word": "engineering",
+      "count": 1055
+    },
+    {
+      "word": "application",
+      "count": 1046
+    },
+    {
+      "word": "pune",
+      "count": 1026
+    },
+    {
+      "word": "services",
+      "count": 956
+    },
+    {
+      "word": "skills",
+      "count": 950
+    },
+    {
+      "word": "education",
+      "count": 898
+    },
+    {
+      "word": "software",
+      "count": 887
+    },
+    {
+      "word": "pvt",
+      "count": 879
+    },
+    {
+      "word": "responsibilities",
+      "count": 856
+    },
+    {
+      "word": "sales",
+      "count": 825
+    },
+    {
+      "word": "reports",
+      "count": 814
+    },
+    {
+      "word": "process",
+      "count": 813
+    },
+    {
+      "word": "operations",
+      "count": 791
+    },
+    {
+      "word": "requirements",
+      "count": 790
+    },
+    {
+      "word": "server",
+      "count": 779
+    },
+    {
+      "word": "customer",
+      "count": 775
+    },
+    {
+      "word": "technical",
+      "count": 767
+    },
+    {
+      "word": "technologies",
+      "count": 764
+    },
+    {
+      "word": "india",
+      "count": 762
+    },
+    {
+      "word": "university",
+      "count": 762
+    },
+    {
+      "word": "monthscompany",
+      "count": 746
+    },
+    {
+      "word": "design",
+      "count": 745
+    },
+    {
+      "word": "various",
+      "count": 727
+    },
+    {
+      "word": "python",
+      "count": 709
+    },
+    {
+      "word": "environment",
+      "count": 707
+    },
+    {
+      "word": "web",
+      "count": 702
+    },
+    {
+      "word": "college",
+      "count": 695
+    },
+    {
+      "word": "engineer",
+      "count": 650
+    },
+    {
+      "word": "automation",
+      "count": 645
+    },
+    {
+      "word": "like",
+      "count": 640
+    },
+    {
+      "word": "which",
+      "count": 639
+    },
+    {
+      "word": "role",
+      "count": 632
+    },
+    {
+      "word": "time",
+      "count": 627
+    },
+    {
+      "word": "mysql",
+      "count": 625
+    },
+    {
+      "word": "support",
+      "count": 620
+    },
+    {
+      "word": "windows",
+      "count": 617
+    },
+    {
+      "word": "based",
+      "count": 608
+    },
+    {
+      "word": "technology",
+      "count": 606
+    },
+    {
+      "word": "worked",
+      "count": 604
+    },
+    {
+      "word": "per",
+      "count": 601
+    },
+    {
+      "word": "knowledge",
+      "count": 597
+    },
+    {
+      "word": "quality",
+      "count": 596
+    },
+    {
+      "word": "activities",
+      "count": 588
+    },
+    {
+      "word": "manager",
+      "count": 587
+    },
+    {
+      "word": "issues",
+      "count": 577
+    },
+    {
+      "word": "projects",
+      "count": 573
+    },
+    {
+      "word": "used",
+      "count": 568
+    },
+    {
+      "word": "training",
+      "count": 565
+    },
+    {
+      "word": "html",
+      "count": 561
+    },
+    {
+      "word": "mumbai",
+      "count": 552
+    },
+    {
+      "word": "information",
+      "count": 547
+    },
+    {
+      "word": "new",
+      "count": 547
+    },
+    {
+      "word": "computer",
+      "count": 545
+    },
+    {
+      "word": "systems",
+      "count": 529
+    }
+  ],
+  "word_freq_per_category": {
+    "Data Science": [
+      {
+        "word": "data",
+        "count": 396
+      },
+      {
+        "word": "exprience",
+        "count": 248
+      },
+      {
+        "word": "months",
+        "count": 240
+      },
+      {
+        "word": "learning",
+        "count": 204
+      },
+      {
+        "word": "python",
+        "count": 188
+      },
+      {
+        "word": "science",
+        "count": 168
+      },
+      {
+        "word": "year",
+        "count": 168
+      },
+      {
+        "word": "machine",
+        "count": 156
+      },
+      {
+        "word": "less",
+        "count": 156
+      },
+      {
+        "word": "details",
+        "count": 120
+      },
+      {
+        "word": "analytics",
+        "count": 120
+      },
+      {
+        "word": "using",
+        "count": 96
+      },
+      {
+        "word": "like",
+        "count": 88
+      },
+      {
+        "word": "analysis",
+        "count": 84
+      },
+      {
+        "word": "company",
+        "count": 80
+      },
+      {
+        "word": "sql",
+        "count": 72
+      },
+      {
+        "word": "deep",
+        "count": 72
+      },
+      {
+        "word": "description",
+        "count": 72
+      },
+      {
+        "word": "can",
+        "count": 72
+      },
+      {
+        "word": "business",
+        "count": 72
+      },
+      {
+        "word": "project",
+        "count": 72
+      },
+      {
+        "word": "sap",
+        "count": 68
+      },
+      {
+        "word": "knowledge",
+        "count": 64
+      },
+      {
+        "word": "text",
+        "count": 60
+      },
+      {
+        "word": "skills",
+        "count": 56
+      },
+      {
+        "word": "platform",
+        "count": 56
+      },
+      {
+        "word": "education",
+        "count": 52
+      },
+      {
+        "word": "development",
+        "count": 52
+      },
+      {
+        "word": "information",
+        "count": 52
+      },
+      {
+        "word": "technical",
+        "count": 52
+      }
+    ],
+    "HR": [
+      {
+        "word": "details",
+        "count": 132
+      },
+      {
+        "word": "exprience",
+        "count": 72
+      },
+      {
+        "word": "company",
+        "count": 68
+      },
+      {
+        "word": "management",
+        "count": 60
+      },
+      {
+        "word": "description",
+        "count": 52
+      },
+      {
+        "word": "skill",
+        "count": 44
+      },
+      {
+        "word": "months",
+        "count": 44
+      },
+      {
+        "word": "education",
+        "count": 40
+      },
+      {
+        "word": "skills",
+        "count": 28
+      },
+      {
+        "word": "monthscompany",
+        "count": 28
+      },
+      {
+        "word": "payroll",
+        "count": 28
+      },
+      {
+        "word": "june",
+        "count": 28
+      },
+      {
+        "word": "january",
+        "count": 24
+      },
+      {
+        "word": "engineering",
+        "count": 24
+      },
+      {
+        "word": "university",
+        "count": 24
+      },
+      {
+        "word": "computer",
+        "count": 24
+      },
+      {
+        "word": "mba",
+        "count": 20
+      },
+      {
+        "word": "college",
+        "count": 20
+      },
+      {
+        "word": "software",
+        "count": 20
+      },
+      {
+        "word": "statutory",
+        "count": 20
+      },
+      {
+        "word": "compliance",
+        "count": 20
+      },
+      {
+        "word": "employee",
+        "count": 20
+      },
+      {
+        "word": "salary",
+        "count": 20
+      },
+      {
+        "word": "employees",
+        "count": 20
+      },
+      {
+        "word": "dynamics",
+        "count": 20
+      },
+      {
+        "word": "school",
+        "count": 16
+      },
+      {
+        "word": "year",
+        "count": 16
+      },
+      {
+        "word": "payment",
+        "count": 16
+      },
+      {
+        "word": "form",
+        "count": 16
+      },
+      {
+        "word": "training",
+        "count": 16
+      }
+    ],
+    "Advocate": [
+      {
+        "word": "details",
+        "count": 60
+      },
+      {
+        "word": "legal",
+        "count": 50
+      },
+      {
+        "word": "law",
+        "count": 46
+      },
+      {
+        "word": "university",
+        "count": 38
+      },
+      {
+        "word": "advocate",
+        "count": 34
+      },
+      {
+        "word": "exprience",
+        "count": 32
+      },
+      {
+        "word": "january",
+        "count": 32
+      },
+      {
+        "word": "company",
+        "count": 30
+      },
+      {
+        "word": "court",
+        "count": 28
+      },
+      {
+        "word": "maharashtra",
+        "count": 24
+      },
+      {
+        "word": "description",
+        "count": 22
+      },
+      {
+        "word": "skill",
+        "count": 20
+      },
+      {
+        "word": "less",
+        "count": 20
+      },
+      {
+        "word": "year",
+        "count": 20
+      },
+      {
+        "word": "months",
+        "count": 20
+      },
+      {
+        "word": "district",
+        "count": 16
+      },
+      {
+        "word": "all",
+        "count": 16
+      },
+      {
+        "word": "mumbai",
+        "count": 16
+      },
+      {
+        "word": "pune",
+        "count": 16
+      },
+      {
+        "word": "college",
+        "count": 14
+      },
+      {
+        "word": "courts",
+        "count": 14
+      },
+      {
+        "word": "criminal",
+        "count": 14
+      },
+      {
+        "word": "cases",
+        "count": 14
+      },
+      {
+        "word": "education",
+        "count": 14
+      },
+      {
+        "word": "chennai",
+        "count": 14
+      },
+      {
+        "word": "high",
+        "count": 12
+      },
+      {
+        "word": "matters",
+        "count": 12
+      },
+      {
+        "word": "paper",
+        "count": 12
+      },
+      {
+        "word": "monthscompany",
+        "count": 12
+      },
+      {
+        "word": "llb",
+        "count": 12
+      }
+    ],
+    "Arts": [
+      {
+        "word": "company",
+        "count": 156
+      },
+      {
+        "word": "arts",
+        "count": 144
+      },
+      {
+        "word": "details",
+        "count": 108
+      },
+      {
+        "word": "description",
+        "count": 108
+      },
+      {
+        "word": "january",
+        "count": 96
+      },
+      {
+        "word": "maharashtra",
+        "count": 90
+      },
+      {
+        "word": "india",
+        "count": 78
+      },
+      {
+        "word": "college",
+        "count": 72
+      },
+      {
+        "word": "skill",
+        "count": 66
+      },
+      {
+        "word": "council",
+        "count": 66
+      },
+      {
+        "word": "british",
+        "count": 60
+      },
+      {
+        "word": "music",
+        "count": 60
+      },
+      {
+        "word": "days",
+        "count": 54
+      },
+      {
+        "word": "development",
+        "count": 54
+      },
+      {
+        "word": "events",
+        "count": 54
+      },
+      {
+        "word": "responsibilities",
+        "count": 54
+      },
+      {
+        "word": "projects",
+        "count": 54
+      },
+      {
+        "word": "mumbai",
+        "count": 48
+      },
+      {
+        "word": "pune",
+        "count": 42
+      },
+      {
+        "word": "university",
+        "count": 42
+      },
+      {
+        "word": "state",
+        "count": 42
+      },
+      {
+        "word": "managing",
+        "count": 42
+      },
+      {
+        "word": "new",
+        "count": 42
+      },
+      {
+        "word": "marketing",
+        "count": 36
+      },
+      {
+        "word": "management",
+        "count": 36
+      },
+      {
+        "word": "nagpur",
+        "count": 36
+      },
+      {
+        "word": "workshop",
+        "count": 36
+      },
+      {
+        "word": "board",
+        "count": 36
+      },
+      {
+        "word": "programmes",
+        "count": 36
+      },
+      {
+        "word": "programme",
+        "count": 36
+      }
+    ],
+    "Web Designing": [
+      {
+        "word": "project",
+        "count": 360
+      },
+      {
+        "word": "application",
+        "count": 252
+      },
+      {
+        "word": "description",
+        "count": 234
+      },
+      {
+        "word": "web",
+        "count": 207
+      },
+      {
+        "word": "exprience",
+        "count": 198
+      },
+      {
+        "word": "used",
+        "count": 171
+      },
+      {
+        "word": "html",
+        "count": 162
+      },
+      {
+        "word": "css",
+        "count": 162
+      },
+      {
+        "word": "bootstrap",
+        "count": 162
+      },
+      {
+        "word": "months",
+        "count": 162
+      },
+      {
+        "word": "details",
+        "count": 153
+      },
+      {
+        "word": "software",
+        "count": 144
+      },
+      {
+        "word": "company",
+        "count": 144
+      },
+      {
+        "word": "jquery",
+        "count": 135
+      },
+      {
+        "word": "developed",
+        "count": 135
+      },
+      {
+        "word": "technologies",
+        "count": 126
+      },
+      {
+        "word": "roles",
+        "count": 126
+      },
+      {
+        "word": "responsibility",
+        "count": 126
+      },
+      {
+        "word": "website",
+        "count": 126
+      },
+      {
+        "word": "designed",
+        "count": 117
+      },
+      {
+        "word": "com",
+        "count": 117
+      },
+      {
+        "word": "photoshop",
+        "count": 108
+      },
+      {
+        "word": "maharashtra",
+        "count": 108
+      },
+      {
+        "word": "developer",
+        "count": 108
+      },
+      {
+        "word": "php",
+        "count": 99
+      },
+      {
+        "word": "javascript",
+        "count": 90
+      },
+      {
+        "word": "nagpur",
+        "count": 90
+      },
+      {
+        "word": "trust",
+        "count": 90
+      },
+      {
+        "word": "time",
+        "count": 90
+      },
+      {
+        "word": "made",
+        "count": 90
+      }
+    ],
+    "Mechanical Engineer": [
+      {
+        "word": "engineering",
+        "count": 224
+      },
+      {
+        "word": "mechanical",
+        "count": 208
+      },
+      {
+        "word": "design",
+        "count": 168
+      },
+      {
+        "word": "company",
+        "count": 160
+      },
+      {
+        "word": "details",
+        "count": 120
+      },
+      {
+        "word": "description",
+        "count": 112
+      },
+      {
+        "word": "technical",
+        "count": 104
+      },
+      {
+        "word": "project",
+        "count": 104
+      },
+      {
+        "word": "customer",
+        "count": 104
+      },
+      {
+        "word": "products",
+        "count": 96
+      },
+      {
+        "word": "vendor",
+        "count": 96
+      },
+      {
+        "word": "ltd",
+        "count": 88
+      },
+      {
+        "word": "cost",
+        "count": 80
+      },
+      {
+        "word": "training",
+        "count": 72
+      },
+      {
+        "word": "projects",
+        "count": 72
+      },
+      {
+        "word": "role",
+        "count": 72
+      },
+      {
+        "word": "sales",
+        "count": 72
+      },
+      {
+        "word": "time",
+        "count": 72
+      },
+      {
+        "word": "vendors",
+        "count": 72
+      },
+      {
+        "word": "development",
+        "count": 72
+      },
+      {
+        "word": "machine",
+        "count": 72
+      },
+      {
+        "word": "exprience",
+        "count": 64
+      },
+      {
+        "word": "responsibilities",
+        "count": 64
+      },
+      {
+        "word": "all",
+        "count": 64
+      },
+      {
+        "word": "process",
+        "count": 64
+      },
+      {
+        "word": "proposal",
+        "count": 64
+      },
+      {
+        "word": "pune",
+        "count": 64
+      },
+      {
+        "word": "manufacturing",
+        "count": 64
+      },
+      {
+        "word": "pvt",
+        "count": 64
+      },
+      {
+        "word": "order",
+        "count": 56
+      }
+    ],
+    "Sales": [
+      {
+        "word": "sales",
+        "count": 400
+      },
+      {
+        "word": "exprience",
+        "count": 168
+      },
+      {
+        "word": "months",
+        "count": 128
+      },
+      {
+        "word": "details",
+        "count": 120
+      },
+      {
+        "word": "manager",
+        "count": 120
+      },
+      {
+        "word": "company",
+        "count": 120
+      },
+      {
+        "word": "description",
+        "count": 96
+      },
+      {
+        "word": "marketing",
+        "count": 96
+      },
+      {
+        "word": "office",
+        "count": 72
+      },
+      {
+        "word": "year",
+        "count": 64
+      },
+      {
+        "word": "college",
+        "count": 64
+      },
+      {
+        "word": "targets",
+        "count": 64
+      },
+      {
+        "word": "skill",
+        "count": 56
+      },
+      {
+        "word": "ltd",
+        "count": 56
+      },
+      {
+        "word": "cricket",
+        "count": 56
+      },
+      {
+        "word": "staff",
+        "count": 56
+      },
+      {
+        "word": "worked",
+        "count": 48
+      },
+      {
+        "word": "skills",
+        "count": 48
+      },
+      {
+        "word": "performance",
+        "count": 48
+      },
+      {
+        "word": "managing",
+        "count": 48
+      },
+      {
+        "word": "clients",
+        "count": 48
+      },
+      {
+        "word": "leads",
+        "count": 48
+      },
+      {
+        "word": "less",
+        "count": 40
+      },
+      {
+        "word": "monthscompany",
+        "count": 40
+      },
+      {
+        "word": "university",
+        "count": 40
+      },
+      {
+        "word": "management",
+        "count": 40
+      },
+      {
+        "word": "education",
+        "count": 32
+      },
+      {
+        "word": "high",
+        "count": 32
+      },
+      {
+        "word": "school",
+        "count": 32
+      },
+      {
+        "word": "calling",
+        "count": 32
+      }
+    ],
+    "Health and fitness": [
+      {
+        "word": "fitness",
+        "count": 185
+      },
+      {
+        "word": "company",
+        "count": 140
+      },
+      {
+        "word": "description",
+        "count": 115
+      },
+      {
+        "word": "details",
+        "count": 90
+      },
+      {
+        "word": "health",
+        "count": 80
+      },
+      {
+        "word": "gym",
+        "count": 70
+      },
+      {
+        "word": "skills",
+        "count": 60
+      },
+      {
+        "word": "nutrition",
+        "count": 60
+      },
+      {
+        "word": "management",
+        "count": 55
+      },
+      {
+        "word": "sales",
+        "count": 55
+      },
+      {
+        "word": "january",
+        "count": 50
+      },
+      {
+        "word": "responsibilities",
+        "count": 50
+      },
+      {
+        "word": "science",
+        "count": 45
+      },
+      {
+        "word": "related",
+        "count": 45
+      },
+      {
+        "word": "education",
+        "count": 40
+      },
+      {
+        "word": "college",
+        "count": 40
+      },
+      {
+        "word": "training",
+        "count": 40
+      },
+      {
+        "word": "months",
+        "count": 35
+      },
+      {
+        "word": "handling",
+        "count": 35
+      },
+      {
+        "word": "queries",
+        "count": 35
+      },
+      {
+        "word": "customers",
+        "count": 35
+      },
+      {
+        "word": "skill",
+        "count": 30
+      },
+      {
+        "word": "hotel",
+        "count": 30
+      },
+      {
+        "word": "university",
+        "count": 30
+      },
+      {
+        "word": "customer",
+        "count": 30
+      },
+      {
+        "word": "centre",
+        "count": 30
+      },
+      {
+        "word": "high",
+        "count": 25
+      },
+      {
+        "word": "good",
+        "count": 25
+      },
+      {
+        "word": "people",
+        "count": 25
+      },
+      {
+        "word": "spa",
+        "count": 25
+      }
+    ],
+    "Civil Engineer": [
+      {
+        "word": "project",
+        "count": 228
+      },
+      {
+        "word": "civil",
+        "count": 160
+      },
+      {
+        "word": "engineer",
+        "count": 140
+      },
+      {
+        "word": "company",
+        "count": 140
+      },
+      {
+        "word": "site",
+        "count": 132
+      },
+      {
+        "word": "description",
+        "count": 116
+      },
+      {
+        "word": "construction",
+        "count": 80
+      },
+      {
+        "word": "details",
+        "count": 72
+      },
+      {
+        "word": "india",
+        "count": 64
+      },
+      {
+        "word": "inspection",
+        "count": 56
+      },
+      {
+        "word": "client",
+        "count": 48
+      },
+      {
+        "word": "exprience",
+        "count": 48
+      },
+      {
+        "word": "engineering",
+        "count": 44
+      },
+      {
+        "word": "mumbai",
+        "count": 44
+      },
+      {
+        "word": "all",
+        "count": 40
+      },
+      {
+        "word": "drawings",
+        "count": 40
+      },
+      {
+        "word": "maharashtra",
+        "count": 40
+      },
+      {
+        "word": "quality",
+        "count": 36
+      },
+      {
+        "word": "months",
+        "count": 36
+      },
+      {
+        "word": "material",
+        "count": 36
+      },
+      {
+        "word": "building",
+        "count": 32
+      },
+      {
+        "word": "name",
+        "count": 32
+      },
+      {
+        "word": "etc",
+        "count": 32
+      },
+      {
+        "word": "ensure",
+        "count": 32
+      },
+      {
+        "word": "autocad",
+        "count": 32
+      },
+      {
+        "word": "skill",
+        "count": 28
+      },
+      {
+        "word": "position",
+        "count": 28
+      },
+      {
+        "word": "responsibilities",
+        "count": 28
+      },
+      {
+        "word": "job",
+        "count": 28
+      },
+      {
+        "word": "specifications",
+        "count": 28
+      }
+    ],
+    "Java Developer": [
+      {
+        "word": "java",
+        "count": 636
+      },
+      {
+        "word": "exprience",
+        "count": 408
+      },
+      {
+        "word": "months",
+        "count": 372
+      },
+      {
+        "word": "developer",
+        "count": 288
+      },
+      {
+        "word": "details",
+        "count": 276
+      },
+      {
+        "word": "description",
+        "count": 198
+      },
+      {
+        "word": "company",
+        "count": 192
+      },
+      {
+        "word": "less",
+        "count": 186
+      },
+      {
+        "word": "year",
+        "count": 186
+      },
+      {
+        "word": "maharashtra",
+        "count": 168
+      },
+      {
+        "word": "ajax",
+        "count": 138
+      },
+      {
+        "word": "spring",
+        "count": 132
+      },
+      {
+        "word": "jsp",
+        "count": 132
+      },
+      {
+        "word": "technologies",
+        "count": 132
+      },
+      {
+        "word": "hibernate",
+        "count": 114
+      },
+      {
+        "word": "mysql",
+        "count": 114
+      },
+      {
+        "word": "pvt",
+        "count": 108
+      },
+      {
+        "word": "ltd",
+        "count": 108
+      },
+      {
+        "word": "january",
+        "count": 108
+      },
+      {
+        "word": "javascript",
+        "count": 102
+      },
+      {
+        "word": "project",
+        "count": 102
+      },
+      {
+        "word": "technology",
+        "count": 96
+      },
+      {
+        "word": "development",
+        "count": 96
+      },
+      {
+        "word": "servlet",
+        "count": 96
+      },
+      {
+        "word": "skill",
+        "count": 90
+      },
+      {
+        "word": "system",
+        "count": 90
+      },
+      {
+        "word": "jquery",
+        "count": 90
+      },
+      {
+        "word": "education",
+        "count": 78
+      },
+      {
+        "word": "web",
+        "count": 78
+      },
+      {
+        "word": "windows",
+        "count": 72
+      }
+    ],
+    "Business Analyst": [
+      {
+        "word": "business",
+        "count": 252
+      },
+      {
+        "word": "test",
+        "count": 214
+      },
+      {
+        "word": "company",
+        "count": 168
+      },
+      {
+        "word": "description",
+        "count": 168
+      },
+      {
+        "word": "testing",
+        "count": 128
+      },
+      {
+        "word": "management",
+        "count": 128
+      },
+      {
+        "word": "project",
+        "count": 124
+      },
+      {
+        "word": "details",
+        "count": 122
+      },
+      {
+        "word": "requirement",
+        "count": 116
+      },
+      {
+        "word": "requirements",
+        "count": 116
+      },
+      {
+        "word": "exprience",
+        "count": 112
+      },
+      {
+        "word": "process",
+        "count": 102
+      },
+      {
+        "word": "functional",
+        "count": 96
+      },
+      {
+        "word": "months",
+        "count": 92
+      },
+      {
+        "word": "system",
+        "count": 90
+      },
+      {
+        "word": "analysis",
+        "count": 90
+      },
+      {
+        "word": "responsibilities",
+        "count": 84
+      },
+      {
+        "word": "analyst",
+        "count": 82
+      },
+      {
+        "word": "user",
+        "count": 82
+      },
+      {
+        "word": "various",
+        "count": 72
+      },
+      {
+        "word": "january",
+        "count": 72
+      },
+      {
+        "word": "which",
+        "count": 72
+      },
+      {
+        "word": "maharashtra",
+        "count": 70
+      },
+      {
+        "word": "report",
+        "count": 70
+      },
+      {
+        "word": "ltd",
+        "count": 68
+      },
+      {
+        "word": "client",
+        "count": 68
+      },
+      {
+        "word": "pvt",
+        "count": 64
+      },
+      {
+        "word": "mumbai",
+        "count": 60
+      },
+      {
+        "word": "cases",
+        "count": 60
+      },
+      {
+        "word": "processes",
+        "count": 60
+      }
+    ],
+    "SAP Developer": [
+      {
+        "word": "sap",
+        "count": 300
+      },
+      {
+        "word": "hana",
+        "count": 136
+      },
+      {
+        "word": "project",
+        "count": 136
+      },
+      {
+        "word": "data",
+        "count": 112
+      },
+      {
+        "word": "reports",
+        "count": 112
+      },
+      {
+        "word": "developer",
+        "count": 100
+      },
+      {
+        "word": "exprience",
+        "count": 100
+      },
+      {
+        "word": "business",
+        "count": 96
+      },
+      {
+        "word": "company",
+        "count": 92
+      },
+      {
+        "word": "months",
+        "count": 84
+      },
+      {
+        "word": "users",
+        "count": 84
+      },
+      {
+        "word": "using",
+        "count": 80
+      },
+      {
+        "word": "details",
+        "count": 72
+      },
+      {
+        "word": "description",
+        "count": 72
+      },
+      {
+        "word": "application",
+        "count": 68
+      },
+      {
+        "word": "issues",
+        "count": 68
+      },
+      {
+        "word": "webi",
+        "count": 68
+      },
+      {
+        "word": "bods",
+        "count": 64
+      },
+      {
+        "word": "universe",
+        "count": 64
+      },
+      {
+        "word": "requirements",
+        "count": 60
+      },
+      {
+        "word": "worked",
+        "count": 60
+      },
+      {
+        "word": "client",
+        "count": 56
+      },
+      {
+        "word": "various",
+        "count": 52
+      },
+      {
+        "word": "environment",
+        "count": 48
+      },
+      {
+        "word": "end",
+        "count": 48
+      },
+      {
+        "word": "views",
+        "count": 48
+      },
+      {
+        "word": "order",
+        "count": 48
+      },
+      {
+        "word": "performance",
+        "count": 44
+      },
+      {
+        "word": "implemented",
+        "count": 44
+      },
+      {
+        "word": "design",
+        "count": 44
+      }
+    ],
+    "Automation Testing": [
+      {
+        "word": "test",
+        "count": 416
+      },
+      {
+        "word": "testing",
+        "count": 342
+      },
+      {
+        "word": "automation",
+        "count": 272
+      },
+      {
+        "word": "company",
+        "count": 116
+      },
+      {
+        "word": "qtp",
+        "count": 112
+      },
+      {
+        "word": "description",
+        "count": 108
+      },
+      {
+        "word": "project",
+        "count": 100
+      },
+      {
+        "word": "exprience",
+        "count": 100
+      },
+      {
+        "word": "months",
+        "count": 94
+      },
+      {
+        "word": "using",
+        "count": 86
+      },
+      {
+        "word": "details",
+        "count": 84
+      },
+      {
+        "word": "good",
+        "count": 84
+      },
+      {
+        "word": "system",
+        "count": 84
+      },
+      {
+        "word": "integration",
+        "count": 80
+      },
+      {
+        "word": "involved",
+        "count": 78
+      },
+      {
+        "word": "software",
+        "count": 76
+      },
+      {
+        "word": "cases",
+        "count": 76
+      },
+      {
+        "word": "selenium",
+        "count": 72
+      },
+      {
+        "word": "environment",
+        "count": 72
+      },
+      {
+        "word": "development",
+        "count": 72
+      },
+      {
+        "word": "sql",
+        "count": 70
+      },
+      {
+        "word": "manual",
+        "count": 68
+      },
+      {
+        "word": "regression",
+        "count": 66
+      },
+      {
+        "word": "knowledge",
+        "count": 64
+      },
+      {
+        "word": "creation",
+        "count": 64
+      },
+      {
+        "word": "responsibilities",
+        "count": 60
+      },
+      {
+        "word": "design",
+        "count": 60
+      },
+      {
+        "word": "maharashtra",
+        "count": 54
+      },
+      {
+        "word": "driven",
+        "count": 54
+      },
+      {
+        "word": "functional",
+        "count": 54
+      }
+    ],
+    "Electrical Engineering": [
+      {
+        "word": "electrical",
+        "count": 300
+      },
+      {
+        "word": "maintenance",
+        "count": 144
+      },
+      {
+        "word": "engineering",
+        "count": 114
+      },
+      {
+        "word": "power",
+        "count": 108
+      },
+      {
+        "word": "project",
+        "count": 102
+      },
+      {
+        "word": "details",
+        "count": 90
+      },
+      {
+        "word": "company",
+        "count": 66
+      },
+      {
+        "word": "ltd",
+        "count": 66
+      },
+      {
+        "word": "maharashtra",
+        "count": 60
+      },
+      {
+        "word": "description",
+        "count": 60
+      },
+      {
+        "word": "operation",
+        "count": 60
+      },
+      {
+        "word": "control",
+        "count": 54
+      },
+      {
+        "word": "plant",
+        "count": 54
+      },
+      {
+        "word": "pvt",
+        "count": 54
+      },
+      {
+        "word": "technical",
+        "count": 54
+      },
+      {
+        "word": "layout",
+        "count": 54
+      },
+      {
+        "word": "design",
+        "count": 48
+      },
+      {
+        "word": "equipment",
+        "count": 48
+      },
+      {
+        "word": "cable",
+        "count": 48
+      },
+      {
+        "word": "pune",
+        "count": 48
+      },
+      {
+        "word": "panels",
+        "count": 48
+      },
+      {
+        "word": "panel",
+        "count": 48
+      },
+      {
+        "word": "completed",
+        "count": 48
+      },
+      {
+        "word": "management",
+        "count": 42
+      },
+      {
+        "word": "per",
+        "count": 42
+      },
+      {
+        "word": "drawing",
+        "count": 42
+      },
+      {
+        "word": "activities",
+        "count": 42
+      },
+      {
+        "word": "schedules",
+        "count": 36
+      },
+      {
+        "word": "university",
+        "count": 36
+      },
+      {
+        "word": "process",
+        "count": 36
+      }
+    ],
+    "Operations Manager": [
+      {
+        "word": "company",
+        "count": 600
+      },
+      {
+        "word": "operations",
+        "count": 570
+      },
+      {
+        "word": "all",
+        "count": 560
+      },
+      {
+        "word": "project",
+        "count": 470
+      },
+      {
+        "word": "client",
+        "count": 410
+      },
+      {
+        "word": "services",
+        "count": 400
+      },
+      {
+        "word": "management",
+        "count": 390
+      },
+      {
+        "word": "ensuring",
+        "count": 320
+      },
+      {
+        "word": "description",
+        "count": 290
+      },
+      {
+        "word": "system",
+        "count": 290
+      },
+      {
+        "word": "customer",
+        "count": 270
+      },
+      {
+        "word": "quality",
+        "count": 250
+      },
+      {
+        "word": "manager",
+        "count": 240
+      },
+      {
+        "word": "development",
+        "count": 240
+      },
+      {
+        "word": "ltd",
+        "count": 220
+      },
+      {
+        "word": "business",
+        "count": 200
+      },
+      {
+        "word": "india",
+        "count": 190
+      },
+      {
+        "word": "job",
+        "count": 190
+      },
+      {
+        "word": "timely",
+        "count": 190
+      },
+      {
+        "word": "process",
+        "count": 190
+      },
+      {
+        "word": "ensure",
+        "count": 180
+      },
+      {
+        "word": "meetings",
+        "count": 180
+      },
+      {
+        "word": "honeywell",
+        "count": 180
+      },
+      {
+        "word": "control",
+        "count": 170
+      },
+      {
+        "word": "activities",
+        "count": 170
+      },
+      {
+        "word": "monitored",
+        "count": 170
+      },
+      {
+        "word": "ges",
+        "count": 170
+      },
+      {
+        "word": "fat",
+        "count": 170
+      },
+      {
+        "word": "customers",
+        "count": 160
+      },
+      {
+        "word": "managing",
+        "count": 160
+      }
+    ],
+    "Python Developer": [
+      {
+        "word": "python",
+        "count": 344
+      },
+      {
+        "word": "exprience",
+        "count": 264
+      },
+      {
+        "word": "months",
+        "count": 224
+      },
+      {
+        "word": "pune",
+        "count": 216
+      },
+      {
+        "word": "completed",
+        "count": 160
+      },
+      {
+        "word": "developer",
+        "count": 152
+      },
+      {
+        "word": "details",
+        "count": 144
+      },
+      {
+        "word": "training",
+        "count": 136
+      },
+      {
+        "word": "year",
+        "count": 112
+      },
+      {
+        "word": "internal",
+        "count": 104
+      },
+      {
+        "word": "maharashtra",
+        "count": 104
+      },
+      {
+        "word": "less",
+        "count": 104
+      },
+      {
+        "word": "mysql",
+        "count": 96
+      },
+      {
+        "word": "development",
+        "count": 88
+      },
+      {
+        "word": "web",
+        "count": 88
+      },
+      {
+        "word": "project",
+        "count": 88
+      },
+      {
+        "word": "django",
+        "count": 80
+      },
+      {
+        "word": "computer",
+        "count": 80
+      },
+      {
+        "word": "movex",
+        "count": 72
+      },
+      {
+        "word": "company",
+        "count": 72
+      },
+      {
+        "word": "technical",
+        "count": 64
+      },
+      {
+        "word": "html",
+        "count": 64
+      },
+      {
+        "word": "erp",
+        "count": 64
+      },
+      {
+        "word": "university",
+        "count": 64
+      },
+      {
+        "word": "rest",
+        "count": 64
+      },
+      {
+        "word": "description",
+        "count": 64
+      },
+      {
+        "word": "api",
+        "count": 56
+      },
+      {
+        "word": "skill",
+        "count": 56
+      },
+      {
+        "word": "agile",
+        "count": 48
+      },
+      {
+        "word": "worked",
+        "count": 48
+      }
+    ],
+    "DevOps Engineer": [
+      {
+        "word": "exprience",
+        "count": 424
+      },
+      {
+        "word": "project",
+        "count": 420
+      },
+      {
+        "word": "months",
+        "count": 386
+      },
+      {
+        "word": "shell",
+        "count": 257
+      },
+      {
+        "word": "company",
+        "count": 213
+      },
+      {
+        "word": "description",
+        "count": 210
+      },
+      {
+        "word": "devops",
+        "count": 209
+      },
+      {
+        "word": "servers",
+        "count": 205
+      },
+      {
+        "word": "build",
+        "count": 204
+      },
+      {
+        "word": "mysql",
+        "count": 191
+      },
+      {
+        "word": "automation",
+        "count": 180
+      },
+      {
+        "word": "applications",
+        "count": 173
+      },
+      {
+        "word": "scripts",
+        "count": 171
+      },
+      {
+        "word": "linux",
+        "count": 170
+      },
+      {
+        "word": "details",
+        "count": 165
+      },
+      {
+        "word": "less",
+        "count": 153
+      },
+      {
+        "word": "year",
+        "count": 153
+      },
+      {
+        "word": "users",
+        "count": 153
+      },
+      {
+        "word": "software",
+        "count": 149
+      },
+      {
+        "word": "sql",
+        "count": 144
+      },
+      {
+        "word": "cloud",
+        "count": 142
+      },
+      {
+        "word": "which",
+        "count": 139
+      },
+      {
+        "word": "support",
+        "count": 138
+      },
+      {
+        "word": "scripting",
+        "count": 136
+      },
+      {
+        "word": "deployment",
+        "count": 136
+      },
+      {
+        "word": "development",
+        "count": 130
+      },
+      {
+        "word": "different",
+        "count": 124
+      },
+      {
+        "word": "technologies",
+        "count": 123
+      },
+      {
+        "word": "commerce",
+        "count": 122
+      },
+      {
+        "word": "engineer",
+        "count": 119
+      }
+    ],
+    "Network Security Engineer": [
+      {
+        "word": "network",
+        "count": 305
+      },
+      {
+        "word": "exprience",
+        "count": 245
+      },
+      {
+        "word": "security",
+        "count": 240
+      },
+      {
+        "word": "cisco",
+        "count": 225
+      },
+      {
+        "word": "months",
+        "count": 220
+      },
+      {
+        "word": "configuration",
+        "count": 170
+      },
+      {
+        "word": "year",
+        "count": 160
+      },
+      {
+        "word": "less",
+        "count": 150
+      },
+      {
+        "word": "management",
+        "count": 125
+      },
+      {
+        "word": "firewall",
+        "count": 105
+      },
+      {
+        "word": "etc",
+        "count": 95
+      },
+      {
+        "word": "description",
+        "count": 90
+      },
+      {
+        "word": "server",
+        "count": 85
+      },
+      {
+        "word": "company",
+        "count": 80
+      },
+      {
+        "word": "switches",
+        "count": 75
+      },
+      {
+        "word": "details",
+        "count": 75
+      },
+      {
+        "word": "project",
+        "count": 75
+      },
+      {
+        "word": "servers",
+        "count": 75
+      },
+      {
+        "word": "firewalls",
+        "count": 70
+      },
+      {
+        "word": "devices",
+        "count": 70
+      },
+      {
+        "word": "troubleshooting",
+        "count": 65
+      },
+      {
+        "word": "technologies",
+        "count": 65
+      },
+      {
+        "word": "client",
+        "count": 65
+      },
+      {
+        "word": "asa",
+        "count": 60
+      },
+      {
+        "word": "engineer",
+        "count": 60
+      },
+      {
+        "word": "troubleshoot",
+        "count": 60
+      },
+      {
+        "word": "routing",
+        "count": 55
+      },
+      {
+        "word": "maintaining",
+        "count": 55
+      },
+      {
+        "word": "maharashtra",
+        "count": 50
+      },
+      {
+        "word": "networking",
+        "count": 50
+      }
+    ],
+    "PMO": [
+      {
+        "word": "management",
+        "count": 430
+      },
+      {
+        "word": "project",
+        "count": 400
+      },
+      {
+        "word": "report",
+        "count": 210
+      },
+      {
+        "word": "business",
+        "count": 150
+      },
+      {
+        "word": "reports",
+        "count": 140
+      },
+      {
+        "word": "exprience",
+        "count": 140
+      },
+      {
+        "word": "sla",
+        "count": 140
+      },
+      {
+        "word": "data",
+        "count": 120
+      },
+      {
+        "word": "skills",
+        "count": 110
+      },
+      {
+        "word": "months",
+        "count": 110
+      },
+      {
+        "word": "company",
+        "count": 110
+      },
+      {
+        "word": "process",
+        "count": 110
+      },
+      {
+        "word": "documentation",
+        "count": 100
+      },
+      {
+        "word": "risk",
+        "count": 100
+      },
+      {
+        "word": "description",
+        "count": 100
+      },
+      {
+        "word": "resource",
+        "count": 100
+      },
+      {
+        "word": "client",
+        "count": 100
+      },
+      {
+        "word": "monitor",
+        "count": 100
+      },
+      {
+        "word": "training",
+        "count": 100
+      },
+      {
+        "word": "senior",
+        "count": 100
+      },
+      {
+        "word": "maintain",
+        "count": 90
+      },
+      {
+        "word": "ensure",
+        "count": 90
+      },
+      {
+        "word": "reporting",
+        "count": 90
+      },
+      {
+        "word": "details",
+        "count": 90
+      },
+      {
+        "word": "pmo",
+        "count": 90
+      },
+      {
+        "word": "operations",
+        "count": 90
+      },
+      {
+        "word": "billing",
+        "count": 90
+      },
+      {
+        "word": "requirements",
+        "count": 90
+      },
+      {
+        "word": "delivery",
+        "count": 80
+      },
+      {
+        "word": "ability",
+        "count": 80
+      }
+    ],
+    "Database": [
+      {
+        "word": "database",
+        "count": 474
+      },
+      {
+        "word": "sql",
+        "count": 219
+      },
+      {
+        "word": "server",
+        "count": 210
+      },
+      {
+        "word": "oracle",
+        "count": 198
+      },
+      {
+        "word": "exprience",
+        "count": 138
+      },
+      {
+        "word": "databases",
+        "count": 120
+      },
+      {
+        "word": "description",
+        "count": 117
+      },
+      {
+        "word": "using",
+        "count": 114
+      },
+      {
+        "word": "company",
+        "count": 111
+      },
+      {
+        "word": "backup",
+        "count": 108
+      },
+      {
+        "word": "details",
+        "count": 105
+      },
+      {
+        "word": "months",
+        "count": 105
+      },
+      {
+        "word": "installation",
+        "count": 102
+      },
+      {
+        "word": "issues",
+        "count": 99
+      },
+      {
+        "word": "servers",
+        "count": 99
+      },
+      {
+        "word": "management",
+        "count": 90
+      },
+      {
+        "word": "data",
+        "count": 90
+      },
+      {
+        "word": "administrator",
+        "count": 75
+      },
+      {
+        "word": "ltd",
+        "count": 75
+      },
+      {
+        "word": "support",
+        "count": 75
+      },
+      {
+        "word": "windows",
+        "count": 72
+      },
+      {
+        "word": "monitoring",
+        "count": 72
+      },
+      {
+        "word": "creating",
+        "count": 69
+      },
+      {
+        "word": "log",
+        "count": 66
+      },
+      {
+        "word": "rman",
+        "count": 63
+      },
+      {
+        "word": "linux",
+        "count": 60
+      },
+      {
+        "word": "mysql",
+        "count": 60
+      },
+      {
+        "word": "user",
+        "count": 57
+      },
+      {
+        "word": "backups",
+        "count": 57
+      },
+      {
+        "word": "worked",
+        "count": 54
+      }
+    ],
+    "Hadoop": [
+      {
+        "word": "data",
+        "count": 624
+      },
+      {
+        "word": "hadoop",
+        "count": 444
+      },
+      {
+        "word": "hive",
+        "count": 336
+      },
+      {
+        "word": "using",
+        "count": 174
+      },
+      {
+        "word": "sqoop",
+        "count": 174
+      },
+      {
+        "word": "description",
+        "count": 168
+      },
+      {
+        "word": "hdfs",
+        "count": 162
+      },
+      {
+        "word": "project",
+        "count": 144
+      },
+      {
+        "word": "exprience",
+        "count": 144
+      },
+      {
+        "word": "details",
+        "count": 126
+      },
+      {
+        "word": "company",
+        "count": 126
+      },
+      {
+        "word": "spark",
+        "count": 120
+      },
+      {
+        "word": "months",
+        "count": 120
+      },
+      {
+        "word": "cluster",
+        "count": 114
+      },
+      {
+        "word": "developer",
+        "count": 96
+      },
+      {
+        "word": "pig",
+        "count": 96
+      },
+      {
+        "word": "sql",
+        "count": 90
+      },
+      {
+        "word": "involved",
+        "count": 90
+      },
+      {
+        "word": "which",
+        "count": 90
+      },
+      {
+        "word": "mapreduce",
+        "count": 84
+      },
+      {
+        "word": "queries",
+        "count": 84
+      },
+      {
+        "word": "hbase",
+        "count": 72
+      },
+      {
+        "word": "system",
+        "count": 72
+      },
+      {
+        "word": "like",
+        "count": 72
+      },
+      {
+        "word": "tables",
+        "count": 72
+      },
+      {
+        "word": "used",
+        "count": 72
+      },
+      {
+        "word": "scala",
+        "count": 66
+      },
+      {
+        "word": "database",
+        "count": 66
+      },
+      {
+        "word": "java",
+        "count": 66
+      },
+      {
+        "word": "map",
+        "count": 66
+      }
+    ],
+    "ETL Developer": [
+      {
+        "word": "data",
+        "count": 376
+      },
+      {
+        "word": "etl",
+        "count": 344
+      },
+      {
+        "word": "informatica",
+        "count": 240
+      },
+      {
+        "word": "sql",
+        "count": 184
+      },
+      {
+        "word": "project",
+        "count": 176
+      },
+      {
+        "word": "exprience",
+        "count": 160
+      },
+      {
+        "word": "details",
+        "count": 152
+      },
+      {
+        "word": "using",
+        "count": 144
+      },
+      {
+        "word": "talend",
+        "count": 128
+      },
+      {
+        "word": "developer",
+        "count": 120
+      },
+      {
+        "word": "months",
+        "count": 120
+      },
+      {
+        "word": "company",
+        "count": 120
+      },
+      {
+        "word": "testing",
+        "count": 120
+      },
+      {
+        "word": "description",
+        "count": 112
+      },
+      {
+        "word": "unix",
+        "count": 104
+      },
+      {
+        "word": "services",
+        "count": 96
+      },
+      {
+        "word": "mappings",
+        "count": 96
+      },
+      {
+        "word": "server",
+        "count": 88
+      },
+      {
+        "word": "environment",
+        "count": 88
+      },
+      {
+        "word": "business",
+        "count": 88
+      },
+      {
+        "word": "knowledge",
+        "count": 80
+      },
+      {
+        "word": "january",
+        "count": 80
+      },
+      {
+        "word": "oracle",
+        "count": 80
+      },
+      {
+        "word": "unit",
+        "count": 80
+      },
+      {
+        "word": "jobs",
+        "count": 80
+      },
+      {
+        "word": "center",
+        "count": 72
+      },
+      {
+        "word": "source",
+        "count": 72
+      },
+      {
+        "word": "warehouse",
+        "count": 72
+      },
+      {
+        "word": "job",
+        "count": 72
+      },
+      {
+        "word": "maharashtra",
+        "count": 72
+      }
+    ],
+    "DotNet Developer": [
+      {
+        "word": "net",
+        "count": 276
+      },
+      {
+        "word": "exprience",
+        "count": 176
+      },
+      {
+        "word": "months",
+        "count": 152
+      },
+      {
+        "word": "project",
+        "count": 148
+      },
+      {
+        "word": "asp",
+        "count": 132
+      },
+      {
+        "word": "database",
+        "count": 116
+      },
+      {
+        "word": "sql",
+        "count": 116
+      },
+      {
+        "word": "server",
+        "count": 108
+      },
+      {
+        "word": "details",
+        "count": 100
+      },
+      {
+        "word": "developer",
+        "count": 100
+      },
+      {
+        "word": "description",
+        "count": 100
+      },
+      {
+        "word": "application",
+        "count": 100
+      },
+      {
+        "word": "mvc",
+        "count": 96
+      },
+      {
+        "word": "management",
+        "count": 96
+      },
+      {
+        "word": "system",
+        "count": 88
+      },
+      {
+        "word": "jquery",
+        "count": 84
+      },
+      {
+        "word": "less",
+        "count": 84
+      },
+      {
+        "word": "year",
+        "count": 84
+      },
+      {
+        "word": "dot",
+        "count": 80
+      },
+      {
+        "word": "javascript",
+        "count": 72
+      },
+      {
+        "word": "role",
+        "count": 72
+      },
+      {
+        "word": "company",
+        "count": 68
+      },
+      {
+        "word": "pune",
+        "count": 64
+      },
+      {
+        "word": "framework",
+        "count": 64
+      },
+      {
+        "word": "layer",
+        "count": 64
+      },
+      {
+        "word": "development",
+        "count": 64
+      },
+      {
+        "word": "environment",
+        "count": 64
+      },
+      {
+        "word": "web",
+        "count": 60
+      },
+      {
+        "word": "html",
+        "count": 60
+      },
+      {
+        "word": "worked",
+        "count": 60
+      }
+    ],
+    "Blockchain": [
+      {
+        "word": "company",
+        "count": 256
+      },
+      {
+        "word": "blockchain",
+        "count": 216
+      },
+      {
+        "word": "description",
+        "count": 208
+      },
+      {
+        "word": "exprience",
+        "count": 192
+      },
+      {
+        "word": "months",
+        "count": 160
+      },
+      {
+        "word": "details",
+        "count": 120
+      },
+      {
+        "word": "system",
+        "count": 120
+      },
+      {
+        "word": "ethereum",
+        "count": 120
+      },
+      {
+        "word": "january",
+        "count": 112
+      },
+      {
+        "word": "technology",
+        "count": 112
+      },
+      {
+        "word": "smart",
+        "count": 80
+      },
+      {
+        "word": "computer",
+        "count": 80
+      },
+      {
+        "word": "maharashtra",
+        "count": 72
+      },
+      {
+        "word": "mysql",
+        "count": 64
+      },
+      {
+        "word": "java",
+        "count": 64
+      },
+      {
+        "word": "engineering",
+        "count": 56
+      },
+      {
+        "word": "developer",
+        "count": 56
+      },
+      {
+        "word": "worked",
+        "count": 56
+      },
+      {
+        "word": "management",
+        "count": 56
+      },
+      {
+        "word": "build",
+        "count": 56
+      },
+      {
+        "word": "web",
+        "count": 56
+      },
+      {
+        "word": "project",
+        "count": 56
+      },
+      {
+        "word": "skill",
+        "count": 48
+      },
+      {
+        "word": "api",
+        "count": 48
+      },
+      {
+        "word": "html",
+        "count": 48
+      },
+      {
+        "word": "css",
+        "count": 48
+      },
+      {
+        "word": "global",
+        "count": 40
+      },
+      {
+        "word": "services",
+        "count": 40
+      },
+      {
+        "word": "contracts",
+        "count": 40
+      },
+      {
+        "word": "monthscompany",
+        "count": 40
+      }
+    ],
+    "Testing": [
+      {
+        "word": "testing",
+        "count": 370
+      },
+      {
+        "word": "test",
+        "count": 320
+      },
+      {
+        "word": "details",
+        "count": 260
+      },
+      {
+        "word": "exprience",
+        "count": 230
+      },
+      {
+        "word": "months",
+        "count": 220
+      },
+      {
+        "word": "maharashtra",
+        "count": 170
+      },
+      {
+        "word": "windows",
+        "count": 160
+      },
+      {
+        "word": "company",
+        "count": 150
+      },
+      {
+        "word": "system",
+        "count": 140
+      },
+      {
+        "word": "check",
+        "count": 140
+      },
+      {
+        "word": "transformer",
+        "count": 140
+      },
+      {
+        "word": "january",
+        "count": 130
+      },
+      {
+        "word": "engineer",
+        "count": 130
+      },
+      {
+        "word": "description",
+        "count": 130
+      },
+      {
+        "word": "project",
+        "count": 130
+      },
+      {
+        "word": "quality",
+        "count": 120
+      },
+      {
+        "word": "education",
+        "count": 90
+      },
+      {
+        "word": "skill",
+        "count": 90
+      },
+      {
+        "word": "ltd",
+        "count": 90
+      },
+      {
+        "word": "android",
+        "count": 90
+      },
+      {
+        "word": "engineering",
+        "count": 90
+      },
+      {
+        "word": "per",
+        "count": 90
+      },
+      {
+        "word": "assembly",
+        "count": 80
+      },
+      {
+        "word": "inspection",
+        "count": 80
+      },
+      {
+        "word": "electronics",
+        "count": 70
+      },
+      {
+        "word": "pvt",
+        "count": 70
+      },
+      {
+        "word": "application",
+        "count": 70
+      },
+      {
+        "word": "college",
+        "count": 70
+      },
+      {
+        "word": "resistance",
+        "count": 70
+      },
+      {
+        "word": "core",
+        "count": 70
+      }
+    ]
+  },
+  "education_stats": {
+    "bachelor": 354,
+    "master": 576,
+    "phd": 15,
+    "mba": 305
+  },
+  "complexity": {
+    "avg_word_length": 13.936902286902288,
+    "avg_word_count": 445
+  },
+  "note": "分析基于 Kaggle UpdatedResumeDataSet.csv，962份简历，25个岗位类别"
+}

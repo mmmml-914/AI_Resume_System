@@ -1,0 +1,286 @@
+{
+  "samples": [
+    {
+      "category": "Hadoop",
+      "resume_preview": "Education Details \r\n\r\nHadoop Developer \r\n\r\nHadoop Developer - INFOSYS\r\nSkill Details \r\nCompany Details \r\ncompany - INFOSYS\r\ndescription - Project Description: The banking information had stored the da",
+      "single_overall": 58.0,
+      "multi_overall": 59.0,
+      "multi_ci": 5.2,
+      "ci_low": 53.8,
+      "ci_high": 64.2,
+      "dimensions": [
+        {
+          "key": "skills_match",
+          "label": "技能匹配度",
+          "single_score": 85,
+          "multi_mean": 85,
+          "multi_ci": 0.0,
+          "ci_low": 85.0,
+          "ci_high": 85.0
+        },
+        {
+          "key": "project_quality",
+          "label": "项目经验质量",
+          "single_score": 70,
+          "multi_mean": 70,
+          "multi_ci": 0.0,
+          "ci_low": 70.0,
+          "ci_high": 70.0
+        },
+        {
+          "key": "format_readability",
+          "label": "格式与可读性",
+          "single_score": 40,
+          "multi_mean": 37.0,
+          "multi_ci": 6.5,
+          "ci_low": 30.0,
+          "ci_high": 43.0
+        },
+        {
+          "key": "education",
+          "label": "教育背景",
+          "single_score": 0,
+          "multi_mean": 10,
+          "multi_ci": 19.6,
+          "ci_low": 0,
+          "ci_high": 30.0
+        },
+        {
+          "key": "expression",
+          "label": "内容表达",
+          "single_score": 60,
+          "multi_mean": 58.0,
+          "multi_ci": 8.6,
+          "ci_low": 50.0,
+          "ci_high": 67.0
+        }
+      ]
+    },
+    {
+      "category": "Arts",
+      "resume_preview": "â¢ Good communication skill â¢ Quick learner â¢ Keen to find solutionsEducation Details \r\n MBA Marketing and International Business Management Pune, Maharashtra Pune University\r\n B-Tech Tech Nagpur",
+      "single_overall": 24.0,
+      "multi_overall": 22.0,
+      "multi_ci": 0.7,
+      "ci_low": 21.3,
+      "ci_high": 22.7,
+      "dimensions": [
+        {
+          "key": "skills_match",
+          "label": "技能匹配度",
+          "single_score": 20,
+          "multi_mean": 20,
+          "multi_ci": 0.0,
+          "ci_low": 20.0,
+          "ci_high": 20.0
+        },
+        {
+          "key": "project_quality",
+          "label": "项目经验质量",
+          "single_score": 10,
+          "multi_mean": 10,
+          "multi_ci": 0.0,
+          "ci_low": 10.0,
+          "ci_high": 10.0
+        },
+        {
+          "key": "format_readability",
+          "label": "格式与可读性",
+          "single_score": 30,
+          "multi_mean": 22.0,
+          "multi_ci": 8.6,
+          "ci_low": 13.0,
+          "ci_high": 30.0
+        },
+        {
+          "key": "education",
+          "label": "教育背景",
+          "single_score": 50,
+          "multi_mean": 50,
+          "multi_ci": 0.0,
+          "ci_low": 50.0,
+          "ci_high": 50.0
+        },
+        {
+          "key": "expression",
+          "label": "内容表达",
+          "single_score": 20,
+          "multi_mean": 18.0,
+          "multi_ci": 3.3,
+          "ci_low": 15.0,
+          "ci_high": 22.0
+        }
+      ]
+    },
+    {
+      "category": "Data Science",
+      "resume_preview": "Skills * Programming Languages: Python (pandas, numpy, scipy, scikit-learn, matplotlib), Sql, Java, JavaScript/JQuery. * Machine learning: Regression, SVM, NaÃ¯ve Bayes, KNN, Random Forest, Decision T",
+      "single_overall": 56.0,
+      "multi_overall": 63.0,
+      "multi_ci": 3.4,
+      "ci_low": 59.6,
+      "ci_high": 66.4,
+      "dimensions": [
+        {
+          "key": "skills_match",
+          "label": "技能匹配度",
+          "single_score": 75,
+          "multi_mean": 78.0,
+          "multi_ci": 6.5,
+          "ci_low": 72.0,
+          "ci_high": 85.0
+        },
+        {
+          "key": "project_quality",
+          "label": "项目经验质量",
+          "single_score": 70,
+          "multi_mean": 72.0,
+          "multi_ci": 3.3,
+          "ci_low": 68.0,
+          "ci_high": 75.0
+        },
+        {
+          "key": "format_readability",
+          "label": "格式与可读性",
+          "single_score": 45,
+          "multi_mean": 47.0,
+          "multi_ci": 6.5,
+          "ci_low": 40.0,
+          "ci_high": 53.0
+        },
+        {
+          "key": "education",
+          "label": "教育背景",
+          "single_score": 0,
+          "multi_mean": 30,
+          "multi_ci": 0.0,
+          "ci_low": 30.0,
+          "ci_high": 30.0
+        },
+        {
+          "key": "expression",
+          "label": "内容表达",
+          "single_score": 60,
+          "multi_mean": 67.0,
+          "multi_ci": 3.3,
+          "ci_low": 63.0,
+          "ci_high": 70.0
+        }
+      ]
+    },
+    {
+      "category": "Blockchain",
+      "resume_preview": "Hobbies â¢ Playing Chess â¢ Solving Rubik's Cube â¢ Watching Series Languages â¢ English â¢ Hindi â¢ Marathi Education Details \r\nJanuary 2014 to January 2017 Bachelorâs Degree Information Tech",
+      "single_overall": 41.0,
+      "multi_overall": 40.0,
+      "multi_ci": 2.0,
+      "ci_low": 38.0,
+      "ci_high": 42.0,
+      "dimensions": [
+        {
+          "key": "skills_match",
+          "label": "技能匹配度",
+          "single_score": 45,
+          "multi_mean": 45,
+          "multi_ci": 0.0,
+          "ci_low": 45.0,
+          "ci_high": 45.0
+        },
+        {
+          "key": "project_quality",
+          "label": "项目经验质量",
+          "single_score": 30,
+          "multi_mean": 30,
+          "multi_ci": 0.0,
+          "ci_low": 30.0,
+          "ci_high": 30.0
+        },
+        {
+          "key": "format_readability",
+          "label": "格式与可读性",
+          "single_score": 40,
+          "multi_mean": 28.0,
+          "multi_ci": 6.5,
+          "ci_low": 22.0,
+          "ci_high": 35.0
+        },
+        {
+          "key": "education",
+          "label": "教育背景",
+          "single_score": 60,
+          "multi_mean": 60,
+          "multi_ci": 0.0,
+          "ci_low": 60.0,
+          "ci_high": 60.0
+        },
+        {
+          "key": "expression",
+          "label": "内容表达",
+          "single_score": 35,
+          "multi_mean": 37.0,
+          "multi_ci": 3.3,
+          "ci_low": 33.0,
+          "ci_high": 40.0
+        }
+      ]
+    },
+    {
+      "category": "Civil Engineer",
+      "resume_preview": "Education Details \r\n B.E in Civil Engineering Civil Engineering Chennai, Tamil Nadu Anna University\r\nQA/QC Civil Engineer \r\n\r\nQA/QC Civil Engineer\r\nSkill Details \r\nCompany Details \r\ncompany - Ray Engi",
+      "single_overall": 62.0,
+      "multi_overall": 62.0,
+      "multi_ci": 0.0,
+      "ci_low": 62.0,
+      "ci_high": 62.0,
+      "dimensions": [
+        {
+          "key": "skills_match",
+          "label": "技能匹配度",
+          "single_score": 65,
+          "multi_mean": 65,
+          "multi_ci": 0.0,
+          "ci_low": 65.0,
+          "ci_high": 65.0
+        },
+        {
+          "key": "project_quality",
+          "label": "项目经验质量",
+          "single_score": 70,
+          "multi_mean": 70,
+          "multi_ci": 0.0,
+          "ci_low": 70.0,
+          "ci_high": 70.0
+        },
+        {
+          "key": "format_readability",
+          "label": "格式与可读性",
+          "single_score": 45,
+          "multi_mean": 48.0,
+          "multi_ci": 3.3,
+          "ci_low": 45.0,
+          "ci_high": 52.0
+        },
+        {
+          "key": "education",
+          "label": "教育背景",
+          "single_score": 70,
+          "multi_mean": 67.0,
+          "multi_ci": 6.5,
+          "ci_low": 60.0,
+          "ci_high": 73.0
+        },
+        {
+          "key": "expression",
+          "label": "内容表达",
+          "single_score": 55,
+          "multi_mean": 55,
+          "multi_ci": 0.0,
+          "ci_low": 55.0,
+          "ci_high": 55.0
+        }
+      ]
+    }
+  ],
+  "note": "每份简历使用同一份文本，分别调用 n_samples=1 和 n_samples=3",
+  "total_n": 5
+}
