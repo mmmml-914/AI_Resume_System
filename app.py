@@ -116,12 +116,12 @@ with st.sidebar:
 
     # 导航
     page = st.radio("", [
-        "🎤 模拟面试",
-        "🤖 AI 助手",
-        "✨ 简历润色",
-        "📥 简历采集",
-        "📋 批量测试",
-        "📊 数据看板",
+        "模拟面试",
+        "AI 助手",
+        "简历润色",
+        "简历采集",
+        "批量测试",
+        "数据看板",
     ], label_visibility="collapsed")
 
     st.markdown("---")
@@ -144,8 +144,8 @@ with st.sidebar:
 
 
 # ========== 模拟面试页面 ==========
-if page == "🎤 模拟面试":
-    st.markdown('<div class="page-header"><div class="page-title"><span class="page-title-icon">🎤</span> 模拟面试</div><div class="page-subtitle">简历评估 + AI 模拟面试</div></div>', unsafe_allow_html=True)
+if page == "模拟面试":
+    st.markdown('<div class="page-header"><div class="page-title">模拟面试</div><div class="page-subtitle">简历评估 + AI 模拟面试</div></div>', unsafe_allow_html=True)
     report = st.session_state.get("report")
     resume_text = st.session_state.get("resume_text")
     interview_status = st.session_state.interview_status
@@ -395,8 +395,8 @@ if page == "🎤 模拟面试":
 
 
 # ========== AI 助手页面 ==========
-elif page == "🤖 AI 助手":
-    st.markdown('<div class="page-header"><div class="page-title"><span class="page-title-icon">🤖</span> AI 助手</div><div class="page-subtitle">自然语言交互 · 自动调用工具完成操作</div></div>', unsafe_allow_html=True)
+elif page == "AI 助手":
+    st.markdown('<div class="page-header"><div class="page-title">AI 助手</div><div class="page-subtitle">自然语言交互 · 自动调用工具完成操作</div></div>', unsafe_allow_html=True)
 
     chat_history = st.session_state.agent_chat_messages
 
@@ -491,8 +491,8 @@ elif page == "🤖 AI 助手":
 
 
 # ========== 简历润色页面 ==========
-elif page == "✨ 简历润色":
-    st.markdown('<div class="page-header"><div class="page-title"><span class="page-title-icon">✨</span> 简历润色</div><div class="page-subtitle">用 AI 优化简历表达，突出量化成果，匹配目标岗位</div></div>', unsafe_allow_html=True)
+elif page == "简历润色":
+    st.markdown('<div class="page-header"><div class="page-title">简历润色</div><div class="page-subtitle">用 AI 优化简历表达，突出量化成果，匹配目标岗位</div></div>', unsafe_allow_html=True)
     st.markdown("用 AI 优化简历表达，突出量化成果，匹配目标岗位")
 
     col_left, col_right = st.columns([1, 1])
@@ -582,8 +582,8 @@ elif page == "✨ 简历润色":
 
 
 # ========== 简历采集页面 ==========
-elif page == "📥 简历采集":
-    st.markdown('<div class="page-header"><div class="page-title"><span class="page-title-icon">📥</span> 简历采集</div><div class="page-subtitle">从网页批量采集优秀简历</div></div>', unsafe_allow_html=True)
+elif page == "简历采集":
+    st.markdown('<div class="page-header"><div class="page-title">简历采集</div><div class="page-subtitle">从网页批量采集优秀简历</div></div>', unsafe_allow_html=True)
 
     tab_collect, tab_browse, tab_bookmarklet = st.tabs(["添加简历", "浏览库", "采集工具"])
 
@@ -722,9 +722,9 @@ elif page == "📥 简历采集":
 
 
 # ========== 批量测试页面 ==========
-elif page == "📋 批量测试":
+elif page == "批量测试":
     st.markdown("### 🔬 批量简历评估测试")
-    st.markdown('<div class="page-header"><div class="page-title"><span class="page-title-icon">📋</span> 批量测试</div><div class="page-subtitle">多份简历批量评分对比</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-header"><div class="page-title">批量测试</div><div class="page-subtitle">多份简历批量评分对比</div></div>', unsafe_allow_html=True)
     mgr = st.session_state.records_mgr
 
     col_config, col_status = st.columns([1, 1])
@@ -866,10 +866,10 @@ elif page == "📋 批量测试":
 
 
 # ========== 数据看板页面 ==========
-elif page == "📊 数据看板":
+elif page == "数据看板":
     dash_section = st.radio("", ["Kaggle 数据集", "优秀简历库", "面试记录分析", "📊 深度分析"],
                             horizontal=True, label_visibility="collapsed")
-    st.markdown('<div class="page-header"><div class="page-title"><span class="page-title-icon">📊</span> 数据看板</div><div class="page-subtitle">数据集分析 · 评分验证 · RAG 状态</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-header"><div class="page-title">数据看板</div><div class="page-subtitle">数据集分析 · 评分验证 · RAG 状态</div></div>', unsafe_allow_html=True)
     st.markdown("---")
 
     if dash_section == "📊 深度分析":
