@@ -182,8 +182,17 @@ streamlit run app.py
 │   ├── interview_records.json     # 面试记录
 │   ├── analysis_cache.json        # 数据分析缓存
 │   └── validation_cache.json      # 评分验证缓存
-├── tests/                         # 单元测试
-│   └── test_evaluator.py
+├── tests/                         # 单元测试（193 tests）
+│   ├── test_agent_base.py         # BaseAgent 抽象基类测试
+│   ├── test_analysis_agent.py     # 分析 Agent 测试
+│   ├── test_coordinator.py        # 协调器路由 & Pipeline 测试
+│   ├── test_evaluation_agent.py   # 评估 Agent 测试
+│   ├── test_evaluator.py          # 评估引擎测试
+│   ├── test_interview_agent.py    # 面试 Agent & Session 测试
+│   ├── test_knowledge_base.py     # 知识库测试
+│   ├── test_record_manager.py     # 记录管理测试
+│   ├── test_resume_polisher.py    # 润色模块测试
+│   └── test_utils.py              # 配置验证测试
 ├── .gitignore
 ├── requirements.txt
 └── run.bat                        # 一键启动脚本

@@ -69,6 +69,20 @@ if "knowledge_base" not in st.session_state:
     st.session_state.knowledge_base = ResumeKnowledgeBase()
 if "records_mgr" not in st.session_state:
     st.session_state.records_mgr = RecordsManager()
+
+# ========== RAG 向量库自动构建 ==========
+if "rag_built" not in st.session_state:
+    try:
+        from modules.rag_knowledge import get_chroma_collection, build_vector_store
+        collection = get_chroma_collection()
+        if collection.count() == 0:
+            with st.spinner("正在构建 RAG 向量库（首次启动，仅需一次）..."):
+                result = build_vector_store()
+                st.session_state.rag_built = result.get("status", "built")
+        else:
+            st.session_state.rag_built = "skipped"
+    except Exception as e:
+        st.session_state.rag_built = f"failed: {e}"
 if "report" not in st.session_state:
     st.session_state.report = None
 if "resume_text" not in st.session_state:
@@ -137,7 +151,7 @@ with st.sidebar:
                 st.markdown(f"&nbsp;&nbsp;{cat}: {cnt} 份")
 
     st.markdown("---")
-    st.markdown('<div class="sidebar-footer">v2.0 · 大数据课程项目</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-footer">v2.0 · AI Mock Interview</div>', unsafe_allow_html=True)
 
     if st.session_state.get("session_restored"):
         st.markdown('<div style="font-size:0.75rem;color:#4F46E5;text-align:center">💾 已恢复上次进度</div>', unsafe_allow_html=True)
