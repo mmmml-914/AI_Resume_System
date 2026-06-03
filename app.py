@@ -57,6 +57,16 @@ def _load_all():
 with open(os.path.join(os.path.dirname(__file__), "styles", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+# ========== 顶部导航栏 ==========
+st.markdown("""
+<div class="app-header">
+  <div class="logo">AI Interview <span>Resume System</span></div>
+  <div class="badge">v2.0 · 课程项目</div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="main-content">', unsafe_allow_html=True)
+
 # ========== 初始化 ==========
 if "agent" not in st.session_state:
     st.session_state.agent = WorkflowAgent()
@@ -105,13 +115,24 @@ collector = st.session_state.collector
 
 # ========== 侧边栏 ==========
 with st.sidebar:
-    st.markdown('<div class="sidebar-title" translate="no">AI Interview</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sidebar-subtitle">模拟面试系统</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="sidebar-header">
+        <div class="title">AI Interview</div>
+        <div class="subtitle">模拟面试系统</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("---")
 
     # 导航
-    page = st.radio("", ["模拟面试", "AI 助手", "简历润色", "简历采集", "批量测试", "📊 数据看板"], label_visibility="collapsed")
+    page = st.radio("", [
+        "🎤 模拟面试",
+        "🤖 AI 助手",
+        "✨ 简历润色",
+        "📥 简历采集",
+        "📋 批量测试",
+        "📊 数据看板",
+    ], label_visibility="collapsed")
 
     st.markdown("---")
 
@@ -126,15 +147,15 @@ with st.sidebar:
                 st.markdown(f"&nbsp;&nbsp;{cat}: {cnt} 份")
 
     st.markdown("---")
-    st.markdown('<div style="font-size:0.7rem;color:#4A5A78;letter-spacing:0.15em;text-align:center">v2.0 · 大数据课程项目</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-footer">v2.0 · 大数据课程项目</div>', unsafe_allow_html=True)
 
     if st.session_state.get("session_restored"):
         st.markdown('<div style="font-size:0.75rem;color:#4F46E5;text-align:center">💾 已恢复上次进度</div>', unsafe_allow_html=True)
 
 
 # ========== 模拟面试页面 ==========
-if page == "模拟面试":
-    st.markdown("### <span translate='no'>Mock Interview</span>", unsafe_allow_html=True)
+if page == "🎤 模拟面试":
+    st.markdown('<div class="page-title">模拟面试</div><div class="page-subtitle">简历评估 + AI 模拟面试</div>', unsafe_allow_html=True)
     report = st.session_state.get("report")
     resume_text = st.session_state.get("resume_text")
     interview_status = st.session_state.interview_status
@@ -384,9 +405,8 @@ if page == "模拟面试":
 
 
 # ========== AI 助手页面 ==========
-elif page == "AI 助手":
-    st.markdown("### <span translate='no'>AI</span> 助手", unsafe_allow_html=True)
-    st.markdown("直接输入需求，AI 自动调用工具完成评估、润色、查询等操作")
+elif page == "🤖 AI 助手":
+    st.markdown('<div class="page-title">AI 助手</div><div class="page-subtitle">自然语言交互 · 自动调用工具完成操作</div>', unsafe_allow_html=True)
 
     chat_history = st.session_state.agent_chat_messages
 
@@ -481,8 +501,8 @@ elif page == "AI 助手":
 
 
 # ========== 简历润色页面 ==========
-elif page == "简历润色":
-    st.markdown("### <span translate='no'>Resume</span> 润色", unsafe_allow_html=True)
+elif page == "✨ 简历润色":
+    st.markdown('<div class="page-title">简历润色</div><div class="page-subtitle">用 AI 优化简历表达，突出量化成果，匹配目标岗位</div>', unsafe_allow_html=True)
     st.markdown("用 AI 优化简历表达，突出量化成果，匹配目标岗位")
 
     col_left, col_right = st.columns([1, 1])
@@ -572,9 +592,7 @@ elif page == "简历润色":
 
 
 # ========== 简历采集页面 ==========
-elif page == "简历采集":
-    st.markdown("### <span translate='no'>Resume</span> 采集", unsafe_allow_html=True)
-    st.markdown("从小红书/抖音/牛客网/知乎采集优秀简历，导入系统用于对比评估")
+elif page == "📥 简历采集":
 
     tab_collect, tab_browse, tab_bookmarklet = st.tabs(["添加简历", "浏览库", "采集工具"])
 
@@ -713,9 +731,9 @@ elif page == "简历采集":
 
 
 # ========== 批量测试页面 ==========
-elif page == "批量测试":
+elif page == "📋 批量测试":
     st.markdown("### 🔬 批量简历评估测试")
-
+    st.markdown('<div class="page-title">批量测试</div><div class="page-subtitle">多份简历批量评分对比</div>', unsafe_allow_html=True)
     mgr = st.session_state.records_mgr
 
     col_config, col_status = st.columns([1, 1])
@@ -858,8 +876,6 @@ elif page == "批量测试":
 
 # ========== 数据看板页面 ==========
 elif page == "📊 数据看板":
-    st.markdown("### 📊 数据看板")
-
     dash_section = st.radio("", ["Kaggle 数据集", "优秀简历库", "面试记录分析", "📊 深度分析"],
                             horizontal=True, label_visibility="collapsed")
     st.markdown("---")
@@ -1225,3 +1241,5 @@ elif page == "📊 数据看板":
                     if st.button("🗑️ 清空所有记录"):
                         records_mgr.clear()
                         st.rerun()
+
+st.markdown('</div>', unsafe_allow_html=True)
