@@ -1,42 +1,49 @@
 /* ===================================================
-   AI Resume System — Modern SaaS Dashboard
-   Inspired by React + Tailwind CSS design principles
-   Clean · Professional · Airy
+   Nova — 大厂智能模型风格
+   深色 · 极简 · 玻璃质感 · AI 产品级
    =================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
 
 :root {
-  --bg: #f8fafc;
-  --bg-alt: #f1f5f9;
-  --surface: #ffffff;
-  --surface-hover: #fafbfc;
-  --border: #e2e8f0;
-  --border-light: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --accent: #2563eb;
-  --accent-light: #eff6ff;
-  --accent-hover: #1d4ed8;
-  --accent-subtle: #dbeafe;
+  --bg: #0a0c10;
+  --bg-alt: #111318;
+  --surface: #161a22;
+  --surface-hover: #1c202b;
+  --surface-glass: rgba(22, 26, 34, 0.7);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.04);
+  --border-active: rgba(59, 130, 246, 0.3);
+  --text-primary: #e8edf5;
+  --text-secondary: #8b95a6;
+  --text-muted: #545d6e;
+  --accent: #3b82f6;
+  --accent-light: rgba(59, 130, 246, 0.1);
+  --accent-subtle: rgba(59, 130, 246, 0.15);
+  --accent-hover: #60a5fa;
+  --accent-gradient: linear-gradient(135deg, #3b82f6, #2dd4bf);
   --danger: #ef4444;
   --success: #22c55e;
   --warning: #f59e0b;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
   --radius: 8px;
   --radius-sm: 6px;
   --radius-lg: 12px;
+
+  /* accent color for elements that should use gradient */
+  --accent-1: #3b82f6;
+  --accent-2: #2dd4bf;
 }
 
-.stApp {
-  background: var(--bg);
-  font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+/* ===== Base ===== */
+html, body, .stApp {
+  background: var(--bg) !important;
   color: var(--text-primary);
+  font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 #MainMenu, footer { display: none !important; }
@@ -48,9 +55,11 @@ header { display: none !important; }
   margin: 0;
 }
 
-/* ===== Header / Top Navigation ===== */
+/* ===== Header ===== */
 .app-header {
-  background: var(--surface);
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   padding: 0 2rem;
   height: 56px;
@@ -63,29 +72,35 @@ header { display: none !important; }
 }
 
 .app-header .logo {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .app-header .logo span {
-  color: var(--accent);
+  -webkit-text-fill-color: var(--text-muted);
+  font-weight: 400;
 }
 
 .app-header .badge {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text-muted);
   font-weight: 500;
-  background: var(--bg-alt);
+  background: var(--surface);
+  border: 1px solid var(--border);
   padding: 4px 10px;
   border-radius: 20px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
 }
 
-/* ===== Main Content Area ===== */
+/* ===== Main Content ===== */
 .main-content {
-  padding: 1.5rem 2rem 3rem;
+  padding: 1.5rem 2rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -116,12 +131,12 @@ div[data-testid="metric-container"] {
   border-radius: var(--radius) !important;
   padding: 1rem 1.25rem !important;
   box-shadow: var(--shadow-sm) !important;
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 div[data-testid="metric-container"]:hover {
-  box-shadow: var(--shadow) !important;
-  border-color: #cbd5e1 !important;
+  border-color: var(--border-active) !important;
+  box-shadow: var(--shadow-glow) !important;
 }
 
 div[data-testid="metric-container"] label {
@@ -130,11 +145,10 @@ div[data-testid="metric-container"] label {
   font-weight: 500 !important;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 0.25rem !important;
 }
 
 div[data-testid="metric-container"] div[data-testid="metric-value"] {
-  font-size: 1.5rem !important;
+  font-size: 1.4rem !important;
   font-weight: 700 !important;
   color: var(--text-primary) !important;
   letter-spacing: -0.02em;
@@ -142,9 +156,8 @@ div[data-testid="metric-container"] div[data-testid="metric-value"] {
 
 /* ===== Sidebar ===== */
 section[data-testid="stSidebar"] {
-  background: var(--surface) !important;
+  background: var(--bg-alt) !important;
   border-right: 1px solid var(--border) !important;
-  box-shadow: none !important;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
@@ -160,7 +173,10 @@ section[data-testid="stSidebar"] > div:first-child {
 .sidebar-brand .brand-name {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--accent);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -0.02em;
 }
 
@@ -173,27 +189,27 @@ section[data-testid="stSidebar"] > div:first-child {
   margin-top: 0.15rem;
 }
 
-/* ===== Navigation Radio ===== */
+/* ===== Navigation ===== */
 section[data-testid="stSidebar"] div[data-testid="stRadio"] {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   padding: 0.35rem 0;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label {
-  padding: 0.5rem 0.75rem !important;
+  padding: 0.45rem 0.75rem !important;
   border-radius: var(--radius-sm) !important;
   font-size: 0.82rem !important;
   font-weight: 500 !important;
   color: var(--text-secondary) !important;
   border: none !important;
   background: transparent !important;
-  transition: all 0.12s ease;
+  transition: all 0.15s ease;
 }
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] > label:hover {
-  background: var(--bg-alt) !important;
+  background: var(--surface) !important;
   color: var(--text-primary) !important;
 }
 
@@ -201,6 +217,8 @@ section[data-testid="stSidebar"] div[data-testid="stRadio"] > label[data-checked
   background: var(--accent-light) !important;
   color: var(--accent) !important;
   font-weight: 600 !important;
+  border-left: 2px solid var(--accent) !important;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
 }
 
 section[data-testid="stSidebar"] hr {
@@ -248,27 +266,26 @@ section[data-testid="stSidebar"] .stMarkdown p {
   font-weight: 500 !important;
   border: 1px solid var(--border) !important;
   background: var(--surface) !important;
-  color: var(--text-primary) !important;
-  transition: all 0.12s ease !important;
-  box-shadow: var(--shadow-sm) !important;
+  color: var(--text-secondary) !important;
+  transition: all 0.15s ease !important;
 }
 
 .stButton button:hover {
-  background: var(--bg-alt) !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: var(--shadow) !important;
+  background: var(--surface-hover) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
 }
 
 .stButton button[kind="primary"] {
-  background: var(--accent) !important;
+  background: var(--accent-gradient) !important;
   color: white !important;
-  border-color: var(--accent) !important;
-  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2) !important;
+  border: none !important;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25) !important;
 }
 
 .stButton button[kind="primary"]:hover {
-  background: var(--accent-hover) !important;
-  border-color: var(--accent-hover) !important;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4) !important;
+  opacity: 0.95;
 }
 
 /* ===== Form Elements ===== */
@@ -280,19 +297,19 @@ section[data-testid="stSidebar"] .stMarkdown p {
   background: var(--surface) !important;
   color: var(--text-primary) !important;
   font-family: 'Inter', sans-serif;
-  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .stTextInput input:focus, .stTextArea textarea:focus {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
 
 .stSelectbox div[data-baseweb="select"] > div:hover {
-  border-color: #cbd5e1 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
-/* ===== Progress Bar ===== */
+/* ===== Progress ===== */
 .stProgress .st-bo {
   background: var(--bg-alt) !important;
   height: 4px !important;
@@ -300,28 +317,29 @@ section[data-testid="stSidebar"] .stMarkdown p {
 }
 
 .stProgress .st-bp {
-  background: var(--accent) !important;
+  background: var(--accent-gradient) !important;
   height: 4px !important;
   border-radius: 4px !important;
 }
 
-/* ===== Chat Messages ===== */
+/* ===== Chat ===== */
 div[data-testid="stChatMessage"] {
   border-radius: var(--radius);
   padding: 0.75rem 1rem;
   margin: 0.4rem 0;
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border);
   background: var(--surface);
 }
 
 div[data-testid="stChatMessage"]:first-child {
   background: var(--accent-light);
-  border-color: var(--accent-subtle);
+  border-color: var(--border-active);
 }
 
 div[data-testid="stChatMessageContent"] {
   font-size: 0.87rem;
   line-height: 1.7;
+  color: var(--text-secondary);
 }
 
 div[data-testid="stChatInput"] {
@@ -329,23 +347,21 @@ div[data-testid="stChatInput"] {
   border-radius: var(--radius) !important;
   padding: 0.15rem 0.15rem 0.15rem 1.2rem !important;
   background: var(--surface) !important;
-  box-shadow: var(--shadow-sm) !important;
 }
 
 div[data-testid="stChatInput"]:focus-within {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
 }
 
 div[data-testid="stChatInput"] button {
-  background: var(--accent) !important;
+  background: var(--accent-gradient) !important;
   border-radius: var(--radius-sm) !important;
 }
 
 /* ===== Tabs ===== */
 .stTabs [data-baseweb="tab-list"] {
   border-bottom: 1px solid var(--border);
-  padding: 0;
   gap: 0;
 }
 
@@ -354,7 +370,6 @@ div[data-testid="stChatInput"] button {
   font-size: 0.78rem !important;
   color: var(--text-muted) !important;
   font-weight: 500;
-  transition: color 0.12s ease;
 }
 
 .stTabs [data-baseweb="tab"]:hover {
@@ -368,10 +383,6 @@ div[data-testid="stChatInput"] button {
   border-bottom: 2px solid var(--accent);
 }
 
-.stTabs [data-baseweb="tab-panel"] {
-  padding-top: 1.25rem !important;
-}
-
 /* ===== Alerts ===== */
 .stAlert {
   border-radius: var(--radius-sm) !important;
@@ -379,42 +390,42 @@ div[data-testid="stChatInput"] button {
   padding: 0.6rem 1rem !important;
   font-size: 0.82rem;
   background: var(--surface) !important;
+  color: var(--text-secondary) !important;
 }
 
 .stInfo {
-  border-color: var(--accent-subtle) !important;
+  border-color: var(--border-active) !important;
   background: var(--accent-light) !important;
   color: var(--text-primary) !important;
 }
 
 .stSuccess {
-  border-color: #bbf7d0 !important;
-  background: #f0fdf4 !important;
+  border-color: rgba(34, 197, 94, 0.2) !important;
+  background: rgba(34, 197, 94, 0.08) !important;
 }
 
 .stWarning {
-  border-color: #fde68a !important;
-  background: #fffbeb !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
+  background: rgba(245, 158, 11, 0.08) !important;
 }
 
 .stError {
-  border-color: #fecaca !important;
-  background: #fef2f2 !important;
+  border-color: rgba(239, 68, 68, 0.2) !important;
+  background: rgba(239, 68, 68, 0.08) !important;
 }
 
-/* ===== Dataframe / Tables ===== */
+/* ===== Dataframe ===== */
 div[data-testid="stDataFrame"] {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
 }
 
 div[data-testid="stDataFrame"] thead tr th {
   background: var(--bg-alt) !important;
-  color: var(--text-secondary) !important;
+  color: var(--text-muted) !important;
   font-weight: 600 !important;
-  font-size: 0.72rem !important;
+  font-size: 0.7rem !important;
   padding: 0.55rem 0.8rem !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -433,7 +444,7 @@ div[data-testid="stDataFrame"] tbody tr:last-child td {
 }
 
 div[data-testid="stDataFrame"] tbody tr:hover td {
-  background: var(--bg-alt) !important;
+  background: var(--surface-hover) !important;
 }
 
 /* ===== File Uploader ===== */
@@ -450,7 +461,7 @@ div[data-testid="stFileUploader"]:hover {
   background: var(--accent-light);
 }
 
-/* ===== Radio Group ===== */
+/* ===== Radio ===== */
 div[data-testid="stRadio"] label {
   padding: 0.3rem 0.8rem !important;
   border-radius: var(--radius-sm) !important;
@@ -458,12 +469,12 @@ div[data-testid="stRadio"] label {
   color: var(--text-secondary) !important;
   font-size: 0.78rem !important;
   border: 1px solid var(--border) !important;
-  transition: all 0.12s ease;
+  transition: all 0.15s ease;
 }
 
 div[data-testid="stRadio"] label:hover {
-  border-color: #cbd5e1 !important;
-  background: var(--bg-alt) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: var(--surface) !important;
 }
 
 div[data-testid="stRadio"] label[data-checked="true"] {
@@ -473,11 +484,12 @@ div[data-testid="stRadio"] label[data-checked="true"] {
   font-weight: 600 !important;
 }
 
-/* ===== Plotly Charts ===== */
+/* ===== Plotly ===== */
 .js-plotly-plot {
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
   overflow: hidden;
+  background: var(--surface);
 }
 
 /* ===== Expander ===== */
@@ -485,7 +497,6 @@ div[data-testid="stExpander"] {
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
   background: var(--surface) !important;
-  box-shadow: var(--shadow-sm) !important;
 }
 
 div[data-testid="stExpander"] summary {
@@ -512,33 +523,15 @@ div[data-testid="stExpander"] summary:hover {
   font-size: 0.72rem !important;
 }
 
-.stMarkdown h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
   color: var(--text-primary);
+  font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
 }
 
-.stMarkdown h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.4rem;
-}
-
-.stMarkdown h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.3rem;
-}
-
-.stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
-  font-weight: 500;
-  color: var(--text-secondary);
-}
+.stMarkdown h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.stMarkdown h2 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+.stMarkdown h3 { font-size: 1rem; margin-bottom: 0.3rem; }
 
 hr:not(section[data-testid="stSidebar"] hr) {
   margin: 1.5rem 0;
@@ -549,7 +542,7 @@ hr:not(section[data-testid="stSidebar"] hr) {
 
 code {
   background: var(--bg-alt) !important;
-  border: 1px solid var(--border-light) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px !important;
   padding: 0.1em 0.3em !important;
   font-size: 0.85em !important;
@@ -563,12 +556,12 @@ pre code {
   padding: 1rem !important;
 }
 
-/* ===== Columns Gap ===== */
+/* ===== Columns ===== */
 div.row-widget.stColumns {
   gap: 0.75rem;
 }
 
-/* ===== Select Dropdown ===== */
+/* ===== Dropdown Menu ===== */
 ul[data-baseweb="menu"] {
   background: var(--surface) !important;
   border: 1px solid var(--border) !important;
@@ -589,7 +582,7 @@ ul[data-baseweb="menu"] li:hover {
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ===== Checkbox ===== */
@@ -598,23 +591,31 @@ ul[data-baseweb="menu"] li:hover {
   color: var(--text-secondary) !important;
 }
 
-.stCheckbox label:hover {
-  color: var(--text-primary) !important;
-}
-
 /* ===== Spinner ===== */
 .stSpinner {
   color: var(--accent) !important;
 }
 
-/* ===== MultiSelect ===== */
+/* ===== Select ===== */
 div[data-baseweb="select"] > div {
   border-radius: var(--radius-sm) !important;
   border-color: var(--border) !important;
   min-height: 36px;
 }
 
-/* ===== Empty State styling ===== */
-.css-1v0mbdj, .css-1r6slb0 {
-  color: var(--text-muted);
+/* ===== Markdown Info/Note Decor ===== */
+.stInfo, .stSuccess, .stWarning, .stError {
+  border-left: 3px solid transparent !important;
+}
+.stInfo { border-left-color: var(--accent) !important; }
+.stSuccess { border-left-color: var(--success) !important; }
+.stWarning { border-left-color: var(--warning) !important; }
+.stError { border-left-color: var(--danger) !important; }
+
+/* ===== Plotly chart modebar tweak for dark ===== */
+.modebar-btn {
+  color: var(--text-muted) !important;
+}
+.modebar-btn:hover {
+  color: var(--text-primary) !important;
 }
