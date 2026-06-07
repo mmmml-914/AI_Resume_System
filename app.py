@@ -129,6 +129,7 @@ with st.sidebar:
         "简历采集",
         "批量测试",
         "数据看板",
+        "双盲实验",
     ], label_visibility="collapsed")
 
     st.markdown("---")
@@ -1266,5 +1267,10 @@ elif page == "数据看板":
                     if st.button("🗑️ 清空所有记录"):
                         records_mgr.clear()
                         st.rerun()
+
+
+elif page == "双盲实验":
+    from modules.double_blind_experiment import render_experiment_page
+    render_experiment_page()
 
 st.markdown('</div>', unsafe_allow_html=True)
