@@ -538,19 +538,16 @@ elif page == "简历润色":
 
         if st.button("✨ 开始润色", type="primary", use_container_width=True):
             if polish_input and len(polish_input) > 50:
-                from modules.resume_polisher import ResumePolisher
-                polisher = ResumePolisher(llm_client=agent.llm)
-
-                # 流式显示进度
+                # 通过 AnalysisAgent 流式润色
                 status_box = st.status("AI 正在优化简历...", expanded=True)
                 progress = status_box.empty()
                 full = ""
-                for chunk in polisher.polish_stream(polish_input, polish_category, polish_focus):
+                for chunk in agent.analysis_agent.polish_stream(polish_input, polish_category, polish_focus):
                     full += chunk
                     progress.markdown(f"⏳ 已接收 {len(full)} 字符...")
 
                 status_box.update(label="✅ 润色完成，解析结果中...", state="running")
-                result = ResumePolisher._parse_result(full)
+                result = agent.analysis_agent.parse_polish_result(full)
                 status_box.update(label="✅ 润色完成", state="complete", expanded=False)
 
                 st.session_state.polish_result = result

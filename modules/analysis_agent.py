@@ -118,3 +118,14 @@ class AnalysisAgent(BaseAgent):
                      focus: str = "", **kwargs) -> dict:
         polisher = self._get_module("polisher")
         return polisher.polish(resume_text, category, focus)
+
+    def polish_stream(self, resume_text: str, category: str = "", focus: str = ""):
+        """流式润色 — 供 UI 层逐字展示进度"""
+        polisher = self._get_module("polisher")
+        return polisher.polish_stream(resume_text, category, focus)
+
+    @staticmethod
+    def parse_polish_result(reply: str) -> dict:
+        """解析流式润色的 LLM 返回 JSON"""
+        from modules.resume_polisher import ResumePolisher
+        return ResumePolisher._parse_result(reply)
