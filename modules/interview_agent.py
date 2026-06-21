@@ -353,8 +353,23 @@ class InterviewAgent(BaseAgent):
             return BaseAgent.format_error_summary(e, context=f"interview:{tool_name}")
 
     def process(self, user_message: str, context: dict = None) -> dict:
-        """Override: 有活跃会话时绕过 LLM 路由直接 chat，降低延迟"""
+        """Override: 有活跃会话时绕过 LLM 路由直接 chat，降低延迟。
+        检测明显的非面试意图，避免把"帮我评分"当成面试回答。"""
         if self._session is not None:
+            non_interview_kw = [
+                "评分", "评估", "打分", "润色", "解析简历", "知识库",
+                "批量", "看板", "统计", "采集", "polish", "evaluate",
+                "parse", "score", "总览", "数据",
+            ]
+            msg_lower = user_message.lower()
+            if any(kw in msg_lower for kw in non_interview_kw):
+                return {
+                    "type": "text",
+                    "content": (
+                        "您当前正在面试中。请先输入 **结束面试** 生成面试报告，"
+                        "然后再进行其他操作。"
+                    ),
+                }
             reply = self._session.chat(user_message)
             return {"type": "text", "content": reply}
         return super().process(user_message, context)
@@ -376,7 +391,8 @@ class InterviewAgent(BaseAgent):
     def _tool_start_interview(self, resume_text: str, category: str, **kwargs) -> dict:
         from modules.resume_evaluator import ResumeEvaluator
 
-        # 优先使用 Coordinator 注入的评估结果，否则自己做快速评估
+        if self._session is not None:
+            return {"error": "已有活跃面试会话，请先结束当前面试再开始新的面试"}
         eval_result = {}
         if self._shared_context and self._shared_context.evaluation_result:
             eval_result = self._shared_context.evaluation_result

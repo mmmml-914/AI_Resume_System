@@ -126,13 +126,18 @@ class AgentCoordinator:
         return target.process(user_message, context)
 
     def _pre_route(self, user_message: str) -> str | None:
-        """关键词预检：零成本匹配常见意图，命中则跳过 LLM 路由"""
+        """关键词预检：零成本匹配常见意图，命中则跳过 LLM 路由。
+        使用加权匹配，评估/面试优先于分析（分析是兜底角色）。"""
         msg = user_message.lower()
+        # priority weight: interview > evaluation > analysis
+        _PRIORITY = {"interview": 3, "evaluation": 2, "analysis": 1}
         scores = {"analysis": 0, "evaluation": 0, "interview": 0}
         for agent, keywords in self._KEYWORD_ROUTES.items():
             for kw in keywords:
                 if kw in msg:
-                    scores[agent] += 1
+                    scores[agent] += len(kw)
+            # 应用优先级加权
+            scores[agent] *= _PRIORITY[agent]
         best = max(scores, key=scores.get)
         return best if scores[best] > 0 else None
 
@@ -282,19 +287,43 @@ class AgentCoordinator:
     def pipeline_polish_and_evaluate(self, resume_text: str, category: str, focus: str = "") -> dict:
         """润色前后对比：EvaluationAgent(evaluate) → AnalysisAgent(polish) → EvaluationAgent(evaluate) → delta"""
         self.state = WorkflowState(workflow_name="polish_and_evaluate", status="running")
+        error_result = {"workflow_status": "failed", "resume_text": resume_text, "category": category}
 
         # Step 1: 评估原始版
-        before = self.evaluation_agent.execute_tool("evaluate_resume",
-                                                      resume_text=resume_text, category=category)
+        try:
+            before = self.evaluation_agent.execute_tool("evaluate_resume",
+                                                         resume_text=resume_text, category=category)
+        except Exception as e:
+            self.state.status = "failed"
+            self.state.error = str(e)
+            error_result["error"] = f"评估失败: {str(e)}"
+            return error_result
 
         # Step 2: 润色
-        polished_result = self.analysis_agent.execute_tool("polish_resume",
-                                                            resume_text=resume_text, category=category, focus=focus)
+        try:
+            polished_result = self.analysis_agent.execute_tool("polish_resume",
+                                                               resume_text=resume_text, category=category, focus=focus)
+        except Exception as e:
+            self.state.status = "failed"
+            self.state.error = str(e)
+            error_result["error"] = f"润色失败: {str(e)}"
+            error_result["before_evaluation"] = before
+            return error_result
+
         polished_text = polished_result.get("polished", resume_text)
 
         # Step 3: 评估润色版
-        after = self.evaluation_agent.execute_tool("evaluate_resume",
-                                                     resume_text=polished_text, category=category)
+        try:
+            after = self.evaluation_agent.execute_tool("evaluate_resume",
+                                                        resume_text=polished_text, category=category)
+        except Exception as e:
+            self.state.status = "failed"
+            self.state.error = str(e)
+            error_result["error"] = f"润色后评估失败: {str(e)}"
+            error_result["before_evaluation"] = before
+            error_result["polished_text"] = polished_text
+            error_result["changes"] = polished_result.get("changes", [])
+            return error_result
 
         # Step 4: 计算差异
         before_scores = {d["key"]: d["score"] for d in before.get("dimensions", [])}
