@@ -210,19 +210,26 @@ if page == "模拟面试":
 
             if st.button("🎤 开始模拟面试", type="primary", use_container_width=True):
                 with st.spinner("面试官正在准备..."):
-                    from modules.interview_agent import InterviewSession
-                    session = InterviewSession(resume_text, report)
-                    first_q = session.start()
-                    st.session_state.interview_session = session
-                    st.session_state.interview_messages = [
-                        {"role": "assistant", "content": first_q}
-                    ]
-                    st.session_state.interview_status = "active"
-                    # 从 report 中提取岗位类别（如果没有保存过）
-                    if "interview_category" not in st.session_state:
-                        st.session_state.interview_category = "未知"
-                    _save_all()
-                    st.rerun()
+                    # 通过 InterviewAgent 启动面试（注入评估上下文以获取优秀简历对比）
+                    agent.interview_agent.set_context("evaluation_result", report)
+                    result = agent.interview_agent.execute_tool(
+                        "start_interview",
+                        resume_text=resume_text,
+                        category=st.session_state.get("interview_category", ""))
+                    if "error" in result:
+                        st.error(result["error"])
+                    else:
+                        first_q = result["question"]
+                        session = agent.interview_agent.active_session
+                        st.session_state.interview_session = session
+                        st.session_state.interview_messages = [
+                            {"role": "assistant", "content": first_q}
+                        ]
+                        st.session_state.interview_status = "active"
+                        if "interview_category" not in st.session_state:
+                            st.session_state.interview_category = "未知"
+                        _save_all()
+                        st.rerun()
 
             if st.button("🔄 清除数据重新开始"):
                 for k in ["resume_text", "report", "interview_messages", "interview_session", "interview_category"]:
@@ -250,9 +257,10 @@ if page == "模拟面试":
                     st.session_state.interview_status = "idle"
                     st.rerun()
                 with st.spinner("正在生成面试报告..."):
-                    ireport = session.end_interview()
+                    ireport = agent.interview_agent.execute_tool("end_interview")
                     st.session_state.interview_report = ireport
                     st.session_state.interview_status = "ended"
+                    st.session_state.interview_session = None  # Agent 已释放会话
 
                     # 自动保存面试记录到 RecordsManager
                     mgr = st.session_state.records_mgr

@@ -378,6 +378,11 @@ class InterviewAgent(BaseAgent):
     def has_active_session(self) -> bool:
         return self._session is not None
 
+    @property
+    def active_session(self) -> Optional[InterviewSession]:
+        """返回当前活跃会话，供 UI 层直接操作（如 Streamlit 聊天循环）"""
+        return self._session
+
     def get_messages(self) -> list:
         """获取当前面试对话历史"""
         if not self._session:

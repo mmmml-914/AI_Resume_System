@@ -16,16 +16,8 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
 # ========== Modules (lazy loaded) ==========
-_evaluator = None
 _kb = None
 _coordinator = None
-
-def get_evaluator():
-    global _evaluator
-    if _evaluator is None:
-        from modules.resume_evaluator import ResumeEvaluator
-        _evaluator = ResumeEvaluator()
-    return _evaluator
 
 def get_kb():
     global _kb
@@ -136,8 +128,11 @@ def kaggle_stats():
 @app.post("/api/evaluate")
 def evaluate(req: EvalRequest):
     try:
-        evaluator = get_evaluator()
-        result = evaluator.evaluate(req.resume_text, req.category, n_samples=3)
+        coordinator = get_coordinator()
+        result = coordinator.evaluation_agent.execute_tool(
+            "evaluate_resume", resume_text=req.resume_text, category=req.category)
+        if "error" in result:
+            return {"error": result.get("error_message", str(result.get("error", "未知错误")))}
         return {
             "overall": result.get("overall"),
             "weighted_score": result.get("weighted_score"),
@@ -158,15 +153,32 @@ def evaluate(req: EvalRequest):
 def chat(req: ChatRequest):
     try:
         coordinator = get_coordinator()
-        llm = coordinator.evaluation_agent.llm
-        resp = llm.client.chat.completions.create(
-            model=llm.model,
-            messages=[{"role": "system", "content": "你是 AI 简历助手，帮助用户解答简历相关问题。"}] +
-                     [{"role": "user" if i % 2 == 0 else "assistant", "content": m}
-                      for i, m in enumerate(req.history + [req.message])],
-            temperature=0.7,
-        )
-        return {"reply": resp.choices[0].message.content}
+        context = {"history": req.history} if req.history else None
+        result = coordinator.process_user_request(req.message, context)
+        if result.get("type") == "text":
+            return {"reply": result.get("content", "")}
+        elif result.get("type") == "tool_calls":
+            # 提取工具调用结果中的文本信息
+            calls = result.get("calls", [])
+            parts = []
+            for c in calls:
+                r = c.get("result", {})
+                if c["tool"] == "evaluate_resume":
+                    parts.append(f"综合评分: {r.get('overall', '?')}/100")
+                    for d in r.get("dimensions", []):
+                        parts.append(f"  {d['label']}: {d['score']}分")
+                elif c["tool"] == "polish_resume":
+                    parts.append(r.get("polished", "润色完成"))
+                elif c["tool"] == "knowledge_lookup":
+                    parts.append(f"找到 {r.get('count', 0)} 个样本")
+                elif c["tool"] == "parse_resume":
+                    parts.append("简历解析完成")
+                elif c["tool"] == "start_interview":
+                    parts.append(r.get("question", "面试已开始"))
+                else:
+                    parts.append(str(r)[:500])
+            return {"reply": "\n\n".join(parts) if parts else "操作完成"}
+        return {"reply": "抱歉，无法处理您的请求"}
     except Exception as e:
         return {"reply": f"抱歉，出现错误：{str(e)}"}
 
@@ -174,16 +186,11 @@ def chat(req: ChatRequest):
 def polish(req: EvalRequest):
     try:
         coordinator = get_coordinator()
-        llm = coordinator.evaluation_agent.llm
-        resp = llm.client.chat.completions.create(
-            model=llm.model,
-            messages=[
-                {"role": "system", "content": "你是一个简历润色专家。优化以下简历的表达：使用更强力的动作动词、量化结果、STAR结构。保持原意，只返回润色后的简历。"},
-                {"role": "user", "content": req.resume_text},
-            ],
-            temperature=0.3,
-        )
-        return {"polished": resp.choices[0].message.content}
+        result = coordinator.analysis_agent.execute_tool(
+            "polish_resume", resume_text=req.resume_text, category=req.category)
+        if "error" in result:
+            return {"error": result.get("error_message", str(result.get("error", "润色失败")))}
+        return result
     except Exception as e:
         return {"error": str(e)}
 
@@ -203,7 +210,7 @@ def batch_evaluate(req: BatchRequest):
 
         count = min(req.count, len(subset))
         sampled = subset.sample(n=count)
-        evaluator = get_evaluator()
+        coordinator = get_coordinator()  # 确保 Agent 在线程池之前初始化
         results = []
         errors = 0
 
@@ -215,15 +222,18 @@ def batch_evaluate(req: BatchRequest):
 
         def _evaluate_one(idx, row):
             try:
-                report = evaluator.evaluate(row["Resume"], row["Category"], n_samples=3)
-                dims = {d["key"]: d["score"] for d in report.get("dimensions", [])}
+                result = coordinator.evaluation_agent.execute_tool(
+                    "evaluate_resume", resume_text=row["Resume"], category=row["Category"])
+                if "error" in result:
+                    return idx, None
+                dims = {d["key"]: d["score"] for d in result.get("dimensions", [])}
                 return idx, {
                     "category": row["Category"],
-                    "overall": report.get("overall", 0),
+                    "overall": result.get("overall", 0),
                     "dimensions": dims,
-                    "strengths": report.get("strengths", [])[:2],
-                    "weaknesses": report.get("weaknesses", [])[:2],
-                    "summary": report.get("summary", "")[:200],
+                    "strengths": result.get("strengths", [])[:2],
+                    "weaknesses": result.get("weaknesses", [])[:2],
+                    "summary": result.get("summary", "")[:200],
                 }
             except Exception:
                 return idx, None
@@ -254,12 +264,12 @@ def batch_evaluate(req: BatchRequest):
 def interview_start(req: InterviewStartRequest):
     try:
         coordinator = get_coordinator()
-        evaluator = get_evaluator()
 
-        # Evaluate resume
-        eval_result = evaluator.evaluate(req.resume_text, req.category, n_samples=3)
+        # Evaluate resume via EvaluationAgent
+        eval_result = coordinator.evaluation_agent.execute_tool(
+            "evaluate_resume", resume_text=req.resume_text, category=req.category)
 
-        # Start interview session
+        # Start interview session (direct creation for multi-user support)
         from modules.interview_agent import InterviewSession
         session = InterviewSession(req.resume_text, eval_result, llm_client=coordinator.evaluation_agent.llm)
         first_q = session.start()
