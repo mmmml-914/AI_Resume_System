@@ -6,7 +6,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import os, sys, json
+import os, sys, json, html
 
 # ChromaDB protobuf 兼容性
 os.environ.setdefault("PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION", "python")
@@ -442,7 +442,7 @@ elif page == "AI 助手":
 
                             elif tool_name == "polish_resume":
                                 if result.get("polished"):
-                                    st.markdown(f'<div style="background:#F8FFFB;border:1px solid #D1FAE5;border-radius:12px;padding:14px 18px;font-size:0.92rem;line-height:1.7;white-space:pre-wrap">{result["polished"]}</div>', unsafe_allow_html=True)
+                                    st.markdown(f'<div style="background:#F8FFFB;border:1px solid #D1FAE5;border-radius:12px;padding:14px 18px;font-size:0.92rem;line-height:1.7;white-space:pre-wrap">{html.escape(result["polished"])}</div>', unsafe_allow_html=True)
                                 if result.get("changes"):
                                     with st.expander(f"📝 {len(result['changes'])} 处修改"):
                                         for ch in result["changes"]:
@@ -558,7 +558,7 @@ elif page == "简历润色":
             st.markdown(
                 f'<div style="background:#F8FFFB;border:1px solid #D1FAE5;border-radius:12px;'
                 f'padding:14px 18px;font-size:0.92rem;line-height:1.7;white-space:pre-wrap">'
-                f'{result["polished"]}</div>',
+                f'{html.escape(result["polished"])}</div>',
                 unsafe_allow_html=True,
             )
 

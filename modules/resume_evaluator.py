@@ -238,7 +238,7 @@ class ResumeEvaluator:
             if len(overalls) >= 2 else 0.0
         )
 
-        primary = valid[0]
+        primary = valid[0] if valid else {}
 
         return {
             "overall": overall_mean,

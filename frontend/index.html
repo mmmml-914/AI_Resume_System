@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Resume System</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,'Segoe UI',sans-serif}
+html,body{background:#020617;color:#f1f5f9;overflow:hidden;height:100%}
+.layout{display:flex;height:100%}
+.sidebar{width:210px;height:100%;background:#0a0f1e;border-right:1px solid #1e293b;display:flex;flex-direction:column;flex-shrink:0;padding-top:40px}
+.sidebar .logo{padding:14px 16px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sidebar .logo .badge{width:28px;height:28px;border-radius:8px;background:#22c55e;display:flex;align-items:center;justify-content:center;color:#020617;font-weight:800;font-size:12px}
+.sidebar .logo .title{font-size:13px;font-weight:700}
+.sidebar .logo .ver{font-size:10px;color:#64748b}
+.nav{padding:6px 8px;flex:1;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer;user-select:none;transition:.15s;margin-bottom:2px}
+.nav-item:hover{background:#1e293b}
+.nav-item.active{background:#22c55e15;color:#22c55e;border-left:3px solid #22c55e;font-weight:600}
+.nav-item .ico{font-size:15px;width:20px;text-align:center}
+.sidebar .footer{padding:10px 16px;border-top:1px solid #1e293b;font-size:10px;color:#64748b}
+.sidebar .footer a{color:#64748b;text-decoration:none}
+.sidebar .footer a:hover{color:#22c55e}
+.content{flex:1;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column}
+#pg{flex:1;overflow-y:auto;min-height:0}
+#pg.fade-in{animation:fadeIn .25s ease}
+.card{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:16px}
+.card-title{font-size:11px;color:#94a3b8;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.btn{background:#22c55e;color:#020617;border:none;border-radius:8px;padding:8px 18px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:#16a34a}
+.btn:disabled{opacity:.5;cursor:default}
+.btn2{background:#1e293b;color:#f1f5f9;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn2:hover{background:#334155}
+input,textarea,select{background:#0f172a;border:1px solid #1e293b;border-radius:8px;color:#f1f5f9;padding:8px 12px;outline:none;width:100%;font-size:13px}
+input:focus,textarea:focus,select:focus{border-color:#22c55e;box-shadow:0 0 0 3px #22c55e20}
+table.data{width:100%;border-collapse:collapse;font-size:13px}
+table.data th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;text-transform:uppercase;color:#64748b;border-bottom:1px solid #1e293b}
+table.data td{padding:8px 10px;border-bottom:1px solid #1e293b}
+table.data tbody tr:hover{background:#0a0f1e}
+.upload-btn{display:inline-flex;align-items:center;gap:4px;border:1px dashed #334155;border-radius:6px;padding:4px 12px;cursor:pointer;font-size:12px;color:#64748b;transition:.2s}
+.upload-btn:hover{border-color:#22c55e;color:#22c55e}
+.page-title{font-size:20px;font-weight:700;margin-bottom:2px}
+.page-sub{font-size:12px;color:#64748b;margin-bottom:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:14px}
+.kpi label{font-size:10px;color:#64748b;display:block;margin-bottom:4px;text-transform:uppercase}
+.kpi .val{font-size:22px;font-weight:700;font-family:'Courier New',monospace}
+.kpi .sub{font-size:10px;color:#64748b;margin-top:4px}
+.mono{font-family:'Courier New',monospace}
+.flex{display:flex}
+.flex-1{flex:1}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-2{gap:8px}
+.gap-3{gap:12px}
+.mb-2{margin-bottom:8px}
+.mb-3{margin-bottom:12px}
+.mb-4{margin-bottom:16px}
+.mt-2{margin-top:8px}
+.text-center{text-align:center}
+.text-xs{font-size:12px;color:#94a3b8}
+.text-sm{font-size:13px}
+.hidden{display:none}
+.progress{width:100%;background:#1e293b;border-radius:999px;height:6px;overflow:hidden}
+.progress-bar{height:6px;border-radius:999px;background:#22c55e;transition:width .3s}
+.msg{margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
+.msg .av{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.msg .bubble{padding:8px 12px;border-radius:8px;max-width:75%;font-size:13px;line-height:1.5}
+.msg.user{flex-direction:row-reverse}
+.msg.user .bubble{background:#22c55e20}
+.msg.ai .av{background:#22c55e;color:#020617}
+.msg.user .av{background:#4f46e5;color:#fff}
+.msg.ai .bubble{background:#0f172a}
+.chat-area{display:flex;flex-direction:column;height:calc(100vh - 130px)}
+.chat-msgs{flex:1;overflow-y:auto;margin-bottom:12px;padding:4px}
+.chat-input{display:flex;gap:8px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(20px)}}
+
+.spinner{width:16px;height:16px;border:2px solid #334155;border-top-color:#22c55e;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
+
+.toast-ctr{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{padding:10px 16px;border-radius:10px;font-size:13px;font-weight:500;max-width:360px;pointer-events:auto;animation:toastIn .25s ease;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px #00000040}
+.toast.info{background:#1e293b;border:1px solid #334155;color:#f1f5f9}
+.toast.error{background:#7f1d1d;border:1px solid #ef4444;color:#fecaca}
+.toast.success{background:#064e3b;border:1px solid #22c55e;color:#bbf7d0}
+.toast.removing{animation:toastOut .2s ease forwards}
+
+.empty-state{padding:40px 0;text-align:center;color:#64748b}
+.empty-state .icon{font-size:32px;margin-bottom:8px}
+.empty-state .title{font-size:14px;font-weight:600;color:#94a3b8;margin-bottom:4px}
+.empty-state .desc{font-size:12px;color:#475569}
+
+.skeleton{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
+</head>
+<body>
+
+<div class="toast-ctr" id="toastCtr"></div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="badge">AI</div>
+      <div><div class="title">Resume System</div><div class="ver">v2.0</div></div>
+    </div>
+    <div class="nav" id="snav">
+      <div class="nav-item active" onclick="pg('overview')"><span class="ico">📊</span>总览</div>
+      <div class="nav-item" onclick="pg('batch')"><span class="ico">🔬</span>批量测试</div>
+      <div class="nav-item" onclick="pg('experiment')"><span class="ico">🧪</span>双盲实验</div>
+      <div class="nav-item" onclick="pg('analysis')"><span class="ico">📈</span>数据看板</div>
+      <div class="nav-item" onclick="pg('polish')"><span class="ico">✨</span>简历润色</div>
+      <div class="nav-item" onclick="pg('chat')"><span class="ico">🤖</span>AI 助手</div>
+      <div class="nav-item" onclick="pg('interview')"><span class="ico">🎤</span>模拟面试</div>
+    </div>
+    <div class="footer"><a href="http://localhost:8501" target="_blank">&#8599; Streamlit 原版</a></div>
+  </div>
+  <div class="content" id="main"><div id="pg"></div></div>
+</div>
+
+<script>
+const API = '/api';
+let _charts = {};
+let _iv = {phase:'input',sid:null,eval:null,msgs:[],report:null};
+const pages = ['overview','batch','experiment','analysis','polish','chat','interview'];
+
+// === TOAST ===
+function toast(msg, type) {
+  type = type || 'info';
+  var ctr = document.getElementById('toastCtr');
+  var el = document.createElement('div');
+  el.className = 'toast ' + type;
+  var icons = {info:'ℹ️', error:'⚠️', success:'✅'};
+  el.innerHTML = '<span>'+(icons[type]||'')+'</span><span>'+msg+'</span>';
+  ctr.appendChild(el);
+  setTimeout(function(){ el.classList.add('removing'); setTimeout(function(){ el.remove(); }, 200); }, 3500);
+}
+
+// === SPINNER ===
+function spin() { return '<span class="spinner"></span>'; }
+
+function btnLoad(btn, loading) {
+  btn.disabled = loading;
+  if (loading) {
+    btn._prev = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner"></span> ' + (btn.getAttribute('data-loading') || '处理中');
+  } else {
+    btn.innerHTML = btn._prev || btn.innerHTML;
+  }
+}
+
+// === PAGE NAVIGATION ===
+function pg(name) {
+  document.querySelectorAll('.nav-item').forEach(function(el){ el.classList.remove('active'); });
+  var items = document.querySelectorAll('.nav-item');
+  var idx = pages.indexOf(name);
+  if (idx >= 0 && items[idx]) items[idx].classList.add('active');
+  Object.values(_charts).forEach(function(c){ try { c.destroy(); } catch(e) {} });
+  _charts = {};
+  var pgEl = document.getElementById('pg');
+  pgEl.classList.remove('fade-in');
+  void pgEl.offsetWidth;
+  pgEl.classList.add('fade-in');
+  var fns = {overview:ov,batch:ba,experiment:ex,analysis:an,polish:pl,chat:ch,interview:iv};
+  (fns[name] || ov)();
+}
+
+function chart(id, cfg) {
+  var el = document.getElementById(id);
+  if (!el) return null;
+  try {
+    var c = new Chart(el, cfg);
+    _charts[id] = c;
+    return c;
+  } catch(e) { return null; }
+}
+
+// === OVERVIEW ===
+async function ov() {
+  var pgEl = document.getElementById('pg');
+  pgEl.innerHTML = '<h1 class="page-title">📊 总览</h1><p class="page-sub">AI 简历评估系统</p>' +
+    '<div class="grid-4" id="kp">' +
+      '<div class="kpi"><label>总评估</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>岗位类别</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
+    '</div>' +
+    '<div class="grid-2" style="margin-top:16px">' +
+      '<div class="card"><div class="card-title">AI 维度平均分</div><div style="height:220px"><canvas id="ovRadar"></canvas></div></div>' +
+      '<div class="card"><div class="card-title">人机评分对比</div><div style="height:220px"><canvas id="ovScat"></canvas></div></div>' +
+    '</div>' +
+    '<div class="card" style="margin-top:16px"><div class="card-title">类别分布 Top 10</div><div style="height:100px"><canvas id="ovBar"></canvas></div></div>' +
+    '<div class="card" style="margin-top:16px"><div class="card-title">最近评估</div><table class="data"><thead><tr><th>类别</th><th style="text-align:center">人工</th><th style="text-align:center">AI</th><th style="text-align:center">差值</th></tr></thead><tbody id="ovTbl"><tr><td colspan="4" style="text-align:center;color:#64748b">'+spin()+' 加载中...</td></tr></tbody></table></div>';
+  try {
+    var results = await Promise.all([
+      fetch(API+'/experiments').then(function(r){return r.json();}),
+      fetch(API+'/config/dimensions').then(function(r){return r.json();}),
+      fetch(API+'/kaggle/stats').then(function(r){return r.json();})
+    ]);
+    var ed = results[0], d = results[1], ks = results[2];
+    var exps = ed.experiments || [], dims = Object.values(d.dimensions || {}), kag = ks;
+    var hu = exps.filter(function(x){return x.human != null;}).map(function(x){return x.human;});
+    var ai = exps.filter(function(x){return x.ai_blind != null;}).map(function(x){return x.ai_blind;});
+    document.getElementById('kp').innerHTML =
+      '<div class="kpi"><label>总评估</label><div class="val">'+exps.length+'</div><div class="sub">Kaggle '+(kag.total||'?')+'</div></div>' +
+      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#4f46e5">'+(hu.length?(hu.reduce(function(a,b){return a+b;},0)/hu.length).toFixed(1):'-')+'</div><div class="sub">'+hu.length+' 份</div></div>' +
+      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#06d6a0">'+(ai.length?(ai.reduce(function(a,b){return a+b;},0)/ai.length).toFixed(1):'-')+'</div><div class="sub">'+ai.length+' 份</div></div>' +
+      '<div class="kpi"><label>岗位类别</label><div class="val" style="color:#f59e0b">'+(Object.keys(kag.cat_distribution||{}).length)+'</div><div class="sub">'+(kag.categories||0)+' 类</div></div>';
+    var da = {};
+    exps.forEach(function(x){(x.dimensions||[]).forEach(function(d){da[d.label]=da[d.label]||[];da[d.label].push(d.score);});});
+    Object.keys(da).forEach(function(k){da[k]=Math.round(da[k].reduce(function(a,b){return a+b;},0)/da[k].length);});
+    var dl = dims.map(function(d){return d.label;}), dc = dims.map(function(d){return d.color;});
+    chart('ovRadar', {type:'radar', data:{labels:dl, datasets:[{data:dl.map(function(l){return da[l]||0;}), backgroundColor:'#4f46e520', borderColor:'#4f46e5', borderWidth:2, pointBackgroundColor:dc, pointBorderColor:'#0f172a', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{min:0,max:100, grid:{color:'#1e293b'}, angleLines:{color:'#1e293b'}, ticks:{display:false}, pointLabels:{color:'#94a3b8', font:{size:10}}}}}});
+    var sc = exps.filter(function(x){return x.human!=null && x.ai_blind!=null;});
+    chart('ovScat', {type:'scatter', data:{datasets:[{data:sc.map(function(e){return {x:e.human, y:e.ai_blind};}), backgroundColor:'#22c55e70', borderColor:'#22c55e', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(ctx){return 'H:'+ctx.raw.x+' AI:'+ctx.raw.y;}}}}, scales:{x:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}}}});
+    var cts = kag.cat_distribution||{};
+    chart('ovBar', {type:'bar', data:{labels:Object.keys(cts).slice(0,10), datasets:[{data:Object.values(cts).slice(0,10), backgroundColor:'#22c55e40', borderColor:'#22c55e', borderWidth:2, borderRadius:4}]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size:9}}}}}});
+    var tb = document.getElementById('ovTbl');
+    tb.innerHTML = '';
+    sc.slice(0,10).forEach(function(e){
+      var diff = e.human - e.ai_blind;
+      tb.innerHTML += '<tr><td style="font-weight:500">'+e.category+'</td><td style="text-align:center;font-weight:600" class="mono">'+e.human+'</td><td style="text-align:center" class="mono">'+e.ai_blind+'</td><td style="text-align:center" class="mono" style="color:'+(Math.abs(diff)<5?'#64748b':diff>0?'#4f46e5':'#06d6a0')+'">'+(diff>0?'+'+diff:diff)+'</td></tr>';
+    });
+  } catch(e) {
+    toast('总览数据加载失败: '+e.message, 'error');
+    pgEl.innerHTML = '<div class="empty-state" style="padding:60px 0"><div class="icon">⚠️</div><div class="title">API 服务器未连接</div><div class="desc">请运行 python frontend/api_server.py</div></div>';
+  }
+}
+
+// === BATCH ===
+async function ba() {
+  var pgEl = document.getElementById('pg');
+  pgEl.innerHTML = '<h1 class="page-title">🔬 批量测试</h1><p class="page-sub">多份简历批量 AI 评分</p>' +
+    '<div class="grid-3" style="margin-bottom:16px">' +
+      '<div class="card"><div class="card-title">岗位</div><select id="bCat" style="font-size:12px"></select></div>' +
+      '<div class="card"><div class="card-title">数量</div><div class="flex items-center gap-2"><input type="range" id="bN" min="3" max="15" value="10" style="padding:0;height:18px;flex:1"><span id="bNl" class="mono" style="font-size:16px;font-weight:700;color:#22c55e">10</span></div></div>' +
+      '<div class="card" style="display:flex;flex-direction:column;justify-content:flex-end"><button class="btn" onclick="bRun()" id="bBtn">▶ 开始</button></div>' +
+    '</div>' +
+    '<div id="bPr" class="hidden" style="margin-bottom:12px"><div class="card"><div class="flex items-center gap-2 mb-2"><span id="bSt" style="font-size:13px">运行中...</span></div><div class="progress"><div class="progress-bar" id="bBar" style="width:0%"></div></div></div></div>' +
+    '<div id="bRs" class="hidden">' +
+      '<div class="card" style="margin-bottom:12px"><div class="card-title">评分结果</div><table class="data"><thead><tr><th>岗位</th><th style="text-align:center">综合</th><th style="text-align:center">技能</th><th style="text-align:center">项目</th><th style="text-align:center">格式</th><th style="text-align:center">教育</th><th style="text-align:center">表达</th></tr></thead><tbody id="bTbl"></tbody></table></div>' +
+      '<div class="card" style="margin-bottom:12px"><div class="card-title">综合评分对比</div><div style="height:120px"><canvas id="bCht"></canvas></div></div>' +
+      '<div class="grid-4" id="bSts"></div>' +
+    '</div>';
+  try {
+    var r = await fetch(API+'/kaggle/stats').then(function(r){return r.json();});
+    var cts = Object.keys(r.cat_distribution||{});
+    document.getElementById('bCat').innerHTML = '<option value="全部">全部类别</option>' + cts.map(function(c){return '<option>'+c+'</option>';}).join('');
+    document.getElementById('bN').addEventListener('input', function(){ document.getElementById('bNl').textContent = this.value; });
+  } catch(e) {
+    toast('加载岗位列表失败', 'error');
+  }
+}
+async function bRun() {
+  var cat = document.getElementById('bCat').value, n = parseInt(document.getElementById('bN').value);
+  var btn = document.getElementById('bBtn'), pr = document.getElementById('bPr'), rs = document.getElementById('bRs'), bar = document.getElementById('bBar'), st = document.getElementById('bSt');
+  btnLoad(btn, true);
+  pr.classList.remove('hidden'); rs.classList.add('hidden'); bar.style.width = '0%';
+  var t0 = Date.now();
+  var tmr = setInterval(function(){ bar.style.width = Math.min(90, Math.round((Date.now()-t0)/1000/n*10))+'%'; }, 500);
+  st.innerHTML = spin()+' 评估 0/'+n+'...';
+  try {
+    var r = await fetch(API+'/batch', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({category:cat, count:n})}).then(function(r){return r.json();});
+    clearInterval(tmr); bar.style.width = '100%';
+    st.innerHTML = '✅ '+(r.total||0)+' 份'+(r.errors ? ', '+r.errors+' 失败' : '');
+    if (r.results && r.results.length) { bShow(r.results); rs.classList.remove('hidden'); }
+    toast('批量评估完成: '+r.total+' 份', 'success');
+  } catch(e) {
+    clearInterval(tmr);
+    st.innerHTML = '❌ '+e.message;
+    toast('批量评估失败: '+e.message, 'error');
+  }
+  btnLoad(btn, false);
+}
+function bShow(r) {
+  document.getElementById('bTbl').innerHTML = r.map(function(x){ var d=x.dimensions||{}; return '<tr><td>'+x.category+'</td><td style="text-align:center;font-weight:700;color:#22c55e" class="mono">'+x.overall+'</td><td style="text-align:center" class="mono">'+(d.skills_match||'-')+'</td><td style="text-align:center" class="mono">'+(d.project_quality||'-')+'</td><td style="text-align:center" class="mono">'+(d.format_readability||'-')+'</td><td style="text-align:center" class="mono">'+(d.education||'-')+'</td><td style="text-align:center" class="mono">'+(d.expression||'-')+'</td></tr>';}).join('');
+  chart('bCht', {type:'bar', data:{labels:r.map(function(x){return x.category.substring(0,10);}), datasets:[{data:r.map(function(x){return x.overall;}), backgroundColor:r.map(function(x){return x.overall>70?'#34d39960':x.overall>50?'#f59e0b60':'#ef444460';}), borderColor:r.map(function(x){return x.overall>70?'#34d399':x.overall>50?'#f59e0b':'#ef4444';}), borderWidth:1.5, borderRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#94a3b8', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}}}});
+  var s = r.map(function(x){return x.overall;}), avg = (s.reduce(function(a,b){return a+b;},0)/s.length).toFixed(1), uc = new Set(r.map(function(x){return x.category;})).size;
+  document.getElementById('bSts').innerHTML = '<div class="kpi"><label>平均</label><div class="val" style="color:#22c55e">'+avg+'</div></div><div class="kpi"><label>最高/最低</label><div class="val">'+Math.max.apply(null,s)+'/'+Math.min.apply(null,s)+'</div></div><div class="kpi"><label>覆盖岗位</label><div class="val" style="color:#f59e0b">'+uc+'</div></div><div class="kpi"><label>样本</label><div class="val">'+r.length+'</div></div>';
+}
+
+// === EXPERIMENT ===
+async function ex() {
+  var pgEl = document.getElementById('pg');
+  pgEl.innerHTML = '<h1 class="page-title">🧪 双盲实验</h1><p class="page-sub">人机评分一致性分析</p>' +
+    '<div class="grid-4" id="exKp"></div>' +
+    '<div class="grid-2" style="margin-top:16px">' +
+      '<div class="card"><div class="card-title">人机散点图</div><div style="height:200px"><canvas id="exScat"></canvas></div></div>' +
+      '<div class="card"><div class="card-title">Bland-Altman</div><div style="height:200px"><canvas id="exBa"></canvas></div></div>' +
+    '</div>' +
+    '<div class="grid-4" style="margin-top:16px">' +
+      '<div class="card"><div class="card-title">Pearson r</div><div class="val" style="font-size:28px;font-weight:700;color:#22c55e" class="mono" id="exR">'+spin()+'</div></div>' +
+      '<div class="card" style="grid-column:span 3"><div class="card-title">指标</div><div class="flex gap-3" id="exMt">'+spin()+' 加载中...</div></div>' +
+    '</div>' +
+    '<div class="card" style="margin-top:16px"><div class="card-title">明细</div><table class="data"><thead><tr><th>类别</th><th style="text-align:center">人工</th><th style="text-align:center">AI</th><th style="text-align:center">差值</th></tr></thead><tbody id="exTbl"></tbody></table></div>';
+  try {
+    var r = await fetch(API+'/experiments').then(function(r){return r.json();});
+    var exps = r.experiments||[], pairs = exps.filter(function(x){return x.human!=null&&x.ai_blind!=null;});
+    var hu = pairs.map(function(x){return x.human;}), ai = pairs.map(function(x){return x.ai_blind;});
+    var dif = hu.map(function(h,i){return h-ai[i];});
+    var md = dif.reduce(function(a,b){return a+b;},0)/dif.length;
+    document.getElementById('exKp').innerHTML =
+      '<div class="kpi"><label>样本</label><div class="val">'+pairs.length+'</div></div>' +
+      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#4f46e5">'+(hu.reduce(function(a,b){return a+b;},0)/hu.length).toFixed(1)+'</div></div>' +
+      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#06d6a0">'+(ai.reduce(function(a,b){return a+b;},0)/ai.length).toFixed(1)+'</div></div>' +
+      '<div class="kpi"><label>均值差</label><div class="val" style="color:#f59e0b">'+md.toFixed(1)+'</div></div>';
+    chart('exScat', {type:'scatter', data:{datasets:[{data:pairs.map(function(x){return {x:x.human, y:x.ai_blind};}), backgroundColor:'#4f46e560', borderColor:'#4f46e5', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(ctx){return 'H:'+ctx.raw.x+' AI:'+ctx.raw.y;}}}}, scales:{x:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}}}});
+    var bd = pairs.map(function(x){return {x:(x.human+x.ai_blind)/2, y:x.human-x.ai_blind};});
+    var bm = bd.reduce(function(s,d){return s+d.y;},0)/bd.length;
+    var bs2 = bd.reduce(function(s,d){return s+(d.y-bm)*(d.y-bm);},0)/bd.length;
+    chart('exBa', {type:'scatter', data:{datasets:[{data:bd, backgroundColor:'#22c55e60', borderColor:'#22c55e', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}, title:{display:true, text:'(H+AI)/2', color:'#64748b', font:{size:9}}}, y:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}, title:{display:true, text:'H-AI', color:'#64748b', font:{size:9}}}}}});
+    var n = pairs.length, hm = hu.reduce(function(a,b){return a+b;},0)/n, am = ai.reduce(function(a,b){return a+b;},0)/n;
+    var rv = hu.reduce(function(s,h,i){return s+(h-hm)*(ai[i]-am);},0) / Math.sqrt(hu.reduce(function(s,h){return s+(h-hm)*(h-hm);},0) * ai.reduce(function(s,a){return s+(a-am)*(a-am);},0));
+    document.getElementById('exR').textContent = rv.toFixed(4);
+    var mae = dif.reduce(function(a,b){return a+Math.abs(b);},0)/dif.length;
+    document.getElementById('exMt').innerHTML =
+      '<div class="kpi" style="flex:1"><label>MAE</label><div class="val" style="font-size:18px;color:#f59e0b">'+mae.toFixed(1)+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>均值差</label><div class="val" style="font-size:18px;color:#f59e0b">'+md.toFixed(1)+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>人高</label><div class="val" style="font-size:18px;color:#4f46e5">'+dif.filter(function(d){return d>0;}).length+'/'+n+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>AI高</label><div class="val" style="font-size:18px;color:#06d6a0">'+dif.filter(function(d){return d<0;}).length+'/'+n+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>95%限</label><div class="val" style="font-size:18px">±'+(1.96*Math.sqrt(bs2)).toFixed(1)+'</div></div>';
+    var tb = document.getElementById('exTbl');
+    pairs.slice(0,15).forEach(function(x){var d=x.human-x.ai_blind;tb.innerHTML+='<tr><td>'+x.category+'</td><td style="text-align:center;font-weight:600" class="mono">'+x.human+'</td><td style="text-align:center" class="mono">'+x.ai_blind+'</td><td style="text-align:center" class="mono" style="color:'+(Math.abs(d)<5?'#64748b':d>0?'#4f46e5':'#06d6a0')+'">'+(d>0?'+'+d:d)+'</td></tr>';});
+  } catch(e) {
+    toast('双盲实验数据加载失败: '+e.message, 'error');
+    pgEl.innerHTML = '<div class="empty-state" style="padding:60px 0"><div class="icon">⚠️</div><div class="title">无法连接</div><div class="desc">请检查 API 服务器是否运行</div></div>';
+  }
+}
+
+// === ANALYSIS ===
+async function an() {
+  var pgEl = document.getElementById('pg');
+  pgEl.innerHTML = '<h1 class="page-title">📈 数据看板</h1><p class="page-sub">Kaggle 数据集</p>' +
+    '<div class="grid-4" id="anKp"></div>' +
+    '<div class="grid-2" style="margin-top:16px"><div class="card"><div class="card-title">类别 Top 10</div><div style="height:150px"><canvas id="anCht"></canvas></div></div><div class="card"><div class="card-title">概览</div><div id="anDet"></div></div></div>';
+  try {
+    var r = await fetch(API+'/kaggle/stats').then(function(r){return r.json();});
+    var cts = r.cat_distribution||{};
+    document.getElementById('anKp').innerHTML =
+      '<div class="kpi"><label>总简历</label><div class="val">'+r.total+'</div></div>' +
+      '<div class="kpi"><label>类别</label><div class="val" style="color:#4f46e5">'+r.categories+'</div></div>' +
+      '<div class="kpi"><label>平均长度</label><div class="val">'+(r.avg_length||0).toLocaleString()+'</div></div>' +
+      '<div class="kpi"><label>已评估</label><div class="val" style="color:#f59e0b">31</div></div>';
+    chart('anCht', {type:'bar', data:{labels:Object.keys(cts).slice(0,10), datasets:[{data:Object.values(cts).slice(0,10), backgroundColor:'#4f46e540', borderColor:'#4f46e5', borderWidth:2, borderRadius:4}]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size:9}}}}}});
+    var entries = Object.entries(cts).sort(function(a,b){return b[1]-a[1];});
+    document.getElementById('anDet').innerHTML = entries.slice(0,5).map(function(kv){return '<div class="flex justify-between" style="font-size:13px;margin-bottom:6px"><span>'+kv[0]+'</span><span style="font-weight:600;color:#4f46e5">'+kv[1]+'</span></div>';}).join('')+'<div style="font-size:11px;color:#64748b;margin-top:8px">共 '+Object.keys(cts).length+' 类</div>';
+  } catch(e) {
+    toast('数据看板加载失败: '+e.message, 'error');
+    pgEl.innerHTML = '<div class="empty-state" style="padding:60px 0"><div class="icon">⚠️</div><div class="title">无法连接</div><div class="desc">请检查 API 服务器是否运行</div></div>';
+  }
+}
+
+// === POLISH ===
+function pl() {
+  document.getElementById('pg').innerHTML = '<h1 class="page-title">✨ 简历润色</h1><p class="page-sub">AI 优化表达 · 支持文件上传</p>' +
+    '<div class="grid-2">' +
+      '<div class="card">' +
+        '<div class="flex justify-between items-center" style="margin-bottom:8px"><span class="card-title" style="margin-bottom:0">原文</span><label class="upload-btn"><span>📤</span> 上传 <input type="file" id="plF" accept=".txt,.pdf,.docx,.doc,.png,.jpg,.jpeg" style="display:none" onchange="plUp()"></label></div>' +
+        '<textarea id="plIn" rows="12" placeholder="粘贴简历或上传文件..." style="height:300px;resize:vertical"></textarea>' +
+        '<button class="btn" style="width:100%;margin-top:8px" onclick="plDo()" id="plBtn">✨ 润色</button>' +
+      '</div>' +
+      '<div class="card">' +
+        '<div class="flex justify-between items-center" style="margin-bottom:8px"><span class="card-title" style="margin-bottom:0">结果</span><button class="btn2" onclick="plCp()" id="plCp">📋 复制</button></div>' +
+        '<textarea id="plOut" rows="12" placeholder="润色结果..." style="height:300px;resize:vertical" readonly></textarea>' +
+      '</div>' +
+    '</div>';
+}
+async function plUp() {
+  var f = document.getElementById('plF').files[0]; if (!f) return;
+  var btn = document.getElementById('plBtn');
+  btnLoad(btn, true);
+  try {
+    var fd = new FormData(); fd.append('file',f);
+    var r = await fetch(API+'/upload', {method:'POST', body:fd}).then(function(r){return r.json();});
+    if (r.text) { document.getElementById('plIn').value = r.text; toast('文件解析成功', 'success'); }
+    else { toast(r.error||'解析失败', 'error'); }
+  } catch(e) { toast('文件上传失败: '+e.message, 'error'); }
+  btnLoad(btn, false);
+}
+async function plDo() {
+  var inp = document.getElementById('plIn'), out = document.getElementById('plOut'), btn = document.getElementById('plBtn');
+  if (!inp.value.trim()) return;
+  btnLoad(btn, true);
+  try {
+    var r = await fetch(API+'/polish', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({resume_text:inp.value})}).then(function(r){return r.json();});
+    out.value = r.polished || r.error || '出错';
+    if (r.polished) toast('润色完成', 'success'); else toast(r.error||'润色失败', 'error');
+  } catch(e) { out.value = '请求失败'; toast('润色请求失败: '+e.message, 'error'); }
+  btnLoad(btn, false);
+}
+function plCp() {
+  var o = document.getElementById('plOut'); if (!o.value) return;
+  navigator.clipboard.writeText(o.value).then(function(){
+    var b = document.getElementById('plCp'); b.innerHTML = '✅ 已复制';
+    toast('已复制到剪贴板', 'success');
+    setTimeout(function(){b.innerHTML='📋 复制';},2000);
+  }).catch(function(){ toast('复制失败', 'error'); });
+}
+
+// === CHAT ===
+function ch() {
+  document.getElementById('pg').innerHTML = '<h1 class="page-title">🤖 AI 助手</h1><p class="page-sub">简历相关问题解答</p>' +
+    '<div class="card chat-area" style="padding:16px">' +
+      '<div class="chat-msgs" id="chMs">' +
+        '<div class="msg ai"><div class="av">AI</div><div class="bubble">你好！我是 AI 简历助手，可以帮你分析简历、建议改进、回答问题。</div></div>' +
+      '</div>' +
+      '<div class="chat-input"><input id="chIn" placeholder="输入问题..." onkeydown="if(event.key===\'Enter\'){event.preventDefault();chSend()}"><button class="btn" onclick="chSend()">发送</button></div>' +
+    '</div>';
+  window.chH = [];
+}
+async function chSend() {
+  var inp = document.getElementById('chIn'), msg = inp.value.trim(); if (!msg) return; inp.value = '';
+  var c = document.getElementById('chMs');
+  c.innerHTML += '<div class="msg user"><div class="bubble">'+esc(msg)+'</div><div class="av" style="background:#4f46e5;color:#fff">你</div></div>';
+  c.scrollTop = c.scrollHeight;
+  c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#64748b">'+spin()+' 思考中...</div></div>';
+  c.scrollTop = c.scrollHeight;
+  try {
+    var r = await fetch(API+'/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg, history:window.chH||[]})}).then(function(r){return r.json();});
+    var els = c.querySelectorAll('.msg');
+    for (var i = 0; i < els.length; i++) { if (els[i].textContent.indexOf('思考中')>=0) { els[i].remove(); break; } }
+    var reply = r.reply||'出错';
+    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble">'+esc(reply)+'</div></div>';
+    window.chH = (window.chH||[]).concat([msg, reply]);
+  } catch(e) {
+    var els2 = c.querySelectorAll('.msg');
+    for (var j = 0; j < els2.length; j++) { if (els2[j].textContent.indexOf('思考中')>=0) { els2[j].remove(); break; } }
+    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#ef4444">请求失败，请检查服务器连接</div></div>';
+    toast('AI 助手请求失败', 'error');
+  }
+  c.scrollTop = c.scrollHeight;
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// === INTERVIEW ===
+function iv() {
+  if (_iv.phase === 'chat') { ivC(); }
+  else if (_iv.phase === 'report') { ivR(); }
+  else { ivI(); }
+}
+function ivI() {
+  document.getElementById('pg').innerHTML = '<h1 class="page-title">🎤 模拟面试</h1><p class="page-sub">AI 模拟面试官 · 支持文件上传</p>' +
+    '<div class="grid-2">' +
+      '<div class="card" style="grid-column:span 2">' +
+        '<div class="flex justify-between items-center" style="margin-bottom:8px"><span class="card-title" style="margin-bottom:0">简历</span><label class="upload-btn"><span>📤</span> 上传 <input type="file" id="ivF" accept=".txt,.pdf,.docx,.doc,.png,.jpg,.jpeg" style="display:none" onchange="ivUp()"></label></div>' +
+        '<textarea id="ivRsm" rows="10" placeholder="粘贴简历或上传文件..." style="height:250px;resize:vertical"></textarea>' +
+      '</div>' +
+    '</div>' +
+    '<div class="flex gap-3 items-center" style="margin-top:8px">' +
+      '<select id="ivCat" style="width:250px;font-size:12px"><option value="">'+spin()+' 加载岗位...</option></select>' +
+      '<button class="btn" onclick="ivStart()" id="ivBtn">🎤 开始面试</button>' +
+      '<span style="font-size:11px;color:#475569">先评估简历再面试</span>' +
+    '</div>';
+  fetch(API+'/kaggle/stats').then(function(r){return r.json();}).then(function(r){
+    var s='<option value="">选择目标岗位...</option>';
+    Object.keys(r.cat_distribution||{}).forEach(function(c){s+='<option>'+c+'</option>';});
+    document.getElementById('ivCat').innerHTML=s;
+  }).catch(function(){ toast('加载岗位列表失败', 'error'); });
+}
+async function ivUp() {
+  var f = document.getElementById('ivF').files[0]; if (!f) return;
+  var btn = document.getElementById('ivBtn');
+  btnLoad(btn, true);
+  try {
+    var fd = new FormData(); fd.append('file',f);
+    var r = await fetch(API+'/upload', {method:'POST', body:fd}).then(function(r){return r.json();});
+    if (r.text) { document.getElementById('ivRsm').value = r.text; toast('文件解析成功', 'success'); }
+    else { toast(r.error||'解析失败', 'error'); }
+  } catch(e) { toast('文件上传失败: '+e.message, 'error'); }
+  btnLoad(btn, false);
+}
+async function ivStart() {
+  var rsm = document.getElementById('ivRsm').value.trim(), cat = document.getElementById('ivCat').value;
+  if (!rsm || rsm.length < 50) { toast('简历至少50字', 'error'); return; }
+  if (!cat) { toast('请选择目标岗位', 'error'); return; }
+  var btn = document.getElementById('ivBtn');
+  btnLoad(btn, true);
+  try {
+    var r = await fetch(API+'/interview/start', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({resume_text:rsm, category:cat})}).then(function(r){return r.json();});
+    if (r.error) { toast(r.error, 'error'); btnLoad(btn, false); return; }
+    _iv.sid = r.session_id; _iv.eval = r.evaluation; _iv.msgs = [{role:'asst', content:r.question}]; _iv.phase = 'chat';
+    toast('面试已开始', 'success');
+    ivC();
+  } catch(e) { toast('面试启动失败: '+e.message, 'error'); btnLoad(btn, false); }
+}
+function ivC() {
+  var msgs = _iv.msgs||[], pgEl = document.getElementById('pg');
+  var html = '<div class="flex justify-between items-center" style="margin-bottom:12px"><div><h1 class="page-title" style="margin-bottom:0">🎤 模拟面试</h1><div style="font-size:12px;color:#64748b">已答 '+msgs.filter(function(m){return m.role==='user';}).length+' 题</div></div><button class="btn2" onclick="ivEnd()" id="ivEndBtn">⏹ 结束</button></div>' +
+    '<div class="card chat-area" style="padding:16px">' +
+    '<div class="chat-msgs" id="ivMs">';
+  for (var i = 0; i < msgs.length; i++) {
+    var m = msgs[i];
+    if (m.role === 'asst') {
+      html += '<div class="msg ai"><div class="av">AI</div><div class="bubble">'+esc(m.content)+'</div></div>';
+    } else {
+      html += '<div class="msg user"><div class="bubble">'+esc(m.content)+'</div><div class="av" style="background:#4f46e5;color:#fff">你</div></div>';
+    }
+  }
+  html += '</div><div class="chat-input"><input id="ivIn" placeholder="输入回答..." onkeydown="if(event.key===\'Enter\'){event.preventDefault();ivSend()}"><button class="btn" onclick="ivSend()">发送</button></div></div>';
+  pgEl.innerHTML = html;
+  var el = document.getElementById('ivMs'); if (el) el.scrollTop = el.scrollHeight;
+}
+async function ivSend() {
+  var inp = document.getElementById('ivIn'), msg = inp.value.trim(); if (!msg) return; inp.value = '';
+  _iv.msgs.push({role:'user', content:msg});
+  var c = document.getElementById('ivMs');
+  c.innerHTML += '<div class="msg user"><div class="bubble">'+esc(msg)+'</div><div class="av" style="background:#4f46e5;color:#fff">你</div></div>';
+  c.scrollTop = c.scrollHeight;
+  c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#64748b">'+spin()+' 思考中...</div></div>';
+  c.scrollTop = c.scrollHeight;
+  try {
+    var r = await fetch(API+'/interview/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({session_id:_iv.sid, message:msg})}).then(function(r){return r.json();});
+    var els = c.querySelectorAll('.msg');
+    for (var i = 0; i < els.length; i++) { if (els[i].textContent.indexOf('思考中')>=0) { els[i].remove(); break; } }
+    var reply = r.reply || r.error || '出错'; _iv.msgs.push({role:'asst', content:reply});
+    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble">'+esc(reply)+'</div></div>';
+    c.scrollTop = c.scrollHeight;
+  } catch(e) {
+    var els2 = c.querySelectorAll('.msg');
+    for (var j = 0; j < els2.length; j++) { if (els2[j].textContent.indexOf('思考中')>=0) { els2[j].remove(); break; } }
+    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#ef4444">请求失败，请检查服务器连接</div></div>';
+    toast('面试消息发送失败', 'error');
+    c.scrollTop = c.scrollHeight;
+  }
+}
+async function ivEnd() {
+  if (!confirm('结束面试并生成报告？')) return;
+  var btn = document.getElementById('ivEndBtn');
+  btnLoad(btn, true);
+  try {
+    var r = await fetch(API+'/interview/end', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({session_id:_iv.sid})}).then(function(r){return r.json();});
+    if (r.error) { toast(r.error, 'error'); btnLoad(btn, false); return; }
+    _iv.report = r; _iv.phase = 'report';
+    toast('面试报告已生成', 'success');
+    ivR();
+  } catch(e) { toast('生成报告失败: '+e.message, 'error'); btnLoad(btn, false); }
+}
+function ivR() {
+  var r = _iv.report||{}, ev = _iv.eval||{}, pgEl = document.getElementById('pg');
+  if (r.error) { pgEl.innerHTML = '<div class="empty-state" style="padding:60px 0"><div class="icon">⚠️</div><div class="title">'+r.error+'</div></div>'; return; }
+  var dims = r.dimensions||{}, dk = ['technical_accuracy','communication','problem_solving','domain_knowledge'];
+  var dl = {'technical_accuracy':'技术准确性','communication':'沟通表达','problem_solving':'问题解决能力','domain_knowledge':'领域知识'};
+  pgEl.innerHTML = '<div class="flex justify-between items-center" style="margin-bottom:16px"><div><h1 class="page-title" style="margin-bottom:0">📋 面试报告</h1></div><button class="btn2" onclick="ivRs()">🔄 重来</button></div>' +
+    '<div class="grid-4" style="margin-bottom:16px">' +
+      '<div class="kpi"><label>综合评分</label><div class="val" style="color:#22c55e">'+(r.overall||0)+'</div></div>' +
+      '<div class="kpi"><label>面试题数</label><div class="val">'+((r.stats||{}).total_questions||0)+'</div></div>' +
+      '<div class="kpi"><label>简历评分</label><div class="val" style="color:#4f46e5">'+(ev.overall||0)+'</div></div>' +
+      '<div class="kpi"><label>对话轮次</label><div class="val">'+((r.stats||{}).conversation_length||0)+'</div></div>' +
+    '</div>' +
+    '<div class="grid-2" style="margin-bottom:16px">' +
+      '<div class="card"><div class="card-title">维度评分</div><div id="ivDims"></div></div>' +
+      '<div class="card"><div class="card-title">简历 vs 面试</div><div style="height:180px"><canvas id="ivRd"></canvas></div></div>' +
+    '</div>' +
+    '<div class="grid-2" style="margin-bottom:16px">' +
+      '<div class="card"><div class="card-title">💪 优势</div><div id="ivStr"></div></div>' +
+      '<div class="card"><div class="card-title">📈 待提升</div><div id="ivWeak"></div></div>' +
+    '</div>' +
+    '<div class="card" style="margin-bottom:16px"><div class="card-title">💡 建议</div><div id="ivSug"></div></div>' +
+    (r.evaluation_gaps ? '<div class="card" style="margin-bottom:16px"><div class="card-title">差异分析</div><p style="font-size:13px;color:#94a3b8">'+r.evaluation_gaps+'</p></div>' : '') +
+    '<div class="text-center" style="margin-top:8px"><button class="btn" onclick="ivRs()">🔄 重新面试</button></div>';
+
+  var dimHtml = '';
+  for (var i = 0; i < dk.length; i++) {
+    var k = dk[i], d = dims[k];
+    if (!d) continue;
+    var s = d.score||0, cl = s>=70?'#34d399':s>=50?'#f59e0b':'#ef4444';
+    dimHtml += '<div style="margin-bottom:10px"><div class="flex justify-between" style="font-size:12px;margin-bottom:2px"><span>'+(dl[k]||k)+'</span><span class="mono" style="font-weight:700;color:'+cl+'">'+s+'</span></div><div class="progress"><div class="progress-bar" style="width:'+s+'%;background:'+cl+'"></div></div><div style="font-size:11px;color:#64748b;margin-top:2px">'+(d.comment||'')+'</div></div>';
+  }
+  document.getElementById('ivDims').innerHTML = dimHtml || '<div style="font-size:12px;color:#64748b">暂无数据</div>';
+
+  var lm = {'technical_accuracy':'技能匹配度','communication':'内容表达','problem_solving':'项目经验质量','domain_knowledge':'领域知识'};
+  var ed = {};
+  (ev.dimensions||[]).forEach(function(d){ed[d.key]=d.score;});
+  var rl=[],es=[],isv=[];
+  for (var i = 0; i < dk.length; i++) {
+    var k = dk[i], v = dims[k];
+    if (v && v.score != null) { rl.push(lm[k]||k); es.push(ed[k]||0); isv.push(v.score); }
+  }
+  if (rl.length) {
+    chart('ivRd', {type:'radar', data:{labels:rl, datasets:[{label:'简历', data:es, backgroundColor:'#4f46e520', borderColor:'#4f46e5', borderWidth:2, pointRadius:3},{label:'面试', data:isv, backgroundColor:'#22c55e20', borderColor:'#22c55e', borderWidth:2, pointRadius:3}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{labels:{color:'#94a3b8', font:{size:10}}}}, scales:{r:{min:0,max:100, grid:{color:'#1e293b'}, angleLines:{color:'#1e293b'}, ticks:{display:false}, pointLabels:{color:'#94a3b8', font:{size:9}}}}}});
+  }
+
+  document.getElementById('ivStr').innerHTML = (r.strengths||[]).length ? r.strengths.map(function(s){return '<div style="font-size:13px;margin-bottom:4px">• '+s+'</div>';}).join('') : '<div class="empty-state"><div class="icon">💪</div><div class="title">暂无数据</div></div>';
+  document.getElementById('ivWeak').innerHTML = (r.weaknesses||[]).length ? r.weaknesses.map(function(w){return '<div style="font-size:13px;margin-bottom:4px">• '+w+'</div>';}).join('') : '<div class="empty-state"><div class="icon">📈</div><div class="title">暂无数据</div></div>';
+  document.getElementById('ivSug').innerHTML = (r.suggestions||[]).length ? r.suggestions.map(function(s,i){return '<div style="font-size:13px;margin-bottom:4px">'+(i+1)+'. '+s+'</div>';}).join('') : '<div class="empty-state"><div class="icon">💡</div><div class="title">暂无数据</div></div>';
+}
+function ivRs() { _iv = {phase:'input',sid:null,eval:null,msgs:[],report:null}; iv(); }
+
+// === START ===
+ov();
+</script>
+</body>
+</html>

@@ -9,6 +9,7 @@ from typing import Optional
 os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
 
 _EMBEDDING_MODEL = None  # 模块级缓存，避免重复加载
+_CHROMA_CLIENT = None   # 模块级缓存 ChromaDB 客户端
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 KAGGLE_CSV = os.path.join(DATA_DIR, "UpdatedResumeDataSet.csv")
@@ -26,10 +27,12 @@ def get_embedding_model():
 
 
 def get_chroma_collection():
-    """获取 ChromaDB 集合（懒加载）"""
+    """获取 ChromaDB 集合（懒加载，client 模块级缓存）"""
+    global _CHROMA_CLIENT
     import chromadb
-    db = chromadb.PersistentClient(path=CHROMA_DIR)
-    return db.get_or_create_collection(
+    if _CHROMA_CLIENT is None:
+        _CHROMA_CLIENT = chromadb.PersistentClient(path=CHROMA_DIR)
+    return _CHROMA_CLIENT.get_or_create_collection(
         name="resumes",
         metadata={"hnsw:space": "cosine"},
     )
@@ -55,7 +58,7 @@ def build_vector_store():
     # 清空重建
     try:
         collection.delete(where={})
-    except:
+    except Exception:
         pass
 
     batch_size = 50
