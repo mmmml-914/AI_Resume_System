@@ -6,50 +6,51 @@
 <title>AI Resume System</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,'Segoe UI',sans-serif}
-html,body{background:#020617;color:#f1f5f9;overflow:hidden;height:100%}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+html,body{background:#F5F5F5;color:#1A1A1A;overflow:hidden;height:100%}
 .layout{display:flex;height:100%}
-.sidebar{width:210px;height:100%;background:#0a0f1e;border-right:1px solid #1e293b;display:flex;flex-direction:column;flex-shrink:0;padding-top:40px}
-.sidebar .logo{padding:14px 16px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.sidebar .logo .badge{width:28px;height:28px;border-radius:8px;background:#22c55e;display:flex;align-items:center;justify-content:center;color:#020617;font-weight:800;font-size:12px}
-.sidebar .logo .title{font-size:13px;font-weight:700}
-.sidebar .logo .ver{font-size:10px;color:#64748b}
+.sidebar{width:210px;height:100%;background:rgba(255,255,255,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-right:1px solid rgba(0,0,0,0.05);display:flex;flex-direction:column;flex-shrink:0;padding-top:40px}
+.sidebar .logo{padding:14px 16px;border-bottom:1px solid #F0F0F0;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sidebar .logo .badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#FF6900,#FF8C42);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px}
+.sidebar .logo .title{font-size:13px;font-weight:700;color:#1A1A1A}
+.sidebar .logo .ver{font-size:10px;color:#B0B0B0}
 .nav{padding:6px 8px;flex:1;overflow-y:auto}
-.nav-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer;user-select:none;transition:.15s;margin-bottom:2px}
-.nav-item:hover{background:#1e293b}
-.nav-item.active{background:#22c55e15;color:#22c55e;border-left:3px solid #22c55e;font-weight:600}
+.nav-item{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:12px;font-size:13px;cursor:pointer;user-select:none;transition:all .2s ease;margin-bottom:2px;color:#666}
+.nav-item:hover{background:#FFF0E5;color:#FF6900}
+.nav-item.active{background:#FFF0E5;color:#FF6900;font-weight:600}
 .nav-item .ico{font-size:15px;width:20px;text-align:center}
-.sidebar .footer{padding:10px 16px;border-top:1px solid #1e293b;font-size:10px;color:#64748b}
-.sidebar .footer a{color:#64748b;text-decoration:none}
-.sidebar .footer a:hover{color:#22c55e}
+.sidebar .footer{padding:10px 16px;border-top:1px solid #F0F0F0;font-size:10px;color:#B0B0B0}
+.sidebar .footer a{color:#B0B0B0;text-decoration:none}
+.sidebar .footer a:hover{color:#FF6900}
 .content{flex:1;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column}
 #pg{flex:1;overflow-y:auto;min-height:0}
 #pg.fade-in{animation:fadeIn .25s ease}
-.card{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:16px}
-.card-title{font-size:11px;color:#94a3b8;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.btn{background:#22c55e;color:#020617;border:none;border-radius:8px;padding:8px 18px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{background:#16a34a}
-.btn:disabled{opacity:.5;cursor:default}
-.btn2{background:#1e293b;color:#f1f5f9;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-.btn2:hover{background:#334155}
-input,textarea,select{background:#0f172a;border:1px solid #1e293b;border-radius:8px;color:#f1f5f9;padding:8px 12px;outline:none;width:100%;font-size:13px}
-input:focus,textarea:focus,select:focus{border-color:#22c55e;box-shadow:0 0 0 3px #22c55e20}
+.card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.card-title{font-size:11px;color:#B0B0B0;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.btn{background:linear-gradient(135deg,#FF6900,#FF8C42);color:#fff;border:none;border-radius:12px;padding:8px 20px;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s ease;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(255,105,0,0.25)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,105,0,0.35)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}
+.btn2{background:#F5F5F5;color:#333;border:1px solid #E8E8E8;border-radius:12px;padding:8px 18px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s ease}
+.btn2:hover{background:#EBEBEB;border-color:#D0D0D0}
+input,textarea,select{background:#F9F9F9;border:1px solid #E8E8E8;border-radius:10px;color:#1A1A1A;padding:8px 12px;outline:none;width:100%;font-size:13px;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:#FF6900;box-shadow:0 0 0 3px rgba(255,105,0,0.1)}
 table.data{width:100%;border-collapse:collapse;font-size:13px}
-table.data th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;text-transform:uppercase;color:#64748b;border-bottom:1px solid #1e293b}
-table.data td{padding:8px 10px;border-bottom:1px solid #1e293b}
-table.data tbody tr:hover{background:#0a0f1e}
-.upload-btn{display:inline-flex;align-items:center;gap:4px;border:1px dashed #334155;border-radius:6px;padding:4px 12px;cursor:pointer;font-size:12px;color:#64748b;transition:.2s}
-.upload-btn:hover{border-color:#22c55e;color:#22c55e}
-.page-title{font-size:20px;font-weight:700;margin-bottom:2px}
-.page-sub{font-size:12px;color:#64748b;margin-bottom:16px}
+table.data th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;text-transform:uppercase;color:#B0B0B0;border-bottom:1px solid #F0F0F0}
+table.data td{padding:8px 10px;border-bottom:1px solid #F0F0F0}
+table.data tbody tr:hover{background:#FFFBF7}
+.upload-btn{display:inline-flex;align-items:center;gap:4px;border:1px dashed #D0D0D0;border-radius:8px;padding:5px 14px;cursor:pointer;font-size:12px;color:#999;transition:all .2s ease}
+.upload-btn:hover{border-color:#FF6900;color:#FF6900;background:#FFFBF7}
+.page-title{font-size:22px;font-weight:700;margin-bottom:2px;color:#1A1A1A}
+.page-sub{font-size:12px;color:#B0B0B0;margin-bottom:16px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.kpi{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:14px}
-.kpi label{font-size:10px;color:#64748b;display:block;margin-bottom:4px;text-transform:uppercase}
-.kpi .val{font-size:22px;font-weight:700;font-family:'Courier New',monospace}
-.kpi .sub{font-size:10px;color:#64748b;margin-top:4px}
-.mono{font-family:'Courier New',monospace}
+.kpi{background:#fff;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.kpi label{font-size:10px;color:#B0B0B0;display:block;margin-bottom:4px;text-transform:uppercase;font-weight:600;letter-spacing:.3px}
+.kpi .val{font-size:22px;font-weight:700;font-family:'SF Mono','Courier New',monospace}
+.kpi .sub{font-size:10px;color:#B0B0B0;margin-top:4px}
+.mono{font-family:'SF Mono','Courier New',monospace}
 .flex{display:flex}
 .flex-1{flex:1}
 .items-center{align-items:center}
@@ -61,19 +62,19 @@ table.data tbody tr:hover{background:#0a0f1e}
 .mb-4{margin-bottom:16px}
 .mt-2{margin-top:8px}
 .text-center{text-align:center}
-.text-xs{font-size:12px;color:#94a3b8}
+.text-xs{font-size:12px;color:#999}
 .text-sm{font-size:13px}
 .hidden{display:none}
-.progress{width:100%;background:#1e293b;border-radius:999px;height:6px;overflow:hidden}
-.progress-bar{height:6px;border-radius:999px;background:#22c55e;transition:width .3s}
+.progress{width:100%;background:#F0F0F0;border-radius:999px;height:6px;overflow:hidden}
+.progress-bar{height:6px;border-radius:999px;background:linear-gradient(90deg,#FF6900,#FF8C42);transition:width .3s}
 .msg{margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
-.msg .av{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.msg .bubble{padding:8px 12px;border-radius:8px;max-width:75%;font-size:13px;line-height:1.5}
+.msg .av{width:28px;height:28px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.msg .bubble{padding:8px 14px;border-radius:10px;max-width:75%;font-size:13px;line-height:1.5}
 .msg.user{flex-direction:row-reverse}
-.msg.user .bubble{background:#22c55e20}
-.msg.ai .av{background:#22c55e;color:#020617}
-.msg.user .av{background:#4f46e5;color:#fff}
-.msg.ai .bubble{background:#0f172a}
+.msg.user .bubble{background:#FFF0E5;color:#1A1A1A}
+.msg.ai .av{background:linear-gradient(135deg,#FF6900,#FF8C42);color:#fff}
+.msg.user .av{background:#E8E8E8;color:#666}
+.msg.ai .bubble{background:#fff;color:#1A1A1A;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
 .chat-area{display:flex;flex-direction:column;height:calc(100vh - 130px)}
 .chat-msgs{flex:1;overflow-y:auto;margin-bottom:12px;padding:4px}
 .chat-input{display:flex;gap:8px}
@@ -83,21 +84,21 @@ table.data tbody tr:hover{background:#0a0f1e}
 @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 @keyframes toastOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(20px)}}
 
-.spinner{width:16px;height:16px;border:2px solid #334155;border-top-color:#22c55e;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
+.spinner{width:16px;height:16px;border:2px solid #E8E8E8;border-top-color:#FF6900;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
 
 .toast-ctr{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.toast{padding:10px 16px;border-radius:10px;font-size:13px;font-weight:500;max-width:360px;pointer-events:auto;animation:toastIn .25s ease;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px #00000040}
-.toast.info{background:#1e293b;border:1px solid #334155;color:#f1f5f9}
-.toast.error{background:#7f1d1d;border:1px solid #ef4444;color:#fecaca}
-.toast.success{background:#064e3b;border:1px solid #22c55e;color:#bbf7d0}
+.toast{padding:10px 16px;border-radius:12px;font-size:13px;font-weight:500;max-width:360px;pointer-events:auto;animation:toastIn .25s ease;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+.toast.info{background:#fff;border:1px solid #E8E8E8;color:#333}
+.toast.error{background:#FFF5F5;border:1px solid #FFCCCC;color:#CC3333}
+.toast.success{background:#F0FFF4;border:1px solid #B7EBC8;color:#1A7A3A}
 .toast.removing{animation:toastOut .2s ease forwards}
 
-.empty-state{padding:40px 0;text-align:center;color:#64748b}
+.empty-state{padding:40px 0;text-align:center;color:#B0B0B0}
 .empty-state .icon{font-size:32px;margin-bottom:8px}
-.empty-state .title{font-size:14px;font-weight:600;color:#94a3b8;margin-bottom:4px}
-.empty-state .desc{font-size:12px;color:#475569}
+.empty-state .title{font-size:14px;font-weight:600;color:#999;margin-bottom:4px}
+.empty-state .desc{font-size:12px;color:#B0B0B0}
 
-.skeleton{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
+.skeleton{background:linear-gradient(90deg,#F0F0F0 25%,#E8E8E8 50%,#F0F0F0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 </style>
 </head>
@@ -187,17 +188,17 @@ async function ov() {
   var pgEl = document.getElementById('pg');
   pgEl.innerHTML = '<h1 class="page-title">📊 总览</h1><p class="page-sub">AI 简历评估系统</p>' +
     '<div class="grid-4" id="kp">' +
-      '<div class="kpi"><label>总评估</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
-      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
-      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
-      '<div class="kpi"><label>岗位类别</label><div class="val" style="color:#64748b"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>总评估</label><div class="val" style="color:#8C8C8C"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#8C8C8C"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#8C8C8C"><span class="spinner"></span></div></div>' +
+      '<div class="kpi"><label>岗位类别</label><div class="val" style="color:#8C8C8C"><span class="spinner"></span></div></div>' +
     '</div>' +
     '<div class="grid-2" style="margin-top:16px">' +
       '<div class="card"><div class="card-title">AI 维度平均分</div><div style="height:220px"><canvas id="ovRadar"></canvas></div></div>' +
       '<div class="card"><div class="card-title">人机评分对比</div><div style="height:220px"><canvas id="ovScat"></canvas></div></div>' +
     '</div>' +
     '<div class="card" style="margin-top:16px"><div class="card-title">类别分布 Top 10</div><div style="height:100px"><canvas id="ovBar"></canvas></div></div>' +
-    '<div class="card" style="margin-top:16px"><div class="card-title">最近评估</div><table class="data"><thead><tr><th>类别</th><th style="text-align:center">人工</th><th style="text-align:center">AI</th><th style="text-align:center">差值</th></tr></thead><tbody id="ovTbl"><tr><td colspan="4" style="text-align:center;color:#64748b">'+spin()+' 加载中...</td></tr></tbody></table></div>';
+    '<div class="card" style="margin-top:16px"><div class="card-title">最近评估</div><table class="data"><thead><tr><th>类别</th><th style="text-align:center">人工</th><th style="text-align:center">AI</th><th style="text-align:center">差值</th></tr></thead><tbody id="ovTbl"><tr><td colspan="4" style="text-align:center;color:#8C8C8C">'+spin()+' 加载中...</td></tr></tbody></table></div>';
   try {
     var results = await Promise.all([
       fetch(API+'/experiments').then(function(r){return r.json();}),
@@ -210,23 +211,23 @@ async function ov() {
     var ai = exps.filter(function(x){return x.ai_blind != null;}).map(function(x){return x.ai_blind;});
     document.getElementById('kp').innerHTML =
       '<div class="kpi"><label>总评估</label><div class="val">'+exps.length+'</div><div class="sub">Kaggle '+(kag.total||'?')+'</div></div>' +
-      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#4f46e5">'+(hu.length?(hu.reduce(function(a,b){return a+b;},0)/hu.length).toFixed(1):'-')+'</div><div class="sub">'+hu.length+' 份</div></div>' +
-      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#06d6a0">'+(ai.length?(ai.reduce(function(a,b){return a+b;},0)/ai.length).toFixed(1):'-')+'</div><div class="sub">'+ai.length+' 份</div></div>' +
-      '<div class="kpi"><label>岗位类别</label><div class="val" style="color:#f59e0b">'+(Object.keys(kag.cat_distribution||{}).length)+'</div><div class="sub">'+(kag.categories||0)+' 类</div></div>';
+      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#FF8C42">'+(hu.length?(hu.reduce(function(a,b){return a+b;},0)/hu.length).toFixed(1):'-')+'</div><div class="sub">'+hu.length+' 份</div></div>' +
+      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#FFB366">'+(ai.length?(ai.reduce(function(a,b){return a+b;},0)/ai.length).toFixed(1):'-')+'</div><div class="sub">'+ai.length+' 份</div></div>' +
+      '<div class="kpi"><label>岗位类别</label><div class="val" style="color:#FFB366">'+(Object.keys(kag.cat_distribution||{}).length)+'</div><div class="sub">'+(kag.categories||0)+' 类</div></div>';
     var da = {};
     exps.forEach(function(x){(x.dimensions||[]).forEach(function(d){da[d.label]=da[d.label]||[];da[d.label].push(d.score);});});
     Object.keys(da).forEach(function(k){da[k]=Math.round(da[k].reduce(function(a,b){return a+b;},0)/da[k].length);});
     var dl = dims.map(function(d){return d.label;}), dc = dims.map(function(d){return d.color;});
-    chart('ovRadar', {type:'radar', data:{labels:dl, datasets:[{data:dl.map(function(l){return da[l]||0;}), backgroundColor:'#4f46e520', borderColor:'#4f46e5', borderWidth:2, pointBackgroundColor:dc, pointBorderColor:'#0f172a', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{min:0,max:100, grid:{color:'#1e293b'}, angleLines:{color:'#1e293b'}, ticks:{display:false}, pointLabels:{color:'#94a3b8', font:{size:10}}}}}});
+    chart('ovRadar', {type:'radar', data:{labels:dl, datasets:[{data:dl.map(function(l){return da[l]||0;}), backgroundColor:'#FFF0E5', borderColor:'#FF8C42', borderWidth:2, pointBackgroundColor:dc, pointBorderColor:'#FFFFFF', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{r:{min:0,max:100, grid:{color:'#E8E8E8'}, angleLines:{color:'#E8E8E8'}, ticks:{display:false}, pointLabels:{color:'#B0B0B0', font:{size:10}}}}}});
     var sc = exps.filter(function(x){return x.human!=null && x.ai_blind!=null;});
-    chart('ovScat', {type:'scatter', data:{datasets:[{data:sc.map(function(e){return {x:e.human, y:e.ai_blind};}), backgroundColor:'#22c55e70', borderColor:'#22c55e', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(ctx){return 'H:'+ctx.raw.x+' AI:'+ctx.raw.y;}}}}, scales:{x:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}}}});
+    chart('ovScat', {type:'scatter', data:{datasets:[{data:sc.map(function(e){return {x:e.human, y:e.ai_blind};}), backgroundColor:'#FFD4B3', borderColor:'#FF6900', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(ctx){return 'H:'+ctx.raw.x+' AI:'+ctx.raw.y;}}}}, scales:{x:{min:0,max:100, grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}}}});
     var cts = kag.cat_distribution||{};
-    chart('ovBar', {type:'bar', data:{labels:Object.keys(cts).slice(0,10), datasets:[{data:Object.values(cts).slice(0,10), backgroundColor:'#22c55e40', borderColor:'#22c55e', borderWidth:2, borderRadius:4}]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size:9}}}}}});
+    chart('ovBar', {type:'bar', data:{labels:Object.keys(cts).slice(0,10), datasets:[{data:Object.values(cts).slice(0,10), backgroundColor:'#FFE0CC', borderColor:'#FF6900', borderWidth:2, borderRadius:4}]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}, y:{grid:{display:false}, ticks:{color:'#B0B0B0', font:{size:9}}}}}});
     var tb = document.getElementById('ovTbl');
     tb.innerHTML = '';
     sc.slice(0,10).forEach(function(e){
       var diff = e.human - e.ai_blind;
-      tb.innerHTML += '<tr><td style="font-weight:500">'+e.category+'</td><td style="text-align:center;font-weight:600" class="mono">'+e.human+'</td><td style="text-align:center" class="mono">'+e.ai_blind+'</td><td style="text-align:center" class="mono" style="color:'+(Math.abs(diff)<5?'#64748b':diff>0?'#4f46e5':'#06d6a0')+'">'+(diff>0?'+'+diff:diff)+'</td></tr>';
+      tb.innerHTML += '<tr><td style="font-weight:500">'+e.category+'</td><td style="text-align:center;font-weight:600" class="mono">'+e.human+'</td><td style="text-align:center" class="mono">'+e.ai_blind+'</td><td style="text-align:center" class="mono" style="color:'+(Math.abs(diff)<5?'#8C8C8C':diff>0?'#FF8C42':'#FFB366')+'">'+(diff>0?'+'+diff:diff)+'</td></tr>';
     });
   } catch(e) {
     toast('总览数据加载失败: '+e.message, 'error');
@@ -240,7 +241,7 @@ async function ba() {
   pgEl.innerHTML = '<h1 class="page-title">🔬 批量测试</h1><p class="page-sub">多份简历批量 AI 评分</p>' +
     '<div class="grid-3" style="margin-bottom:16px">' +
       '<div class="card"><div class="card-title">岗位</div><select id="bCat" style="font-size:12px"></select></div>' +
-      '<div class="card"><div class="card-title">数量</div><div class="flex items-center gap-2"><input type="range" id="bN" min="3" max="15" value="10" style="padding:0;height:18px;flex:1"><span id="bNl" class="mono" style="font-size:16px;font-weight:700;color:#22c55e">10</span></div></div>' +
+      '<div class="card"><div class="card-title">数量</div><div class="flex items-center gap-2"><input type="range" id="bN" min="3" max="15" value="10" style="padding:0;height:18px;flex:1"><span id="bNl" class="mono" style="font-size:16px;font-weight:700;color:#FF6900">10</span></div></div>' +
       '<div class="card" style="display:flex;flex-direction:column;justify-content:flex-end"><button class="btn" onclick="bRun()" id="bBtn">▶ 开始</button></div>' +
     '</div>' +
     '<div id="bPr" class="hidden" style="margin-bottom:12px"><div class="card"><div class="flex items-center gap-2 mb-2"><span id="bSt" style="font-size:13px">运行中...</span></div><div class="progress"><div class="progress-bar" id="bBar" style="width:0%"></div></div></div></div>' +
@@ -280,10 +281,10 @@ async function bRun() {
   btnLoad(btn, false);
 }
 function bShow(r) {
-  document.getElementById('bTbl').innerHTML = r.map(function(x){ var d=x.dimensions||{}; return '<tr><td>'+x.category+'</td><td style="text-align:center;font-weight:700;color:#22c55e" class="mono">'+x.overall+'</td><td style="text-align:center" class="mono">'+(d.skills_match||'-')+'</td><td style="text-align:center" class="mono">'+(d.project_quality||'-')+'</td><td style="text-align:center" class="mono">'+(d.format_readability||'-')+'</td><td style="text-align:center" class="mono">'+(d.education||'-')+'</td><td style="text-align:center" class="mono">'+(d.expression||'-')+'</td></tr>';}).join('');
-  chart('bCht', {type:'bar', data:{labels:r.map(function(x){return x.category.substring(0,10);}), datasets:[{data:r.map(function(x){return x.overall;}), backgroundColor:r.map(function(x){return x.overall>70?'#34d39960':x.overall>50?'#f59e0b60':'#ef444460';}), borderColor:r.map(function(x){return x.overall>70?'#34d399':x.overall>50?'#f59e0b':'#ef4444';}), borderWidth:1.5, borderRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#94a3b8', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}}}});
+  document.getElementById('bTbl').innerHTML = r.map(function(x){ var d=x.dimensions||{}; return '<tr><td>'+x.category+'</td><td style="text-align:center;font-weight:700;color:#FF6900" class="mono">'+x.overall+'</td><td style="text-align:center" class="mono">'+(d.skills_match||'-')+'</td><td style="text-align:center" class="mono">'+(d.project_quality||'-')+'</td><td style="text-align:center" class="mono">'+(d.format_readability||'-')+'</td><td style="text-align:center" class="mono">'+(d.education||'-')+'</td><td style="text-align:center" class="mono">'+(d.expression||'-')+'</td></tr>';}).join('');
+  chart('bCht', {type:'bar', data:{labels:r.map(function(x){return x.category.substring(0,10);}), datasets:[{data:r.map(function(x){return x.overall;}), backgroundColor:r.map(function(x){return x.overall>70?'#FFE0CC':x.overall>50?'#FFF0E5':'#FFE8E8';}), borderColor:r.map(function(x){return x.overall>70?'#FF6900':x.overall>50?'#FFB366':'#FF4444';}), borderWidth:1.5, borderRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#E8E8E8'}, ticks:{color:'#B0B0B0', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}}}});
   var s = r.map(function(x){return x.overall;}), avg = (s.reduce(function(a,b){return a+b;},0)/s.length).toFixed(1), uc = new Set(r.map(function(x){return x.category;})).size;
-  document.getElementById('bSts').innerHTML = '<div class="kpi"><label>平均</label><div class="val" style="color:#22c55e">'+avg+'</div></div><div class="kpi"><label>最高/最低</label><div class="val">'+Math.max.apply(null,s)+'/'+Math.min.apply(null,s)+'</div></div><div class="kpi"><label>覆盖岗位</label><div class="val" style="color:#f59e0b">'+uc+'</div></div><div class="kpi"><label>样本</label><div class="val">'+r.length+'</div></div>';
+  document.getElementById('bSts').innerHTML = '<div class="kpi"><label>平均</label><div class="val" style="color:#FF6900">'+avg+'</div></div><div class="kpi"><label>最高/最低</label><div class="val">'+Math.max.apply(null,s)+'/'+Math.min.apply(null,s)+'</div></div><div class="kpi"><label>覆盖岗位</label><div class="val" style="color:#FFB366">'+uc+'</div></div><div class="kpi"><label>样本</label><div class="val">'+r.length+'</div></div>';
 }
 
 // === EXPERIMENT ===
@@ -296,7 +297,7 @@ async function ex() {
       '<div class="card"><div class="card-title">Bland-Altman</div><div style="height:200px"><canvas id="exBa"></canvas></div></div>' +
     '</div>' +
     '<div class="grid-4" style="margin-top:16px">' +
-      '<div class="card"><div class="card-title">Pearson r</div><div class="val" style="font-size:28px;font-weight:700;color:#22c55e" class="mono" id="exR">'+spin()+'</div></div>' +
+      '<div class="card"><div class="card-title">Pearson r</div><div class="val" style="font-size:28px;font-weight:700;color:#FF6900" class="mono" id="exR">'+spin()+'</div></div>' +
       '<div class="card" style="grid-column:span 3"><div class="card-title">指标</div><div class="flex gap-3" id="exMt">'+spin()+' 加载中...</div></div>' +
     '</div>' +
     '<div class="card" style="margin-top:16px"><div class="card-title">明细</div><table class="data"><thead><tr><th>类别</th><th style="text-align:center">人工</th><th style="text-align:center">AI</th><th style="text-align:center">差值</th></tr></thead><tbody id="exTbl"></tbody></table></div>';
@@ -308,26 +309,26 @@ async function ex() {
     var md = dif.reduce(function(a,b){return a+b;},0)/dif.length;
     document.getElementById('exKp').innerHTML =
       '<div class="kpi"><label>样本</label><div class="val">'+pairs.length+'</div></div>' +
-      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#4f46e5">'+(hu.reduce(function(a,b){return a+b;},0)/hu.length).toFixed(1)+'</div></div>' +
-      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#06d6a0">'+(ai.reduce(function(a,b){return a+b;},0)/ai.length).toFixed(1)+'</div></div>' +
-      '<div class="kpi"><label>均值差</label><div class="val" style="color:#f59e0b">'+md.toFixed(1)+'</div></div>';
-    chart('exScat', {type:'scatter', data:{datasets:[{data:pairs.map(function(x){return {x:x.human, y:x.ai_blind};}), backgroundColor:'#4f46e560', borderColor:'#4f46e5', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(ctx){return 'H:'+ctx.raw.x+' AI:'+ctx.raw.y;}}}}, scales:{x:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}}}});
+      '<div class="kpi"><label>人工均分</label><div class="val" style="color:#FF8C42">'+(hu.reduce(function(a,b){return a+b;},0)/hu.length).toFixed(1)+'</div></div>' +
+      '<div class="kpi"><label>AI 均分</label><div class="val" style="color:#FFB366">'+(ai.reduce(function(a,b){return a+b;},0)/ai.length).toFixed(1)+'</div></div>' +
+      '<div class="kpi"><label>均值差</label><div class="val" style="color:#FFB366">'+md.toFixed(1)+'</div></div>';
+    chart('exScat', {type:'scatter', data:{datasets:[{data:pairs.map(function(x){return {x:x.human, y:x.ai_blind};}), backgroundColor:'#FFD4B3', borderColor:'#FF8C42', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(ctx){return 'H:'+ctx.raw.x+' AI:'+ctx.raw.y;}}}}, scales:{x:{min:0,max:100, grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}, y:{min:0,max:100, grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}}}});
     var bd = pairs.map(function(x){return {x:(x.human+x.ai_blind)/2, y:x.human-x.ai_blind};});
     var bm = bd.reduce(function(s,d){return s+d.y;},0)/bd.length;
     var bs2 = bd.reduce(function(s,d){return s+(d.y-bm)*(d.y-bm);},0)/bd.length;
-    chart('exBa', {type:'scatter', data:{datasets:[{data:bd, backgroundColor:'#22c55e60', borderColor:'#22c55e', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}, title:{display:true, text:'(H+AI)/2', color:'#64748b', font:{size:9}}}, y:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}, title:{display:true, text:'H-AI', color:'#64748b', font:{size:9}}}}}});
+    chart('exBa', {type:'scatter', data:{datasets:[{data:bd, backgroundColor:'#FFD4B3', borderColor:'#FF6900', pointRadius:4}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}, title:{display:true, text:'(H+AI)/2', color:'#8C8C8C', font:{size:9}}}, y:{grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}, title:{display:true, text:'H-AI', color:'#8C8C8C', font:{size:9}}}}}});
     var n = pairs.length, hm = hu.reduce(function(a,b){return a+b;},0)/n, am = ai.reduce(function(a,b){return a+b;},0)/n;
     var rv = hu.reduce(function(s,h,i){return s+(h-hm)*(ai[i]-am);},0) / Math.sqrt(hu.reduce(function(s,h){return s+(h-hm)*(h-hm);},0) * ai.reduce(function(s,a){return s+(a-am)*(a-am);},0));
     document.getElementById('exR').textContent = rv.toFixed(4);
     var mae = dif.reduce(function(a,b){return a+Math.abs(b);},0)/dif.length;
     document.getElementById('exMt').innerHTML =
-      '<div class="kpi" style="flex:1"><label>MAE</label><div class="val" style="font-size:18px;color:#f59e0b">'+mae.toFixed(1)+'</div></div>' +
-      '<div class="kpi" style="flex:1"><label>均值差</label><div class="val" style="font-size:18px;color:#f59e0b">'+md.toFixed(1)+'</div></div>' +
-      '<div class="kpi" style="flex:1"><label>人高</label><div class="val" style="font-size:18px;color:#4f46e5">'+dif.filter(function(d){return d>0;}).length+'/'+n+'</div></div>' +
-      '<div class="kpi" style="flex:1"><label>AI高</label><div class="val" style="font-size:18px;color:#06d6a0">'+dif.filter(function(d){return d<0;}).length+'/'+n+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>MAE</label><div class="val" style="font-size:18px;color:#FFB366">'+mae.toFixed(1)+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>均值差</label><div class="val" style="font-size:18px;color:#FFB366">'+md.toFixed(1)+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>人高</label><div class="val" style="font-size:18px;color:#FF8C42">'+dif.filter(function(d){return d>0;}).length+'/'+n+'</div></div>' +
+      '<div class="kpi" style="flex:1"><label>AI高</label><div class="val" style="font-size:18px;color:#FFB366">'+dif.filter(function(d){return d<0;}).length+'/'+n+'</div></div>' +
       '<div class="kpi" style="flex:1"><label>95%限</label><div class="val" style="font-size:18px">±'+(1.96*Math.sqrt(bs2)).toFixed(1)+'</div></div>';
     var tb = document.getElementById('exTbl');
-    pairs.slice(0,15).forEach(function(x){var d=x.human-x.ai_blind;tb.innerHTML+='<tr><td>'+x.category+'</td><td style="text-align:center;font-weight:600" class="mono">'+x.human+'</td><td style="text-align:center" class="mono">'+x.ai_blind+'</td><td style="text-align:center" class="mono" style="color:'+(Math.abs(d)<5?'#64748b':d>0?'#4f46e5':'#06d6a0')+'">'+(d>0?'+'+d:d)+'</td></tr>';});
+    pairs.slice(0,15).forEach(function(x){var d=x.human-x.ai_blind;tb.innerHTML+='<tr><td>'+x.category+'</td><td style="text-align:center;font-weight:600" class="mono">'+x.human+'</td><td style="text-align:center" class="mono">'+x.ai_blind+'</td><td style="text-align:center" class="mono" style="color:'+(Math.abs(d)<5?'#8C8C8C':d>0?'#FF8C42':'#FFB366')+'">'+(d>0?'+'+d:d)+'</td></tr>';});
   } catch(e) {
     toast('双盲实验数据加载失败: '+e.message, 'error');
     pgEl.innerHTML = '<div class="empty-state" style="padding:60px 0"><div class="icon">⚠️</div><div class="title">无法连接</div><div class="desc">请检查 API 服务器是否运行</div></div>';
@@ -345,12 +346,12 @@ async function an() {
     var cts = r.cat_distribution||{};
     document.getElementById('anKp').innerHTML =
       '<div class="kpi"><label>总简历</label><div class="val">'+r.total+'</div></div>' +
-      '<div class="kpi"><label>类别</label><div class="val" style="color:#4f46e5">'+r.categories+'</div></div>' +
+      '<div class="kpi"><label>类别</label><div class="val" style="color:#FF8C42">'+r.categories+'</div></div>' +
       '<div class="kpi"><label>平均长度</label><div class="val">'+(r.avg_length||0).toLocaleString()+'</div></div>' +
-      '<div class="kpi"><label>已评估</label><div class="val" style="color:#f59e0b">31</div></div>';
-    chart('anCht', {type:'bar', data:{labels:Object.keys(cts).slice(0,10), datasets:[{data:Object.values(cts).slice(0,10), backgroundColor:'#4f46e540', borderColor:'#4f46e5', borderWidth:2, borderRadius:4}]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1e293b'}, ticks:{color:'#64748b', font:{size:9}}}, y:{grid:{display:false}, ticks:{color:'#94a3b8', font:{size:9}}}}}});
+      '<div class="kpi"><label>已评估</label><div class="val" style="color:#FFB366">31</div></div>';
+    chart('anCht', {type:'bar', data:{labels:Object.keys(cts).slice(0,10), datasets:[{data:Object.values(cts).slice(0,10), backgroundColor:'#FFE0CC', borderColor:'#FF8C42', borderWidth:2, borderRadius:4}]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#E8E8E8'}, ticks:{color:'#8C8C8C', font:{size:9}}}, y:{grid:{display:false}, ticks:{color:'#B0B0B0', font:{size:9}}}}}});
     var entries = Object.entries(cts).sort(function(a,b){return b[1]-a[1];});
-    document.getElementById('anDet').innerHTML = entries.slice(0,5).map(function(kv){return '<div class="flex justify-between" style="font-size:13px;margin-bottom:6px"><span>'+kv[0]+'</span><span style="font-weight:600;color:#4f46e5">'+kv[1]+'</span></div>';}).join('')+'<div style="font-size:11px;color:#64748b;margin-top:8px">共 '+Object.keys(cts).length+' 类</div>';
+    document.getElementById('anDet').innerHTML = entries.slice(0,5).map(function(kv){return '<div class="flex justify-between" style="font-size:13px;margin-bottom:6px"><span>'+kv[0]+'</span><span style="font-weight:600;color:#FF8C42">'+kv[1]+'</span></div>';}).join('')+'<div style="font-size:11px;color:#8C8C8C;margin-top:8px">共 '+Object.keys(cts).length+' 类</div>';
   } catch(e) {
     toast('数据看板加载失败: '+e.message, 'error');
     pgEl.innerHTML = '<div class="empty-state" style="padding:60px 0"><div class="icon">⚠️</div><div class="title">无法连接</div><div class="desc">请检查 API 服务器是否运行</div></div>';
@@ -418,9 +419,9 @@ function ch() {
 async function chSend() {
   var inp = document.getElementById('chIn'), msg = inp.value.trim(); if (!msg) return; inp.value = '';
   var c = document.getElementById('chMs');
-  c.innerHTML += '<div class="msg user"><div class="bubble">'+esc(msg)+'</div><div class="av" style="background:#4f46e5;color:#fff">你</div></div>';
+  c.innerHTML += '<div class="msg user"><div class="bubble">'+esc(msg)+'</div><div class="av" style="background:#FF8C42;color:#fff">你</div></div>';
   c.scrollTop = c.scrollHeight;
-  c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#64748b">'+spin()+' 思考中...</div></div>';
+  c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#8C8C8C">'+spin()+' 思考中...</div></div>';
   c.scrollTop = c.scrollHeight;
   try {
     var r = await fetch(API+'/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg, history:window.chH||[]})}).then(function(r){return r.json();});
@@ -432,7 +433,7 @@ async function chSend() {
   } catch(e) {
     var els2 = c.querySelectorAll('.msg');
     for (var j = 0; j < els2.length; j++) { if (els2[j].textContent.indexOf('思考中')>=0) { els2[j].remove(); break; } }
-    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#ef4444">请求失败，请检查服务器连接</div></div>';
+    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#FF4444">请求失败，请检查服务器连接</div></div>';
     toast('AI 助手请求失败', 'error');
   }
   c.scrollTop = c.scrollHeight;
@@ -456,7 +457,7 @@ function ivI() {
     '<div class="flex gap-3 items-center" style="margin-top:8px">' +
       '<select id="ivCat" style="width:250px;font-size:12px"><option value="">'+spin()+' 加载岗位...</option></select>' +
       '<button class="btn" onclick="ivStart()" id="ivBtn">🎤 开始面试</button>' +
-      '<span style="font-size:11px;color:#475569">先评估简历再面试</span>' +
+      '<span style="font-size:11px;color:#999999">先评估简历再面试</span>' +
     '</div>';
   fetch(API+'/kaggle/stats').then(function(r){return r.json();}).then(function(r){
     var s='<option value="">选择目标岗位...</option>';
@@ -492,7 +493,7 @@ async function ivStart() {
 }
 function ivC() {
   var msgs = _iv.msgs||[], pgEl = document.getElementById('pg');
-  var html = '<div class="flex justify-between items-center" style="margin-bottom:12px"><div><h1 class="page-title" style="margin-bottom:0">🎤 模拟面试</h1><div style="font-size:12px;color:#64748b">已答 '+msgs.filter(function(m){return m.role==='user';}).length+' 题</div></div><button class="btn2" onclick="ivEnd()" id="ivEndBtn">⏹ 结束</button></div>' +
+  var html = '<div class="flex justify-between items-center" style="margin-bottom:12px"><div><h1 class="page-title" style="margin-bottom:0">🎤 模拟面试</h1><div style="font-size:12px;color:#8C8C8C">已答 '+msgs.filter(function(m){return m.role==='user';}).length+' 题</div></div><button class="btn2" onclick="ivEnd()" id="ivEndBtn">⏹ 结束</button></div>' +
     '<div class="card chat-area" style="padding:16px">' +
     '<div class="chat-msgs" id="ivMs">';
   for (var i = 0; i < msgs.length; i++) {
@@ -500,7 +501,7 @@ function ivC() {
     if (m.role === 'asst') {
       html += '<div class="msg ai"><div class="av">AI</div><div class="bubble">'+esc(m.content)+'</div></div>';
     } else {
-      html += '<div class="msg user"><div class="bubble">'+esc(m.content)+'</div><div class="av" style="background:#4f46e5;color:#fff">你</div></div>';
+      html += '<div class="msg user"><div class="bubble">'+esc(m.content)+'</div><div class="av" style="background:#FF8C42;color:#fff">你</div></div>';
     }
   }
   html += '</div><div class="chat-input"><input id="ivIn" placeholder="输入回答..." onkeydown="if(event.key===\'Enter\'){event.preventDefault();ivSend()}"><button class="btn" onclick="ivSend()">发送</button></div></div>';
@@ -511,9 +512,9 @@ async function ivSend() {
   var inp = document.getElementById('ivIn'), msg = inp.value.trim(); if (!msg) return; inp.value = '';
   _iv.msgs.push({role:'user', content:msg});
   var c = document.getElementById('ivMs');
-  c.innerHTML += '<div class="msg user"><div class="bubble">'+esc(msg)+'</div><div class="av" style="background:#4f46e5;color:#fff">你</div></div>';
+  c.innerHTML += '<div class="msg user"><div class="bubble">'+esc(msg)+'</div><div class="av" style="background:#FF8C42;color:#fff">你</div></div>';
   c.scrollTop = c.scrollHeight;
-  c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#64748b">'+spin()+' 思考中...</div></div>';
+  c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#8C8C8C">'+spin()+' 思考中...</div></div>';
   c.scrollTop = c.scrollHeight;
   try {
     var r = await fetch(API+'/interview/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({session_id:_iv.sid, message:msg})}).then(function(r){return r.json();});
@@ -525,7 +526,7 @@ async function ivSend() {
   } catch(e) {
     var els2 = c.querySelectorAll('.msg');
     for (var j = 0; j < els2.length; j++) { if (els2[j].textContent.indexOf('思考中')>=0) { els2[j].remove(); break; } }
-    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#ef4444">请求失败，请检查服务器连接</div></div>';
+    c.innerHTML += '<div class="msg ai"><div class="av">AI</div><div class="bubble" style="color:#FF4444">请求失败，请检查服务器连接</div></div>';
     toast('面试消息发送失败', 'error');
     c.scrollTop = c.scrollHeight;
   }
@@ -549,9 +550,9 @@ function ivR() {
   var dl = {'technical_accuracy':'技术准确性','communication':'沟通表达','problem_solving':'问题解决能力','domain_knowledge':'领域知识'};
   pgEl.innerHTML = '<div class="flex justify-between items-center" style="margin-bottom:16px"><div><h1 class="page-title" style="margin-bottom:0">📋 面试报告</h1></div><button class="btn2" onclick="ivRs()">🔄 重来</button></div>' +
     '<div class="grid-4" style="margin-bottom:16px">' +
-      '<div class="kpi"><label>综合评分</label><div class="val" style="color:#22c55e">'+(r.overall||0)+'</div></div>' +
+      '<div class="kpi"><label>综合评分</label><div class="val" style="color:#FF6900">'+(r.overall||0)+'</div></div>' +
       '<div class="kpi"><label>面试题数</label><div class="val">'+((r.stats||{}).total_questions||0)+'</div></div>' +
-      '<div class="kpi"><label>简历评分</label><div class="val" style="color:#4f46e5">'+(ev.overall||0)+'</div></div>' +
+      '<div class="kpi"><label>简历评分</label><div class="val" style="color:#FF8C42">'+(ev.overall||0)+'</div></div>' +
       '<div class="kpi"><label>对话轮次</label><div class="val">'+((r.stats||{}).conversation_length||0)+'</div></div>' +
     '</div>' +
     '<div class="grid-2" style="margin-bottom:16px">' +
@@ -563,17 +564,17 @@ function ivR() {
       '<div class="card"><div class="card-title">📈 待提升</div><div id="ivWeak"></div></div>' +
     '</div>' +
     '<div class="card" style="margin-bottom:16px"><div class="card-title">💡 建议</div><div id="ivSug"></div></div>' +
-    (r.evaluation_gaps ? '<div class="card" style="margin-bottom:16px"><div class="card-title">差异分析</div><p style="font-size:13px;color:#94a3b8">'+r.evaluation_gaps+'</p></div>' : '') +
+    (r.evaluation_gaps ? '<div class="card" style="margin-bottom:16px"><div class="card-title">差异分析</div><p style="font-size:13px;color:#B0B0B0">'+r.evaluation_gaps+'</p></div>' : '') +
     '<div class="text-center" style="margin-top:8px"><button class="btn" onclick="ivRs()">🔄 重新面试</button></div>';
 
   var dimHtml = '';
   for (var i = 0; i < dk.length; i++) {
     var k = dk[i], d = dims[k];
     if (!d) continue;
-    var s = d.score||0, cl = s>=70?'#34d399':s>=50?'#f59e0b':'#ef4444';
-    dimHtml += '<div style="margin-bottom:10px"><div class="flex justify-between" style="font-size:12px;margin-bottom:2px"><span>'+(dl[k]||k)+'</span><span class="mono" style="font-weight:700;color:'+cl+'">'+s+'</span></div><div class="progress"><div class="progress-bar" style="width:'+s+'%;background:'+cl+'"></div></div><div style="font-size:11px;color:#64748b;margin-top:2px">'+(d.comment||'')+'</div></div>';
+    var s = d.score||0, cl = s>=70?'#FF6900':s>=50?'#FFB366':'#FF4444';
+    dimHtml += '<div style="margin-bottom:10px"><div class="flex justify-between" style="font-size:12px;margin-bottom:2px"><span>'+(dl[k]||k)+'</span><span class="mono" style="font-weight:700;color:'+cl+'">'+s+'</span></div><div class="progress"><div class="progress-bar" style="width:'+s+'%;background:'+cl+'"></div></div><div style="font-size:11px;color:#8C8C8C;margin-top:2px">'+(d.comment||'')+'</div></div>';
   }
-  document.getElementById('ivDims').innerHTML = dimHtml || '<div style="font-size:12px;color:#64748b">暂无数据</div>';
+  document.getElementById('ivDims').innerHTML = dimHtml || '<div style="font-size:12px;color:#8C8C8C">暂无数据</div>';
 
   var lm = {'technical_accuracy':'技能匹配度','communication':'内容表达','problem_solving':'项目经验质量','domain_knowledge':'领域知识'};
   var ed = {};
@@ -584,7 +585,7 @@ function ivR() {
     if (v && v.score != null) { rl.push(lm[k]||k); es.push(ed[k]||0); isv.push(v.score); }
   }
   if (rl.length) {
-    chart('ivRd', {type:'radar', data:{labels:rl, datasets:[{label:'简历', data:es, backgroundColor:'#4f46e520', borderColor:'#4f46e5', borderWidth:2, pointRadius:3},{label:'面试', data:isv, backgroundColor:'#22c55e20', borderColor:'#22c55e', borderWidth:2, pointRadius:3}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{labels:{color:'#94a3b8', font:{size:10}}}}, scales:{r:{min:0,max:100, grid:{color:'#1e293b'}, angleLines:{color:'#1e293b'}, ticks:{display:false}, pointLabels:{color:'#94a3b8', font:{size:9}}}}}});
+    chart('ivRd', {type:'radar', data:{labels:rl, datasets:[{label:'简历', data:es, backgroundColor:'#FFF0E5', borderColor:'#FF8C42', borderWidth:2, pointRadius:3},{label:'面试', data:isv, backgroundColor:'#FFF0E5', borderColor:'#FF6900', borderWidth:2, pointRadius:3}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{labels:{color:'#B0B0B0', font:{size:10}}}}, scales:{r:{min:0,max:100, grid:{color:'#E8E8E8'}, angleLines:{color:'#E8E8E8'}, ticks:{display:false}, pointLabels:{color:'#B0B0B0', font:{size:9}}}}}});
   }
 
   document.getElementById('ivStr').innerHTML = (r.strengths||[]).length ? r.strengths.map(function(s){return '<div style="font-size:13px;margin-bottom:4px">• '+s+'</div>';}).join('') : '<div class="empty-state"><div class="icon">💪</div><div class="title">暂无数据</div></div>';

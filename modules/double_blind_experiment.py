@@ -192,9 +192,11 @@ def _read_kaggle_csv() -> pd.DataFrame:
     return pd.read_csv(io.StringIO(fixed))
 
 
-def _get_random_resumes(n: int = 1, exclude_ids: set = None) -> list:
-    """从 Kaggle 数据集中随机抽取 n 份简历"""
+def _get_random_resumes(n: int = 1, exclude_ids: set = None, categories: list = None) -> list:
+    """从 Kaggle 数据集中随机抽取 n 份简历，可按类别筛选"""
     df = _read_kaggle_csv()
+    if categories:
+        df = df[df["Category"].isin(categories)]
     if exclude_ids:
         df = df[~df.index.isin(exclude_ids)]
     if len(df) == 0:
@@ -332,6 +334,11 @@ _EXP_SESSION_KEYS = [
     "exp_status",
     "exp_ai_blind_done",
     "exp_ai_full_done",
+    "exp_translated_text",
+    "exp_dim_scores",
+    "exp_ref_resume",
+    "exp_ref_translated",
+    "exp_selected_categories",
 ]
 
 
@@ -347,6 +354,68 @@ def _init_session_state():
 #  UI 组件
 # ═══════════════════════════════════════════════
 
+def _translate_to_chinese(text: str) -> str:
+    """调用 DeepSeek 将英文简历翻译为中文"""
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+        from openai import OpenAI
+        client = OpenAI(
+            api_key=os.getenv("DEEPSEEK_API_KEY"),
+            base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+            timeout=60,
+        )
+        resp = client.chat.completions.create(
+            model=os.getenv("DEEPSEEK_MODEL", "deepseek-chat"),
+            messages=[
+                {"role": "system", "content": "你是一个翻译专家。把英文简历翻译成地道的中文，要求：\n1. 所有内容都要翻译成中文，包括标题、公司名、技能名、学校名\n2. 唯一保留英文的：纯技术名词首次出现时可括号标注英文（如 Python、Java）\n3. 修复原文中的拼写错误（如 Exprience→Experience）\n4. 语序调整为中文习惯，不要直译\n5. 只输出翻译结果，不加任何解释说明"},
+                {"role": "user", "content": text},
+            ],
+            temperature=0.1,
+            max_tokens=4096,
+        )
+        return resp.choices[0].message.content
+    except Exception as e:
+        return f"[翻译失败: {e}]"
+
+
+def _analyze_dimensions(resume_text: str, category: str) -> dict:
+    """AI 分析各维度得分（仅维度分，不返回总分）"""
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+        from modules.resume_evaluator import ResumeEvaluator
+        evaluator = ResumeEvaluator()
+        result = evaluator.evaluate(resume_text, category, n_samples=1)
+        dims = {}
+        for d in result.get("dimensions", []):
+            dims[d["key"]] = {
+                "label": d["label"],
+                "score": d["score"],
+                "color": d.get("color", "#888"),
+                "weight": d.get("weight", 0),
+            }
+        return dims
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def _get_ref_resume(category: str) -> dict:
+    """从Kaggle同类别中取最长简历作为优秀参考"""
+    df = _read_kaggle_csv()
+    subset = df[df["Category"] == category]
+    if len(subset) == 0:
+        return None
+    s = subset.copy()
+    s["_len"] = s["Resume"].str.len()
+    best = s.sort_values("_len", ascending=False).iloc[0]
+    return {
+        "category": category,
+        "resume_text": best["Resume"],
+        "length": int(best["_len"]),
+    }
+
+
 def render_human_scoring_ui():
     """人工评分界面 — 层级区间选择"""
     _init_session_state()
@@ -361,35 +430,55 @@ def render_human_scoring_ui():
     """, unsafe_allow_html=True)
 
     # 评分人姓名
-    col_name, col_count, _ = st.columns([2, 2, 6])
+    col_name, _, _ = st.columns([2, 2, 6])
     with col_name:
         scorer = st.text_input("评分人", value=st.session_state.exp_scorer_name,
                                placeholder="输入你的名字", key="exp_scorer_input")
         st.session_state.exp_scorer_name = scorer
-    with col_count:
-        st.metric("已评简历", len(done_ids))
-        st.metric("总实验数", len(experiments))
+
+    # ── 选择你懂的类别 ──
+    all_cats = sorted(_read_kaggle_csv()["Category"].unique().tolist())
+    saved_cats = st.session_state.get("exp_selected_categories")
+    selected_cats = st.multiselect(
+        "选择你熟悉的岗位类别（仅从这些类别中抽取简历评分）",
+        options=all_cats,
+        default=saved_cats if saved_cats else [],
+        key="exp_cat_selector",
+    )
+    st.session_state.exp_selected_categories = selected_cats
+
+    # 统计可评数量
+    df_all = _read_kaggle_csv()
+    if selected_cats:
+        df_filtered = df_all[df_all["Category"].isin(selected_cats)]
+        total_avail = len(df_filtered)
+        done_in_cats = {e["resume_id"] for e in experiments if e.get("human_score")
+                        and e.get("category") in selected_cats}
+        remaining = total_avail - len(done_in_cats)
+    else:
+        total_avail = len(df_all)
+        done_in_cats = {e["resume_id"] for e in experiments if e.get("human_score")}
+        remaining = total_avail - len(done_in_cats)
+
+    col_stat1, col_stat2, col_stat3 = st.columns(3)
+    col_stat1.metric("你可评的简历", total_avail if selected_cats else "全部962份")
+    col_stat2.metric("已评", len(done_in_cats))
+    col_stat3.metric("待评", max(0, remaining))
 
     st.markdown("---")
 
     # ── 抽取简历 ──
-    col1, col2 = st.columns([2, 8])
-    with col1:
-        draw_btn = st.button("🎲 抽取简历", use_container_width=True, type="primary")
-    with col2:
-        if st.session_state.exp_current_resume:
-            r = st.session_state.exp_current_resume
-            st.caption(
-                f"当前: {r.get('category', '-')} | "
-                f"已评 {done_ids} 份，还有 {max(0, 962 - len(done_ids))} 份待评"
-            )
+    draw_btn = st.button("🎲 抽取简历", use_container_width=True, type="primary",
+                         disabled=(remaining <= 0))
 
     if draw_btn:
         excluded = done_ids | {st.session_state.exp_current_resume.get("id")
                                 for _ in [0] if st.session_state.exp_current_resume}
-        resumes = _get_random_resumes(1, exclude_ids=excluded if excluded else None)
+        resumes = _get_random_resumes(1, exclude_ids=excluded if excluded else None,
+                                       categories=selected_cats if selected_cats else None)
         if resumes:
-            st.session_state.exp_current_resume = resumes[0]
+            r = resumes[0]
+            st.session_state.exp_current_resume = r
             st.session_state.exp_l1 = None
             st.session_state.exp_l2 = None
             st.session_state.exp_l3 = None
@@ -397,6 +486,20 @@ def render_human_scoring_ui():
             st.session_state.exp_status = "scoring"
             st.session_state.exp_ai_blind_done = False
             st.session_state.exp_ai_full_done = False
+            st.session_state.exp_translated_text = None
+            st.session_state.exp_dim_scores = None
+            st.session_state.exp_ref_resume = None
+            st.session_state.exp_ref_translated = None
+            # 跑 AI 维度分析和找参考简历
+            with st.spinner("AI 正在分析各维度..."):
+                st.session_state.exp_dim_scores = _analyze_dimensions(r["resume_text"], r["category"])
+            ref = _get_ref_resume(r["category"])
+            st.session_state.exp_ref_resume = ref
+            if ref:
+                with st.spinner("正在翻译参考简历..."):
+                    st.session_state.exp_ref_translated = _translate_to_chinese(
+                        anonymize_resume(ref["resume_text"])
+                    )
             st.rerun()
         else:
             st.info("所有简历已评完！")
@@ -406,11 +509,62 @@ def render_human_scoring_ui():
         st.info("点击「抽取简历」开始评分")
         return
 
-    # ── 显示脱敏简历 ──
     anonymized = anonymize_resume(resume["resume_text"])
-    with st.expander("📄 脱敏简历（仅用于评分参考）", expanded=True):
-        st.text_area("简历内容", anonymized, height=280, label_visibility="collapsed",
-                     key="exp_resume_display")
+
+    # ── AI 维度分析参考 ──
+    dim_scores = st.session_state.exp_dim_scores
+    if dim_scores and "error" not in dim_scores:
+        st.markdown("#### 🤖 AI 维度分析（参考，不计入总分）")
+        dim_cols = st.columns(len(dim_scores))
+        _dim_order = ["skills_match", "project_quality", "education", "format_readability", "expression"]
+        for i, key in enumerate(_dim_order):
+            d = dim_scores.get(key)
+            if d:
+                bg = d["color"]
+                with dim_cols[i]:
+                    st.markdown(
+                        f"<div style='text-align:center;background:{bg}15;"
+                        f"border-radius:12px;padding:10px;margin:4px;'>"
+                        f"<div style='font-size:13px;color:#666;'>{d['label']}</div>"
+                        f"<div style='font-size:32px;font-weight:700;color:{bg};'>{int(d['score'])}</div>"
+                        f"<div style='font-size:11px;color:#999;'>权重 {int(d['weight']*100)}%</div>"
+                        f"</div>",
+                        unsafe_allow_html=True,
+                    )
+        st.caption("💡 这是AI对每项的分析评分，作为你打总分的参考，不是标准答案")
+        st.markdown("---")
+
+    # ── 优秀参考简历 ──
+    ref = st.session_state.exp_ref_resume
+    ref_tl = st.session_state.exp_ref_translated
+    if ref:
+        ref_anon = anonymize_resume(ref["resume_text"])
+        with st.expander(f"📋 同类优秀参考 · {ref['category']}（{ref['length']}字）", expanded=False):
+            display_ref = ref_tl if ref_tl else ref_anon
+            st.text_area("参考简历", display_ref, height=200, label_visibility="collapsed",
+                         key="exp_ref_display")
+            if ref_tl:
+                st.caption("已翻译为中文 | 同类中最详细的简历，供对照参考")
+
+    # ── 简历原文 ──
+    tabs_en_cn = st.tabs(["🇬🇧 英文原文", "🇨🇳 中文翻译"])
+    with tabs_en_cn[0]:
+        st.text_area("英文", anonymized, height=280, label_visibility="collapsed",
+                     key="exp_resume_en")
+    with tabs_en_cn[1]:
+        if st.session_state.exp_translated_text is None:
+            if st.button("▶ 翻译为中文", key="exp_do_translate", type="primary",
+                         use_container_width=True):
+                with st.spinner("正在翻译..."):
+                    st.session_state.exp_translated_text = _translate_to_chinese(anonymized)
+                st.rerun()
+            st.caption("点击按钮翻译为中文，技能/技术名词保留英文")
+        else:
+            st.text_area("中文", st.session_state.exp_translated_text, height=280,
+                         label_visibility="collapsed", key="exp_resume_cn")
+            if st.button("✕ 清除翻译", key="exp_clear_translate"):
+                st.session_state.exp_translated_text = None
+                st.rerun()
 
     st.markdown("---")
 
@@ -688,25 +842,31 @@ def render_experiment_dashboard():
 
     if plot_data:
         pdf = pd.DataFrame(plot_data)
-        fig = px.scatter(pdf, x="人类评分", y="AI评分(完整)",
-                         color="类别", symbol="对比",
-                         trendline="ols", opacity=0.7,
-                         labels={"人类评分": "人类评分 (中点)", "AI评分(完整)": "AI 评分"},
-                         width=None, height=500)
-        fig.add_annotation(
-            x=85, y=85,
-            text="y=x (完美一致)",
-            showarrow=False,
-            font=dict(color="gray", size=12),
-        )
-        fig.add_shape(type="line", x0=0, y0=0, x1=100, y1=100,
-                       line=dict(color="gray", width=1, dash="dash"))
-        fig.update_layout(
-            plot_bgcolor="var(--surface)",
-            paper_bgcolor="var(--surface)",
-            margin=dict(l=20, r=20, t=20, b=20),
-        )
-        st.plotly_chart(fig, use_container_width=True)
+        # 动态选择可用的评分列
+        avail_y = [c for c in ["AI评分(脱敏)", "AI评分(完整)"] if c in pdf.columns]
+        if not avail_y:
+            st.info("暂无足够的评分数据绘制散点图")
+        else:
+            y_col = avail_y[0]
+            fig = px.scatter(pdf, x="人类评分", y=y_col,
+                             color="类别", symbol="对比",
+                             opacity=0.7,
+                             labels={"人类评分": "人类评分 (中点)", y_col: "AI 评分"},
+                             width=None, height=500)
+            fig.add_annotation(
+                x=85, y=85,
+                text="y=x (完美一致)",
+                showarrow=False,
+                font=dict(color="gray", size=12),
+            )
+            fig.add_shape(type="line", x0=0, y0=0, x1=100, y1=100,
+                           line=dict(color="gray", width=1, dash="dash"))
+            fig.update_layout(
+                plot_bgcolor="var(--surface)",
+                paper_bgcolor="var(--surface)",
+                margin=dict(l=20, r=20, t=20, b=20),
+            )
+            st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("数据不足，请先运行 AI 评分")
 

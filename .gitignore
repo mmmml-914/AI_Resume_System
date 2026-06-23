@@ -25,3 +25,9 @@ data/FairCV/
 # OS
 .DS_Store
 Thumbs.db
+
+# PPT output files
+*.pptx
+
+# Claude skills
+.claude/skills/
