@@ -354,6 +354,18 @@ def _init_session_state():
 #  UI 组件
 # ═══════════════════════════════════════════════
 
+def _get_secret_for_blind(key: str, default: str = "") -> str:
+    """从环境变量或 Streamlit secrets 读取"""
+    val = os.getenv(key)
+    if val:
+        return val
+    try:
+        import streamlit as st
+        return st.secrets.get(key, default)
+    except ImportError:
+        return default
+
+
 def _translate_to_chinese(text: str) -> str:
     """调用 DeepSeek 将英文简历翻译为中文"""
     try:
@@ -361,12 +373,12 @@ def _translate_to_chinese(text: str) -> str:
         load_dotenv()
         from openai import OpenAI
         client = OpenAI(
-            api_key=os.getenv("DEEPSEEK_API_KEY"),
-            base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+            api_key=_get_secret_for_blind("DEEPSEEK_API_KEY"),
+            base_url=_get_secret_for_blind("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
             timeout=60,
         )
         resp = client.chat.completions.create(
-            model=os.getenv("DEEPSEEK_MODEL", "deepseek-chat"),
+            model=_get_secret_for_blind("DEEPSEEK_MODEL", "deepseek-chat"),
             messages=[
                 {"role": "system", "content": "你是一个翻译专家。把英文简历翻译成地道的中文，要求：\n1. 所有内容都要翻译成中文，包括标题、公司名、技能名、学校名\n2. 唯一保留英文的：纯技术名词首次出现时可括号标注英文（如 Python、Java）\n3. 修复原文中的拼写错误（如 Exprience→Experience）\n4. 语序调整为中文习惯，不要直译\n5. 只输出翻译结果，不加任何解释说明"},
                 {"role": "user", "content": text},

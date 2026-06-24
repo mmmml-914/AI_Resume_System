@@ -10,6 +10,17 @@ from modules.rag_knowledge import build_context_prompt
 
 load_dotenv()
 
+def _get_api_key() -> str:
+    """从环境变量或 Streamlit secrets 读取 API Key"""
+    key = os.getenv("DEEPSEEK_API_KEY")
+    if key:
+        return key
+    try:
+        import streamlit as st
+        return st.secrets.get("DEEPSEEK_API_KEY", "")
+    except ImportError:
+        return ""
+
 EVALUATOR_SYSTEM_PROMPT = """You are a professional resume evaluator specializing in international/Western resume standards.
 Evaluate the candidate's resume across 5 dimensions (0-100 each) and provide specific improvement suggestions.
 
@@ -146,7 +157,7 @@ class ResumeEvaluator:
         self._load_default_model()
 
     def _load_default_model(self):
-        api_key = os.getenv("DEEPSEEK_API_KEY")
+        api_key = _get_api_key()
         if api_key:
             self.models["deepseek"] = LLMClient(
                 api_key=api_key,

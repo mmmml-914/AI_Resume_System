@@ -94,11 +94,23 @@ def extract_text_from_image(file_path: str) -> str:
             return "OCR库未安装，请安装 easyocr 或 pytesseract"
 
 
+def _get_secret(key: str, default: str = "") -> str:
+    """从环境变量或 Streamlit secrets 读取"""
+    val = os.getenv(key)
+    if val:
+        return val
+    try:
+        import streamlit as st
+        return st.secrets.get(key, default)
+    except ImportError:
+        return default
+
+
 def extract_structured_info(resume_text: str, api_key: str = None, base_url: str = None) -> dict:
     """用 LLM 从简历文本中提取结构化信息"""
     client = OpenAI(
-        api_key=api_key or os.getenv("DEEPSEEK_API_KEY"),
-        base_url=base_url or os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        api_key=api_key or _get_secret("DEEPSEEK_API_KEY"),
+        base_url=base_url or _get_secret("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
     )
     resp = client.chat.completions.create(
         model=os.getenv("DEEPSEEK_MODEL", "deepseek-chat"),

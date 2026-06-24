@@ -254,11 +254,14 @@ if page == "模拟面试":
                     if resume_for_eval and len(resume_for_eval) > 50 and new_category:
                         with st.spinner("全流程分析简历中..."):
                             new_report = agent.pipeline_full_evaluation(resume_for_eval, new_category)
-                            st.session_state.resume_text = resume_for_eval
-                            st.session_state.report = new_report
-                            st.session_state.interview_category = new_category
-                            _save_all()
-                            st.rerun()
+                            if new_report.get("workflow_status") == "failed" or new_report.get("error"):
+                                st.error(f"简历评估失败: {new_report.get('error', '未知错误')}。请检查 API Key 配置。")
+                            else:
+                                st.session_state.resume_text = resume_for_eval
+                                st.session_state.report = new_report
+                                st.session_state.interview_category = new_category
+                                _save_all()
+                                st.rerun()
                     else:
                         st.warning("请填写岗位类别和至少50字的简历内容")
         else:

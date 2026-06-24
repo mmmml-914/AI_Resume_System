@@ -70,8 +70,15 @@ class InterviewSession:
             self.client = llm_client.create_module_client()
             self.model = llm_client.model
         else:
+            api_key = os.getenv("DEEPSEEK_API_KEY")
+            if not api_key:
+                try:
+                    import streamlit as st
+                    api_key = st.secrets.get("DEEPSEEK_API_KEY", "")
+                except ImportError:
+                    pass
             self.client = OpenAI(
-                api_key=os.getenv("DEEPSEEK_API_KEY"),
+                api_key=api_key,
                 base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
             )
             self.model = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")

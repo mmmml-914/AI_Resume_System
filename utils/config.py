@@ -4,6 +4,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def _get_env_or_secret(key: str, default: str = "") -> str:
+    """从环境变量或 Streamlit secrets 读取配置"""
+    val = os.getenv(key)
+    if val:
+        return val
+    try:
+        import streamlit as st
+        return st.secrets.get(key, default)
+    except ImportError:
+        return default
+
 # 评估维度权重
 #
 # 权重设计依据（基于以下学术研究）：
@@ -68,9 +79,9 @@ EVAL_WEIGHTS = {
 
 LLM_CONFIGS = {
     "deepseek": {
-        "api_key": os.getenv("DEEPSEEK_API_KEY"),
-        "base_url": os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
-        "model": os.getenv("DEEPSEEK_MODEL", "deepseek-chat"),
+        "api_key": _get_env_or_secret("DEEPSEEK_API_KEY"),
+        "base_url": _get_env_or_secret("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        "model": _get_env_or_secret("DEEPSEEK_MODEL", "deepseek-chat"),
         "label": "DeepSeek",
     },
     # 后续可添加
