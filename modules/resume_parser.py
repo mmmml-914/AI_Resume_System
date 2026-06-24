@@ -25,7 +25,7 @@ EXTRACT_PROMPT = """你是一位专业的简历分析师。请从以下简历文
 
 
 def extract_text_from_pdf(file_path: str) -> str:
-    """从 PDF 提取文本"""
+    """从 PDF 提取文本（文本PDF直接提取，扫描PDF自动OCR兜底）"""
     try:
         import fitz
         doc = fitz.open(file_path)
@@ -33,6 +33,32 @@ def extract_text_from_pdf(file_path: str) -> str:
         for page in doc:
             text += page.get_text()
         doc.close()
+        text = text.strip()
+        # 文本不足 -> 可能是扫描件，触发 OCR
+        if len(text) < 20:
+            try:
+                import easyocr
+                reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+                ocr_text = []
+                import fitz as fz
+                doc2 = fz.open(file_path)
+                for page in doc2:
+                    pix = page.get_pixmap(dpi=200)
+                    img = pix.tobytes("png")
+                    import tempfile
+                    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+                        tmp.write(img)
+                        tmp_path = tmp.name
+                    try:
+                        result = reader.readtext(tmp_path, detail=0)
+                        ocr_text.extend(result)
+                    finally:
+                        import os
+                        os.unlink(tmp_path)
+                doc2.close()
+                text = "\n".join(ocr_text)
+            except ImportError:
+                pass  # OCR 不可用时返回已提取的少量文本
         return text.strip()
     except ImportError:
         return "PDF解析库未安装，请安装 PyMuPDF"
