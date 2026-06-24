@@ -3,8 +3,6 @@
    暖白基调 + #FF6900 橙色点缀
    =================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
-
 /* ===== 装饰性背景 ===== */
 html::before {
   content: '';
@@ -46,8 +44,8 @@ html::before {
   --radius: 18px;
   --radius-sm: 12px;
   --radius-lg: 24px;
-  --font-body: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --font-body: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
 }
 
 /* ===== Base ===== */
@@ -114,13 +112,13 @@ header { display: none !important; }
   color: white;
   font-size: 0.78rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   box-shadow: 0 4px 14px rgba(255, 105, 0, 0.3);
   letter-spacing: -0.04em;
 }
 
 .app-header .logo-text {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -164,7 +162,7 @@ header { display: none !important; }
 }
 
 .page-title {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 1.65rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -224,7 +222,7 @@ div[data-testid="metric-container"] div[data-testid="metric-value"] {
   font-weight: 700 !important;
   color: var(--text-primary) !important;
   letter-spacing: -0.03em;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   margin-top: 0.15rem;
 }
 
@@ -258,14 +256,14 @@ section[data-testid="stSidebar"] > div:first-child {
   color: white;
   font-size: 0.85rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   flex-shrink: 0;
   box-shadow: 0 4px 14px rgba(255, 105, 0, 0.3);
   letter-spacing: -0.02em;
 }
 
 .sidebar-brand-text .brand-name {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -649,7 +647,7 @@ div[data-testid="stExpander"] summary:hover {
 }
 
 .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   color: var(--text-primary);
   font-weight: 700;
   letter-spacing: -0.03em;

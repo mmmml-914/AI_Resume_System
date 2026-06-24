@@ -15,9 +15,6 @@ venv/
 # Embedded external project
 data/FairCV/
 
-# Streamlit
-.streamlit/
-
 # IDE
 .vscode/
 .idea/

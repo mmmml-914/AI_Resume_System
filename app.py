@@ -21,7 +21,8 @@ from modules.scoring_validation import load_validation
 from modules.scoring_calibration import load_calibration
 from utils.file_utils import extract_text_from_upload
 
-st.set_page_config(page_title="AI Mock Interview", page_icon="🎤", layout="wide")
+st.set_page_config(page_title="AI 模拟面试与简历评估", page_icon="🎤", layout="wide",
+    initial_sidebar_state="expanded")
 
 # ========== 统一数据持久化 ==========
 _DATA_FILE = os.path.join(os.path.dirname(__file__), "data", "app_data.json")
