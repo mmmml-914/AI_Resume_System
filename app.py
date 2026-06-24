@@ -57,12 +57,77 @@ def _load_all():
     except (json.JSONDecodeError, OSError):
         return {}
 
-# ========== 加载 CSS ==========
-with open(os.path.join(os.path.dirname(__file__), "styles", "style.css"), encoding="utf-8") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# ========== 加载 CSS（内联版本，不依赖外部文件） ==========
+st.markdown("""
+<style>
+:root {
+  --bg: #F5F5F5;
+  --surface: #FFFFFF;
+  --accent: #FF6900;
+  --accent-hover: #E55E00;
+  --accent-gradient: linear-gradient(135deg, #FF6900, #FF8C42);
+  --text-primary: #1A1A1A;
+  --text-secondary: #8C8C8C;
+  --border: #E8E8E8;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.stApp { background: var(--bg) !important; }
+#MainMenu, footer, header { display: none !important; }
+.main > div:first-child { padding: 0 !important; max-width: 100%; margin: 0; }
+.app-header {
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 999;
+}
+.app-header .logo { display: flex; align-items: center; gap: 0.75rem; }
+.app-header .logo-icon {
+  width: 32px; height: 32px;
+  background: var(--accent-gradient);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 0.78rem; font-weight: 800;
+  box-shadow: 0 4px 14px rgba(255,105,0,0.3);
+}
+.app-header .logo-text { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+.app-header .logo-text span { color: var(--text-secondary); font-weight: 400; }
+.app-header .badge { font-size: 0.6rem; color: var(--text-secondary); font-weight: 600; background: var(--bg); border: 1px solid var(--border); padding: 4px 12px; border-radius: 6px; }
+div[data-testid="metric-container"] { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: var(--radius) !important; padding: 1.1rem 1.35rem !important; box-shadow: var(--shadow) !important; transition: all 0.3s; }
+div[data-testid="metric-container"]:hover { border-color: rgba(255,105,0,0.2) !important; box-shadow: 0 8px 40px rgba(0,0,0,0.10) !important; transform: translateY(-2px); }
+div[data-testid="metric-container"] label { font-size: 0.65rem !important; color: var(--text-secondary) !important; font-weight: 600 !important; text-transform: uppercase; letter-spacing: 0.06em; }
+div[data-testid="metric-container"] div[data-testid="metric-value"] { font-size: 1.45rem !important; font-weight: 700 !important; color: var(--text-primary) !important; }
+section[data-testid="stSidebar"] { background: var(--surface) !important; border-right: 1px solid var(--border) !important; }
+.stButton button { border-radius: var(--radius-sm) !important; padding: 0.45rem 1.4rem !important; font-size: 0.8rem !important; font-weight: 600 !important; border: 1px solid var(--border) !important; background: var(--surface) !important; color: var(--text-secondary) !important; }
+.stButton button:hover { background: #FAFAFA !important; border-color: rgba(0,0,0,0.12) !important; }
+.stButton button[kind="primary"] { background: var(--accent-gradient) !important; color: white !important; border: none !important; box-shadow: 0 4px 14px rgba(255,105,0,0.3) !important; font-weight: 700 !important; }
+.stTextInput input, .stTextArea textarea { border-radius: var(--radius-sm) !important; border: 1px solid var(--border) !important; font-size: 0.85rem !important; background: var(--surface) !important; }
+.stTextInput input:focus, .stTextArea textarea:focus { border-color: rgba(255,105,0,0.4) !important; box-shadow: 0 0 0 3px rgba(255,105,0,0.08) !important; }
+.stProgress .st-bp { background: var(--accent-gradient) !important; height: 4px !important; border-radius: 2px !important; }
+div[data-testid="stChatInput"] { border: 1px solid var(--border) !important; border-radius: var(--radius) !important; }
+div[data-testid="stChatInput"]:focus-within { border-color: rgba(255,105,0,0.3) !important; }
+div[data-testid="stChatInput"] button { background: var(--accent-gradient) !important; border-radius: 8px !important; color: white !important; }
+.stTabs [data-baseweb="tab"][aria-selected="true"] { color: var(--accent) !important; font-weight: 600 !important; }
+.stTabs [data-baseweb="tab-highlight"] { background: var(--accent-gradient) !important; height: 2px !important; }
+div[data-testid="stFileUploader"]:hover { border-color: rgba(255,105,0,0.3) !important; background: rgba(255,105,0,0.04) !important; }
+.js-plotly-plot { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); }
+.stMarkdown p, .stMarkdown li { line-height: 1.75; color: var(--text-secondary); }
+.sidebar-brand { padding: 1.5rem 0.85rem 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+.sidebar-brand-icon { width: 38px; height: 38px; background: var(--accent-gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; font-weight: 800; box-shadow: 0 4px 14px rgba(255,105,0,0.25); flex-shrink: 0; }
+.sidebar-brand-text .brand-name { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.sidebar-brand-text .brand-desc { font-size: 0.6rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+section[data-testid="stSidebar"] div[data-testid="stRadio"] > label { padding: 0.55rem 0.85rem !important; border-radius: var(--radius-sm) !important; font-size: 0.82rem !important; font-weight: 500 !important; color: var(--text-secondary) !important; border: none !important; background: transparent !important; }
+section[data-testid="stSidebar"] div[data-testid="stRadio"] > label:hover { background: rgba(255,105,0,0.05) !important; color: var(--text-primary) !important; }
+section[data-testid="stSidebar"] div[data-testid="stRadio"] > label[data-checked="true"] { background: rgba(255,105,0,0.10) !important; color: var(--accent) !important; font-weight: 600 !important; }
+.sidebar-footer { font-size: 0.55rem; color: var(--text-secondary); text-align: center; padding: 0.85rem; border-top: 1px solid var(--border); margin-top: 0.5rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+</style>
+""", unsafe_allow_html=True)
 
 # ========== 顶部导航栏 ==========
-st.markdown('<div class="app-header"><div class="logo"><div class="logo-icon">AI</div><div class="logo-text">AI Resume <span>System</span></div></div><div class="badge">v2.0</div></div>', unsafe_allow_html=True)
+st.markdown('<div class="app-header"><div class="logo"><div class="logo-icon">AI</div><div class="logo-text">AI 模拟面试 <span>& 简历评估</span></div></div><div class="badge">MIUI-v3</div></div>', unsafe_allow_html=True)
 
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
